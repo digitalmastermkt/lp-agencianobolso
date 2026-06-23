@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A0A0F">
+<title>Proposta · Time da Maia · Agência no Bolso</title>
+<meta name="description" content="Tudo que você vai ver aqui foi feito por uma IA, a Maia, não por uma agência. Não é demo montada, é operação real.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="author" content="Agência no Bolso">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Proposta · Time da Maia">
+<meta property="og:description" content="Uma operação inteira de marketing feita por IA. Prova real, não demo montada.">
+<meta property="og:locale" content="pt_BR">
+
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Fonts (mesmas da marca) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<!-- =================== META PIXEL (padrão do ecossistema) =================== -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '26504188302609300');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', { content_name: 'Proposta Time da Maia', content_category: 'proposta-demo' });
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=26504188302609300&ev=PageView&noscript=1"/></noscript>
+<!-- =================== /META PIXEL =================== -->
+
+<style>
+:root{
+  --bg-0:#0A0A0F; --bg-1:#0F0F17; --bg-2:#15151F; --bg-3:#1C1C28;
+  --bg-glass:rgba(21,21,31,.6);
+  --border:rgba(255,255,255,.08); --border-strong:rgba(255,255,255,.14);
+  --text-0:#FFFFFF; --text-1:#E5E5E5; --text-2:#A0A0B0; --text-3:#8A8A9C;
+  --cyan:#00D4FF; --cyan-soft:rgba(0,212,255,.12);
+  --purple:#A855F7; --purple-soft:rgba(168,85,247,.12);
+  --grad-primary:linear-gradient(135deg,var(--cyan) 0%,var(--purple) 100%);
+  --gold:#FFC34A; --green:#34D399; --red:#FF5A5A; --orange:#FF8A3D;
+  --grad-gain:linear-gradient(135deg,#FFC34A 0%,#34D399 100%);
+  --font:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  --r-sm:10px; --r-md:16px; --r-lg:24px; --r-xl:32px;
+  --shadow:0 12px 40px rgba(0,0,0,.6);
+  --container:1120px; --narrow:860px;
+  --pad:clamp(64px,9vw,120px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font); background:var(--bg-0); color:var(--text-1);
+  line-height:1.6; font-size:17px; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.container{width:100%;max-width:var(--container);margin:0 auto;padding:0 22px}
+.narrow{max-width:var(--narrow)}
+section{padding:var(--pad) 0;position:relative}
+.eyebrow{
+  display:inline-block;font-family:var(--mono);font-size:13px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);
+  margin-bottom:18px;padding:6px 14px;border:1px solid var(--border-strong);
+  border-radius:999px;background:var(--cyan-soft);
+}
+h1,h2,h3{font-weight:800;line-height:1.12;letter-spacing:-.02em;color:var(--text-0);text-wrap:balance}
+p{text-wrap:pretty}
+h1{font-size:clamp(34px,7vw,62px)}
+h2{font-size:clamp(28px,5vw,44px)}
+h3{font-size:clamp(20px,3vw,26px)}
+.grad{background:var(--grad-primary);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.grad-gain{background:var(--grad-gain);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lead{font-size:clamp(18px,2.4vw,21px);color:var(--text-2);line-height:1.65}
+.section-head{max-width:760px;margin:0 auto 56px;text-align:center}
+.section-head p{margin-top:18px}
+.muted{color:var(--text-2)}
+
+/* botões */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:var(--font);font-weight:700;font-size:16px;
+  padding:16px 30px;border-radius:999px;border:1px solid transparent;
+  cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+  white-space:nowrap;
+}
+.btn-primary{background:var(--grad-primary);color:#04060c;box-shadow:0 8px 30px rgba(0,212,255,.28)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 38px rgba(168,85,247,.34)}
+.btn-ghost{background:transparent;color:var(--text-0);border-color:var(--border-strong)}
+.btn-ghost:hover{background:rgba(255,255,255,.05);transform:translateY(-2px)}
+.btn-lg{font-size:17px;padding:18px 38px}
+
+/* NAVBAR */
+.nav{position:sticky;top:0;z-index:50;background:rgba(10,10,15,.78);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;max-width:var(--container);margin:0 auto}
+.nav-in img{height:34px;width:auto}
+.nav .btn{padding:11px 20px;font-size:14px}
+
+/* HERO */
+.hero{padding:clamp(70px,12vw,130px) 0 var(--pad);text-align:center;position:relative;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(720px 420px at 50% -10%, rgba(0,212,255,.16), transparent 60%),
+    radial-gradient(620px 440px at 80% 30%, rgba(168,85,247,.14), transparent 60%);
+}
+.hero .container{position:relative;z-index:1}
+.hero h1{margin-bottom:24px}
+.hero .lead{max-width:680px;margin:0 auto 18px}
+.anchor-quote{
+  max-width:720px;margin:30px auto 36px;padding:26px 30px;position:relative;
+  border:1px solid var(--border-strong);background:var(--bg-glass);border-radius:var(--r-md);
+  font-size:clamp(17px,2.4vw,20px);color:var(--text-0);font-weight:600;text-align:center;line-height:1.5;
+}
+.anchor-quote::before{
+  content:"“";position:absolute;top:6px;left:20px;font-size:54px;line-height:1;
+  color:var(--cyan);opacity:.5;font-family:Georgia,serif;
+}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px 14px;justify-content:center;margin-top:30px}
+.chip{font-family:var(--mono);font-size:13px;color:var(--text-2);border:1px solid var(--border);border-radius:999px;padding:8px 15px;background:var(--bg-1)}
+.chip b{color:var(--cyan);font-weight:600}
+
+/* DOR */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{
+  background:var(--bg-1);border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:28px;transition:border-color .2s ease,transform .2s ease;
+}
+.card:hover{border-color:var(--border-strong);transform:translateY(-3px)}
+.card .num{font-family:var(--mono);font-size:12px;color:var(--cyan);font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.card h3{margin:14px 0 10px;font-size:21px}
+.card p{color:var(--text-2);font-size:15.5px}
+
+/* COMO FUNCIONA */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+.step{position:relative;background:var(--bg-1);border:1px solid var(--border);border-radius:var(--r-lg);padding:30px 26px}
+.step .si{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:600;font-size:18px;color:#04060c;background:var(--grad-primary);margin-bottom:18px}
+.step h3{font-size:20px;margin-bottom:8px}
+.step p{color:var(--text-2);font-size:15.5px}
+.flow-line{text-align:center;font-family:var(--mono);color:var(--text-3);font-size:14px;margin:30px 0 0;letter-spacing:.05em}
+
+/* PROVA */
+.prova-head{margin-bottom:46px}
+.prova-block{margin-top:64px}
+.prova-block:first-of-type{margin-top:0}
+.pb-label{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.pb-label .dot{width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+.pb-label h3{font-size:22px}
+.pb-label span{font-family:var(--mono);font-size:13px;color:var(--text-3);margin-left:auto}
+.gallery{display:grid;gap:16px}
+.g-ig{grid-template-columns:repeat(4,1fr)}
+.g-3{grid-template-columns:repeat(3,1fr)}
+.g-2{grid-template-columns:repeat(2,1fr)}
+.frame{
+  border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;
+  background:var(--bg-2);position:relative;transition:transform .2s ease,border-color .2s ease;
+}
+.frame:hover{transform:translateY(-3px);border-color:var(--cyan)}
+.frame img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/5}
+.frame.story img{aspect-ratio:9/16}
+.frame .cap{position:absolute;left:0;right:0;bottom:0;padding:14px 14px 12px;font-size:13px;color:var(--text-1);background:linear-gradient(transparent,rgba(0,0,0,.85));font-weight:600}
+/* vídeo */
+.video-card{border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;background:#000;position:relative}
+.video-card video{width:100%;display:block;aspect-ratio:9/16;object-fit:cover;background:#000}
+.video-card .badge{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--mono);font-size:11px;font-weight:600;color:#04060c;background:var(--gold);padding:5px 10px;border-radius:999px}
+.video-meta{padding:14px 16px;background:var(--bg-1);border-top:1px solid var(--border)}
+.video-meta h4{font-size:15px;color:var(--text-0);margin-bottom:3px}
+.video-meta p{font-size:13px;color:var(--text-2)}
+/* link de página */
+.link-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.link-card{display:flex;align-items:center;gap:16px;background:var(--bg-1);border:1px solid var(--border);border-radius:var(--r-md);padding:18px 20px;transition:border-color .2s,transform .2s}
+.link-card:hover{border-color:var(--cyan);transform:translateY(-2px)}
+.link-card .lc-ico{width:42px;height:42px;flex:0 0 42px;border-radius:12px;background:var(--cyan-soft);display:flex;align-items:center;justify-content:center;font-size:20px}
+.link-card .lc-txt h4{font-size:16px;color:var(--text-0);margin-bottom:2px}
+.link-card .lc-txt p{font-size:13px;color:var(--text-2);word-break:break-all}
+.link-card .lc-arrow{margin-left:auto;color:var(--cyan);font-size:20px;flex:0 0 auto}
+/* áudio */
+.audio-row{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.audio-card{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--r-md);padding:20px}
+.audio-card h4{font-size:15px;color:var(--text-0);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.audio-card p{font-size:13px;color:var(--text-2);margin-bottom:14px}
+.audio-card audio{width:100%}
+
+/* DIFERENCIAL */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+.col{border-radius:var(--r-lg);padding:30px 26px;border:1px solid var(--border)}
+.col.bad{background:linear-gradient(180deg,rgba(255,90,90,.06),transparent);border-color:rgba(255,90,90,.22)}
+.col.good{background:linear-gradient(180deg,rgba(52,211,153,.07),transparent);border-color:rgba(52,211,153,.26)}
+.col h3{font-size:19px;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.col.bad h3{color:#FF8A8A}
+.col.good h3{color:var(--green)}
+.col ul{list-style:none}
+.col li{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border);font-size:15.5px;color:var(--text-1)}
+.col li:last-child{border-bottom:none}
+.col li .ic{flex:0 0 auto;font-weight:800}
+.col.bad li .ic{color:var(--red)}
+.col.good li .ic{color:var(--green)}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.metric{text-align:center;background:var(--bg-1);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px 18px}
+.metric .big{font-size:clamp(30px,5vw,44px);font-weight:900;line-height:1}
+.metric .lab{font-size:14px;color:var(--text-2);margin-top:10px}
+
+/* INVESTIMENTO (placeholder) */
+.invest{background:var(--bg-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.ph-banner{
+  display:flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap;
+  background:repeating-linear-gradient(45deg,rgba(255,195,74,.08),rgba(255,195,74,.08) 14px,transparent 14px,transparent 28px);
+  border:1px dashed var(--gold);border-radius:var(--r-md);padding:18px 22px;margin:0 auto 44px;max-width:760px;text-align:center;
+}
+.ph-banner .tag{font-family:var(--mono);font-size:12px;font-weight:600;color:#04060c;background:var(--gold);padding:5px 11px;border-radius:999px;letter-spacing:.05em}
+.ph-banner p{font-size:14.5px;color:var(--text-1)}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.plan{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r-lg);padding:32px 26px;display:flex;flex-direction:column}
+.plan.feat{border-color:var(--cyan);box-shadow:0 0 0 1px rgba(0,212,255,.3),0 18px 50px rgba(0,212,255,.12);position:relative}
+.plan.feat::before{content:"Recomendado";position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;font-weight:600;color:#04060c;background:var(--grad-primary);padding:5px 14px;border-radius:999px}
+.plan .pname{font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+.plan .price{font-size:30px;font-weight:900;color:var(--text-0);line-height:1.15;margin-bottom:6px}
+.plan .price small{display:block;font-size:13px;font-weight:500;color:var(--text-3);margin-top:6px;font-family:var(--mono)}
+.plan .pdesc{font-size:14.5px;color:var(--text-2);margin:14px 0 22px;min-height:42px}
+.plan ul{list-style:none;margin-bottom:26px;flex:1}
+.plan li{display:flex;gap:10px;padding:8px 0;font-size:14.5px;color:var(--text-1)}
+.plan li .ic{color:var(--green);flex:0 0 auto}
+.plan .btn{width:100%}
+
+/* CTA final */
+.cta-final{text-align:center;position:relative;overflow:hidden}
+.cta-final::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 360px at 50% 120%,rgba(0,212,255,.16),transparent 60%)}
+.cta-final .container{position:relative;z-index:1}
+.cta-final h2{margin-bottom:18px}
+.cta-final .lead{max-width:620px;margin:0 auto 34px}
+.cta-final .btn{margin:0 6px 12px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:40px 0;text-align:center;background:var(--bg-1)}
+footer img{height:30px;margin:0 auto 16px}
+footer p{font-size:13px;color:var(--text-3)}
+footer .mono{font-family:var(--mono)}
+
+/* fade-in */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* RESPONSIVO */
+@media(max-width:860px){
+  .grid-3,.steps,.plans,.compare,.metrics{grid-template-columns:1fr}
+  .metrics{grid-template-columns:repeat(3,1fr);gap:10px}
+  .g-ig{grid-template-columns:repeat(2,1fr)}
+  .g-3,.g-2{grid-template-columns:repeat(2,1fr)}
+  .link-grid,.audio-row{grid-template-columns:1fr}
+  .nav .nav-links{display:none}
+  .anchor-quote{text-align:left}
+}
+@media(max-width:480px){
+  body{font-size:16px}
+  .metric .big{font-size:30px}
+  .metrics{grid-template-columns:1fr}
+  .btn{width:100%}
+  .nav .btn{width:auto}
+}
+/* Sem JS / sem IntersectionObserver: conteúdo nunca fica oculto (fallback à prova de render headless) */
+.no-js .reveal{opacity:1;transform:none}
+/* Movimento reduzido: sem animação de entrada, sem hover translate */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;scroll-behavior:auto !important}
+  .reveal{opacity:1 !important;transform:none !important;transition:none}
+  .card:hover,.frame:hover,.btn:hover,.link-card:hover,.step:hover{transform:none}
+}
+</style>
+<noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <div class="nav-in">
+    <a href="https://agencianobolso.com.br/" aria-label="Agência no Bolso"><img src="/demo/assets/brand/logo-horizontal-ondark.png" alt="Agência no Bolso"></a>
+    <a class="btn btn-primary" href="https://wa.me/5586981141438?text=Quero%20fechar%20com%20o%20time%20da%20Maia" target="_blank" rel="noopener" data-cta="nav">Falar no WhatsApp</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">Proposta · Time da Maia</span>
+    <h1>Tudo nesta página foi feito<br>por uma <span class="grad">IA</span>. Não por uma agência.</h1>
+    <p class="lead">A Maia é uma operação inteira de marketing dentro de um time de agentes de IA. Conteúdo, vídeo, página de venda, análise de cliente: tudo abaixo é trabalho real que ela entregou.</p>
+    <blockquote class="anchor-quote">Tudo que você vai ver aqui foi feito por uma IA, a Maia, não por uma agência. E não é demo montada, é operação real.</blockquote>
+    <div class="cta-row" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a class="btn btn-primary btn-lg" href="#prova" data-cta="hero-prova">Ver a prova ↓</a>
+      <a class="btn btn-ghost btn-lg" href="#investimento" data-cta="hero-invest">Investimento</a>
+    </div>
+    <div class="hero-meta">
+      <span class="chip"><b>24/7</b> sem folga, sem férias</span>
+      <span class="chip"><b>Minutos</b> em vez de dias</span>
+      <span class="chip"><b>Operação real</b> rodando hoje</span>
+    </div>
+  </div>
+</header>
+
+<!-- DOR -->
+<section id="dor">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Por que você está aqui</span>
+      <h2>Marketing hoje te deixa em<br>uma escolha <span class="grad">ruim</span>.</h2>
+      <p class="lead">Toda empresa que quer aparecer cai num dos dois lados. Os dois custam caro.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal">
+        <span class="num">Caro</span>
+        <h3>Montar uma equipe</h3>
+        <p>Social media, designer, copywriter, editor de vídeo, gestor de tráfego. Salário, encargos, gestão e turnover. Fácil passar de R$ 15 mil/mês, e ainda depende de gente faltar, atrasar e pedir aumento.</p>
+      </div>
+      <div class="card reveal">
+        <span class="num">Lento</span>
+        <h3>Contratar uma agência</h3>
+        <p>Fee mensal alto, fila de demanda, três dias para um post sair, reunião para aprovar o que já estava combinado. Você paga premium e ainda fica na dependência da agenda deles.</p>
+      </div>
+      <div class="card reveal">
+        <span class="num">Trava</span>
+        <h3>Fazer tudo sozinho</h3>
+        <p>Aí o marketing vira a última coisa do dia, e quase sempre não acontece. Você sabe o que precisa postar, mas não tem mão para executar. O conteúdo morre no “depois eu faço”.</p>
+      </div>
+    </div>
+    <p class="lead" style="text-align:center;margin:48px auto 0;max-width:640px">A Maia resolve os três de uma vez: a capacidade de uma equipe, a velocidade de uma máquina, por uma fração do custo.</p>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section id="como" style="background:var(--bg-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Como a Maia funciona</span>
+      <h2>Simples como mandar um<br><span class="grad">WhatsApp</span>.</h2>
+      <p class="lead">Você não opera ferramenta nenhuma. Você pede. O time da Maia executa e entrega pronto.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="si">1</div>
+        <h3>Você manda no WhatsApp</h3>
+        <p>“Maia, preciso de um carrossel sobre X”, “monta a página do meu evento”, “analisa esse concorrente”. Em linguagem normal, como se falasse com a sua equipe.</p>
+      </div>
+      <div class="step reveal">
+        <div class="si">2</div>
+        <h3>O time de agentes executa</h3>
+        <p>A Maia coordena agentes especialistas (copy, design, vídeo, dados, dev) que trabalham juntos, 24 horas por dia, sem fila e sem você cobrar.</p>
+      </div>
+      <div class="step reveal">
+        <div class="si">3</div>
+        <h3>A entrega chega pronta</h3>
+        <p>Cards, vídeos com avatar, página no ar, dossiê do cliente. Você aprova e publica. O que levava dias na agência sai em minutos.</p>
+      </div>
+    </div>
+    <p class="flow-line">VOCÊ PEDE  →  TIME DA MAIA EXECUTA 24/7  →  ENTREGA PRONTA</p>
+  </div>
+</section>
+
+<!-- PROVA -->
+<section id="prova">
+  <div class="container">
+    <div class="section-head prova-head reveal">
+      <span class="eyebrow">A prova</span>
+      <h2>Não acredite na promessa.<br>Olhe o <span class="grad-gain">trabalho</span>.</h2>
+      <p class="lead">Tudo abaixo foi produzido pela Maia para o ecossistema da Agência no Bolso e seus clientes. Nada de stock, nada de mockup: arte real, vídeo real, página no ar.</p>
+    </div>
+
+    <!-- 1. Instagram -->
+    <div class="prova-block reveal">
+      <div class="pb-label"><span class="dot"></span><h3>Conteúdo de Instagram</h3><span>carrosséis · cards · feed</span></div>
+      <div class="gallery g-ig">
+        <div class="frame"><img src="/demo/assets/prova/ig_timeia_capa.png" alt="Carrossel Time de IA, capa" loading="lazy"><div class="cap">Carrossel “Time de IA”</div></div>
+        <div class="frame"><img src="/demo/assets/prova/ig_hanna_feed.png" alt="Feed Hanna" loading="lazy"><div class="cap">Feed · Hanna (100% IA)</div></div>
+        <div class="frame"><img src="/demo/assets/prova/ig_fatima_capa.jpg" alt="Carrossel Fátima Rações" loading="lazy"><div class="cap">Cliente · Fátima Rações</div></div>
+        <div class="frame"><img src="/demo/assets/prova/ig_mastercreditos.png" alt="Carrossel Master Créditos" loading="lazy"><div class="cap">Cliente · Master Créditos</div></div>
+      </div>
+    </div>
+
+    <!-- 2. Stories / Q&A -->
+    <div class="prova-block reveal">
+      <div class="pb-label"><span class="dot"></span><h3>Stories &amp; Q&amp;A</h3><span>9:16 · prontos pra publicar</span></div>
+      <div class="gallery g-3">
+        <div class="frame story"><img src="/demo/assets/prova/story_hanna_1.jpg" alt="Story Hanna 1" loading="lazy"><div class="cap">Story · Reset da Hanna</div></div>
+        <div class="frame story"><img src="/demo/assets/prova/story_hanna_2.jpg" alt="Story Hanna 2" loading="lazy"><div class="cap">Story · sequência</div></div>
+        <div class="frame story"><img src="/demo/assets/prova/ig_hanna_reset.jpg" alt="Criativo reset Hanna" loading="lazy"><div class="cap">Criativo de campanha</div></div>
+      </div>
+    </div>
+
+    <!-- 3. Vídeo / Avatar IA -->
+    <div class="prova-block reveal">
+      <div class="pb-label"><span class="dot"></span><h3>Vídeo &amp; Avatar IA</h3><span>clone real + influenciadora 100% IA</span></div>
+      <div class="gallery g-2">
+        <div class="video-card">
+          <span class="badge">CLONE IA</span>
+          <video controls preload="none" playsinline poster="/demo/assets/prova/thumb_avatar_salatiel.jpg">
+            <source src="/demo/assets/prova/clip_avatar_salatiel.mp4" type="video/mp4">
+          </video>
+          <div class="video-meta"><h4>Clone do Salatiel · multicena</h4><p>Avatar falante gerado por IA, com B-roll, legenda e color grade. A voz e o rosto são clonados.</p></div>
+        </div>
+        <div class="video-card">
+          <span class="badge">100% IA</span>
+          <video controls preload="none" playsinline poster="/demo/assets/prova/thumb_hanna_video.jpg">
+            <source src="/demo/assets/prova/clip_hanna.mp4" type="video/mp4">
+          </video>
+          <div class="video-meta"><h4>Hanna · influenciadora 100% IA</h4><p>Personagem que não existe: rosto, voz, vídeo e roteiro gerados pela Maia. Conta @hannazayt.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Páginas no ar -->
+    <div class="prova-block reveal">
+      <div class="pb-label"><span class="dot"></span><h3>Páginas no ar</h3><span>clicáveis · ao vivo agora</span></div>
+      <div class="link-grid">
+        <a class="link-card" href="https://maquinadevendas.salatielbatista.com.br/" target="_blank" rel="noopener" data-cta="pagina-mv">
+          <div class="lc-ico">🚀</div>
+          <div class="lc-txt"><h4>Página de venda · Imersão</h4><p>maquinadevendas.salatielbatista.com.br</p></div>
+          <span class="lc-arrow">↗</span>
+        </a>
+        <a class="link-card" href="https://evento.salatielbatista.com.br/" target="_blank" rel="noopener" data-cta="pagina-evento">
+          <div class="lc-ico">🎟️</div>
+          <div class="lc-txt"><h4>Página de evento</h4><p>evento.salatielbatista.com.br</p></div>
+          <span class="lc-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 5. Análises / dossiês de clientes -->
+    <div class="prova-block reveal">
+      <div class="pb-label"><span class="dot"></span><h3>Análises de clientes</h3><span>dossiês estratégicos hospedados</span></div>
+      <div class="link-grid">
+        <a class="link-card" href="https://racoesfatima.agencianobolso.com.br/" target="_blank" rel="noopener" data-cta="analise-fatima">
+          <div class="lc-ico">📊</div>
+          <div class="lc-txt"><h4>Análise · Fátima Rações</h4><p>racoesfatima.agencianobolso.com.br</p></div>
+          <span class="lc-arrow">↗</span>
+        </a>
+        <a class="link-card" href="https://mercadaodular.agencianobolso.com.br/" target="_blank" rel="noopener" data-cta="analise-mercadao">
+          <div class="lc-ico">📊</div>
+          <div class="lc-txt"><h4>Análise · Mercadão Du Lar</h4><p>mercadaodular.agencianobolso.com.br</p></div>
+          <span class="lc-arrow">↗</span>
+        </a>
+        <a class="link-card" href="https://mastercredito.agencianobolso.com.br/" target="_blank" rel="noopener" data-cta="analise-mastercredito">
+          <div class="lc-ico">📊</div>
+          <div class="lc-txt"><h4>Análise · Master Créditos</h4><p>mastercredito.agencianobolso.com.br</p></div>
+          <span class="lc-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 6. Áudios da Maia -->
+    <div class="prova-block reveal">
+      <div class="pb-label"><span class="dot"></span><h3>A voz da Maia</h3><span>samples reais</span></div>
+      <div class="audio-row">
+        <div class="audio-card">
+          <h4>🔊 Voz da Hanna (IA)</h4>
+          <p>Narração de story gerada pela Maia para a influenciadora 100% IA.</p>
+          <audio controls preload="none" src="/demo/assets/audio/voz_hanna_1.mp3"></audio>
+        </div>
+        <div class="audio-card">
+          <h4>🔊 Voz da Maia</h4>
+          <p>Áudio de comunicação interno produzido e narrado pela Maia.</p>
+          <audio controls preload="none" src="/demo/assets/audio/voz_maia_aviso.mp3"></audio>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DIFERENCIAL -->
+<section id="diferencial" style="background:var(--bg-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">O diferencial</span>
+      <h2>Mesma entrega. <span class="grad-gain">Outra</span><br>velocidade e outro custo.</h2>
+    </div>
+    <div class="compare">
+      <div class="col bad reveal">
+        <h3>✕ Agência / equipe tradicional</h3>
+        <ul>
+          <li><span class="ic">✕</span> Um carrossel leva de 2 a 5 dias</li>
+          <li><span class="ic">✕</span> Fee mensal alto + fila de demanda</li>
+          <li><span class="ic">✕</span> Depende de gente, agenda e humor</li>
+          <li><span class="ic">✕</span> Reunião pra aprovar o óbvio</li>
+          <li><span class="ic">✕</span> Para nos fins de semana e feriados</li>
+        </ul>
+      </div>
+      <div class="col good reveal">
+        <h3>✓ Time da Maia</h3>
+        <ul>
+          <li><span class="ic">✓</span> O mesmo carrossel em minutos</li>
+          <li><span class="ic">✓</span> Capacidade de equipe, fração do custo</li>
+          <li><span class="ic">✓</span> Não falta, não atrasa, não pede aumento</li>
+          <li><span class="ic">✓</span> Você pede no WhatsApp e recebe pronto</li>
+          <li><span class="ic">✓</span> Roda 24/7, inclusive de madrugada</li>
+        </ul>
+      </div>
+    </div>
+    <div class="metrics">
+      <div class="metric reveal"><div class="big grad-gain">Minutos</div><div class="lab">para entregar o que a agência faz em dias</div></div>
+      <div class="metric reveal"><div class="big grad-gain">24/7</div><div class="lab">disponível todo dia, sem folga</div></div>
+      <div class="metric reveal"><div class="big grad-gain">1 chat</div><div class="lab">um WhatsApp no lugar de uma equipe inteira</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTIMENTO (PLACEHOLDER) -->
+<section id="investimento" class="invest">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Investimento</span>
+      <h2>O que custa ter o<br>time da Maia <span class="grad">no seu negócio</span>.</h2>
+    </div>
+
+    <div class="ph-banner reveal">
+      <span class="tag">PLACEHOLDER</span>
+      <p><strong>[ VALORES · AGUARDANDO SALATIEL ]</strong> &nbsp;·&nbsp; estrutura pronta para encaixar de 1 a 3 planos. Preços, número de planos e bônus a definir.</p>
+    </div>
+
+    <div class="plans">
+      <div class="plan reveal">
+        <div class="pname">Plano A</div>
+        <div class="price">R$ [—]<small>[ valor a definir ]</small></div>
+        <p class="pdesc">[ descrição curta do que está incluso · a definir ]</p>
+        <ul>
+          <li><span class="ic">✓</span> [ entregável 1 ]</li>
+          <li><span class="ic">✓</span> [ entregável 2 ]</li>
+          <li><span class="ic">✓</span> [ entregável 3 ]</li>
+        </ul>
+        <a class="btn btn-ghost" href="#cta" data-cta="plano-a">[ CTA · a definir ]</a>
+      </div>
+      <div class="plan feat reveal">
+        <div class="pname">Plano B</div>
+        <div class="price">R$ [—]<small>[ valor a definir ]</small></div>
+        <p class="pdesc">[ descrição curta · plano recomendado, a definir ]</p>
+        <ul>
+          <li><span class="ic">✓</span> [ entregável 1 ]</li>
+          <li><span class="ic">✓</span> [ entregável 2 ]</li>
+          <li><span class="ic">✓</span> [ entregável 3 ]</li>
+          <li><span class="ic">✓</span> [ entregável 4 ]</li>
+        </ul>
+        <a class="btn btn-primary" href="#cta" data-cta="plano-b">[ CTA · a definir ]</a>
+      </div>
+      <div class="plan reveal">
+        <div class="pname">Plano C</div>
+        <div class="price">R$ [—]<small>[ valor a definir ]</small></div>
+        <p class="pdesc">[ descrição curta do plano completo · a definir ]</p>
+        <ul>
+          <li><span class="ic">✓</span> [ entregável 1 ]</li>
+          <li><span class="ic">✓</span> [ entregável 2 ]</li>
+          <li><span class="ic">✓</span> [ entregável 3 ]</li>
+        </ul>
+        <a class="btn btn-ghost" href="#cta" data-cta="plano-c">[ CTA · a definir ]</a>
+      </div>
+    </div>
+    <p class="muted" style="text-align:center;margin-top:28px;font-size:14px">Estrutura de planos é placeholder. Quando o Salatiel definir valores, esta seção vira a oferta de fechamento.</p>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta" class="cta-final">
+  <div class="container narrow">
+    <div class="reveal">
+      <span class="eyebrow">Vamos fechar</span>
+      <h2>Você já viu a prova.<br>Agora é <span class="grad">colocar a Maia</span> pra trabalhar.</h2>
+      <p class="lead">Tudo nesta página foi feito por IA. Imagine essa máquina rodando dentro do seu negócio, todos os dias. Fale com a gente e dê o próximo passo.</p>
+      <div>
+        <a class="btn btn-primary btn-lg" href="https://wa.me/5586981141438?text=Quero%20fechar%20com%20o%20time%20da%20Maia" target="_blank" rel="noopener" data-cta="final-whatsapp">Falar no WhatsApp</a>
+        <a class="btn btn-ghost btn-lg" href="https://wa.me/5586981141438?text=Quero%20agendar%20uma%20conversa%20sobre%20o%20time%20da%20Maia" target="_blank" rel="noopener" data-cta="final-agendar">Agendar conversa</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <img src="/demo/assets/brand/logo-horizontal-ondark.png" alt="Agência no Bolso">
+    <p class="mono">Time da Maia · Agência no Bolso</p>
+    <p style="margin-top:8px">SRJ · BATISTA &amp; VISGUEIRA LTDA · CNPJ 12.472.917/0001-78</p>
+  </div>
+</footer>
+
+<!-- =================== TRACKING DE ENGAJAMENTO =================== -->
+<script>
+(function(){
+  // 1) Revelar elementos no scroll (com fallback à prova de falha)
+  var els = document.querySelectorAll('.reveal');
+  function revealAll(){ els.forEach(function(el){ el.classList.add('in'); }); }
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) {
+    revealAll();
+  } else {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(el){ io.observe(el); });
+    // failsafe: se algo não disparar em 3s, mostra tudo
+    setTimeout(revealAll, 3000);
+  }
+
+  if (typeof fbq !== 'function') return;
+
+  // 2) Tempo na página (lead quente "leu a proposta"): marcos 30s/60s/120s
+  var marks = {30:false, 60:false, 120:false};
+  var start = Date.now();
+  setInterval(function(){
+    var s = Math.round((Date.now()-start)/1000);
+    [30,60,120].forEach(function(m){
+      if (s >= m && !marks[m]) {
+        marks[m] = true;
+        fbq('trackCustom', 'TempoProposta', {segundos:m, content_name:'Proposta Time da Maia'});
+      }
+    });
+  }, 5000);
+
+  // 3) Profundidade de scroll: 25/50/75/100%
+  var depths = {25:false,50:false,75:false,100:false};
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement;
+    var pct = Math.round((h.scrollTop)/(h.scrollHeight - h.clientHeight) * 100);
+    [25,50,75,100].forEach(function(d){
+      if (pct >= d && !depths[d]) { depths[d]=true; fbq('trackCustom','ScrollProposta',{profundidade:d}); }
+    });
+  }, {passive:true});
+
+  // 4) Chegou na seção de investimento (intenção quente)
+  var inv = document.getElementById('investimento');
+  if (inv) {
+    var io2 = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ fbq('track','ViewContent',{content_name:'Investimento Time da Maia', content_category:'investimento'}); io2.disconnect(); } });
+    }, {threshold:.4});
+    io2.observe(inv);
+  }
+
+  // 5) Cliques em CTA (WhatsApp / planos / páginas)
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('[data-cta]');
+    if (!a) return;
+    var tag = a.getAttribute('data-cta');
+    if (tag.indexOf('whatsapp')>-1 || tag.indexOf('agendar')>-1 || tag.indexOf('nav')>-1) {
+      fbq('track','Lead',{content_name:'Time da Maia', source:tag});
+    } else {
+      fbq('trackCustom','CliqueProposta',{alvo:tag});
+    }
+  });
+})();
+</script>
+</body>
+</html>
