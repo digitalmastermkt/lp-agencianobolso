@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" width="160" height="40">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#F4D784"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="4" width="32" height="32" rx="6" fill="#0F172A"/>
+  <text x="18" y="27" font-family="Playfair Display, Georgia, serif" font-size="20" font-weight="800" fill="url(#g)" text-anchor="middle">A</text>
+  <text x="44" y="20" font-family="Playfair Display, Georgia, serif" font-size="14" font-weight="700" fill="#0F172A">Agência</text>
+  <text x="44" y="34" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="500" fill="#475569" letter-spacing="1">no Bolso</text>
+</svg>
