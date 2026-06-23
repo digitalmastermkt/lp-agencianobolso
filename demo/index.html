@@ -212,7 +212,7 @@ h3{font-size:clamp(20px,3vw,26px)}
 .metric .big{font-size:clamp(30px,5vw,44px);font-weight:900;line-height:1}
 .metric .lab{font-size:14px;color:var(--text-2);margin-top:10px}
 
-/* INVESTIMENTO (placeholder) */
+/* INVESTIMENTO */
 .invest{background:var(--bg-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .ph-banner{
   display:flex;align-items:center;gap:14px;justify-content:center;flex-wrap:wrap;
@@ -233,6 +233,30 @@ h3{font-size:clamp(20px,3vw,26px)}
 .plan li{display:flex;gap:10px;padding:8px 0;font-size:14.5px;color:var(--text-1)}
 .plan li .ic{color:var(--green);flex:0 0 auto}
 .plan .btn{width:100%}
+.plan .price .per{font-size:17px;font-weight:700;color:var(--text-2)}
+/* plano único (Enterprise como fechamento) */
+.plans-single{grid-template-columns:minmax(0,560px);justify-content:center}
+.plan-total{background:var(--bg-1);border:1px solid var(--border-strong);border-radius:var(--r-md);padding:18px 20px;margin-bottom:24px;text-align:center}
+.plan-total .lab{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3)}
+.plan-total .val{display:block;font-size:30px;font-weight:900;color:var(--cyan);line-height:1.15;margin:6px 0 8px}
+.plan-total .note{display:block;font-size:13.5px;color:var(--text-2)}
+/* economia vs montar equipe */
+.invest-compare{margin-top:48px}
+.ic-title{text-align:center;font-size:clamp(18px,2.6vw,24px);font-weight:800;color:var(--text-0);max-width:680px;margin:0 auto 28px}
+.ic-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.ic-card{border:1px solid var(--border);border-radius:var(--r-lg);padding:28px 26px;background:var(--bg-2)}
+.ic-card.ic-bad{background:linear-gradient(180deg,rgba(255,90,90,.06),transparent);border-color:rgba(255,90,90,.24)}
+.ic-card.ic-good{background:linear-gradient(180deg,rgba(52,211,153,.07),transparent);border-color:rgba(52,211,153,.28)}
+.ic-card .ic-lab{display:block;font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px;font-weight:600}
+.ic-card.ic-bad .ic-lab{color:#FF8A8A}
+.ic-card.ic-good .ic-lab{color:var(--green)}
+.ic-card ul{list-style:none;margin-bottom:16px}
+.ic-card li{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border);font-size:15px;color:var(--text-1)}
+.ic-card li:last-child{border-bottom:none}
+.ic-card li .ic{flex:0 0 auto;font-weight:800}
+.ic-card.ic-bad li .ic{color:var(--red)}
+.ic-card.ic-good li .ic{color:var(--green)}
+.ic-foot{font-size:14px;color:var(--text-2);font-style:italic}
 
 /* CTA final */
 .cta-final{text-align:center;position:relative;overflow:hidden}
@@ -254,7 +278,7 @@ footer .mono{font-family:var(--mono)}
 
 /* RESPONSIVO */
 @media(max-width:860px){
-  .grid-3,.steps,.plans,.compare,.metrics{grid-template-columns:1fr}
+  .grid-3,.steps,.plans,.compare,.metrics,.ic-grid{grid-template-columns:1fr}
   .metrics{grid-template-columns:repeat(3,1fr);gap:10px}
   .g-ig{grid-template-columns:repeat(2,1fr)}
   .g-3,.g-2{grid-template-columns:repeat(2,1fr)}
@@ -514,56 +538,65 @@ footer .mono{font-family:var(--mono)}
   </div>
 </section>
 
-<!-- INVESTIMENTO (PLACEHOLDER) -->
+<!-- INVESTIMENTO -->
 <section id="investimento" class="invest">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Investimento</span>
       <h2>O que custa ter a<br>Agência no Bolso <span class="grad">no seu negócio</span>.</h2>
+      <p class="sub">Uma esteira de marketing completa rodando no seu CNPJ &mdash; sem contratar, treinar ou gerir equipe. A Maia opera por dentro, 24/7.</p>
     </div>
 
-    <div class="ph-banner reveal">
-      <span class="tag">PLACEHOLDER</span>
-      <p><strong>[ VALORES · AGUARDANDO SALATIEL ]</strong> &nbsp;·&nbsp; estrutura pronta para encaixar de 1 a 3 planos. Preços, número de planos e bônus a definir.</p>
+    <!-- Plano de fechamento: MAIA Enterprise -->
+    <div class="plans plans-single reveal">
+      <div class="plan feat">
+        <div class="pname">MAIA Enterprise</div>
+        <div class="price">R$ 2.997<span class="per">/mês</span><small>+ setup único de R$ 25.000 (somente no 1º ano)</small></div>
+        <p class="pdesc">A agência inteira &mdash; conteúdo, vídeo, página de venda, análise de cliente e SDR &mdash; operada pela Maia dentro do seu negócio.</p>
+        <ul>
+          <li><span class="ic">✓</span> Esteira completa de marketing rodando no seu CNPJ</li>
+          <li><span class="ic">✓</span> Conteúdo, vídeo e páginas de venda produzidos pela IA</li>
+          <li><span class="ic">✓</span> Análise de cliente e geração de prova social</li>
+          <li><span class="ic">✓</span> SDR de IA operando 24/7, sem folga e sem férias</li>
+          <li><span class="ic">✓</span> Sem contratar, treinar ou gerir equipe</li>
+          <li><span class="ic">✓</span> Implantação e setup feitos por nós no 1º ano</li>
+        </ul>
+        <div class="plan-total">
+          <span class="lab">1º ano (setup + 12 mensalidades)</span>
+          <span class="val">R$ 60.964</span>
+          <span class="note">Depois disso, só a mensalidade de R$ 2.997/mês.</span>
+        </div>
+        <a class="btn btn-primary btn-lg" href="https://wa.me/5586981141438?text=Quero%20a%20Ag%C3%AAncia%20no%20Bolso%20operando%20no%20meu%20neg%C3%B3cio" target="_blank" rel="noopener" data-cta="plano-enterprise-whatsapp">Quero a Agência no Bolso operando</a>
+      </div>
     </div>
 
-    <div class="plans">
-      <div class="plan reveal">
-        <div class="pname">Plano A</div>
-        <div class="price">R$ [—]<small>[ valor a definir ]</small></div>
-        <p class="pdesc">[ descrição curta do que está incluso · a definir ]</p>
-        <ul>
-          <li><span class="ic">✓</span> [ entregável 1 ]</li>
-          <li><span class="ic">✓</span> [ entregável 2 ]</li>
-          <li><span class="ic">✓</span> [ entregável 3 ]</li>
-        </ul>
-        <a class="btn btn-ghost" href="#cta" data-cta="plano-a">[ CTA · a definir ]</a>
-      </div>
-      <div class="plan feat reveal">
-        <div class="pname">Plano B</div>
-        <div class="price">R$ [—]<small>[ valor a definir ]</small></div>
-        <p class="pdesc">[ descrição curta · plano recomendado, a definir ]</p>
-        <ul>
-          <li><span class="ic">✓</span> [ entregável 1 ]</li>
-          <li><span class="ic">✓</span> [ entregável 2 ]</li>
-          <li><span class="ic">✓</span> [ entregável 3 ]</li>
-          <li><span class="ic">✓</span> [ entregável 4 ]</li>
-        </ul>
-        <a class="btn btn-primary" href="#cta" data-cta="plano-b">[ CTA · a definir ]</a>
-      </div>
-      <div class="plan reveal">
-        <div class="pname">Plano C</div>
-        <div class="price">R$ [—]<small>[ valor a definir ]</small></div>
-        <p class="pdesc">[ descrição curta do plano completo · a definir ]</p>
-        <ul>
-          <li><span class="ic">✓</span> [ entregável 1 ]</li>
-          <li><span class="ic">✓</span> [ entregável 2 ]</li>
-          <li><span class="ic">✓</span> [ entregável 3 ]</li>
-        </ul>
-        <a class="btn btn-ghost" href="#cta" data-cta="plano-c">[ CTA · a definir ]</a>
+    <!-- Ângulo de economia: Maia vs montar a equipe -->
+    <div class="invest-compare reveal">
+      <p class="ic-title">A Maia inteira custa quase o mesmo que <strong>um único funcionário CLT</strong>.</p>
+      <div class="ic-grid">
+        <div class="ic-card ic-bad">
+          <span class="ic-lab">Montar a equipe você mesmo</span>
+          <ul>
+            <li><span class="ic">×</span> Agência de marketing terceirizada</li>
+            <li><span class="ic">×</span> Gestor de tráfego</li>
+            <li><span class="ic">×</span> 1 SDR CLT &asymp; <strong>R$ 2.581/mês</strong> (só de salário e encargos)</li>
+            <li><span class="ic">×</span> Recrutar, treinar, gerir e cobrir faltas</li>
+          </ul>
+          <p class="ic-foot">Soma muito maior &mdash; e ainda depende de gente.</p>
+        </div>
+        <div class="ic-card ic-good">
+          <span class="ic-lab">Agência no Bolso · Maia</span>
+          <ul>
+            <li><span class="ic">✓</span> Esteira completa por <strong>R$ 2.997/mês</strong></li>
+            <li><span class="ic">✓</span> Quase o custo de 1 SDR &mdash; fazendo o trabalho de uma agência inteira</li>
+            <li><span class="ic">✓</span> Opera 24/7, sem férias, sem rotatividade</li>
+            <li><span class="ic">✓</span> Tudo no seu CNPJ, pronto pra escalar</li>
+          </ul>
+          <p class="ic-foot">Uma agência inteira pelo preço de um funcionário.</p>
+        </div>
       </div>
     </div>
-    <p class="muted" style="text-align:center;margin-top:28px;font-size:14px">Estrutura de planos é placeholder. Quando o Salatiel definir valores, esta seção vira a oferta de fechamento.</p>
+
   </div>
 </section>
 
