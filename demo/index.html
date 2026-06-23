@@ -151,6 +151,30 @@ h3{font-size:clamp(20px,3vw,26px)}
 .step p{color:var(--text-2);font-size:15.5px}
 .flow-line{text-align:center;font-family:var(--mono);color:var(--text-3);font-size:14px;margin:30px 0 0;letter-spacing:.05em}
 
+/* TIME */
+.team-lead{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:52px}
+.team-lead .avatar-lead{
+  width:128px;height:128px;border-radius:50%;object-fit:cover;
+  border:2px solid var(--cyan);box-shadow:0 0 0 6px var(--cyan-soft),0 14px 40px rgba(0,212,255,.22);
+  margin-bottom:18px;aspect-ratio:1/1;
+}
+.team-lead .lead-name{font-size:24px;font-weight:800;color:var(--text-0);letter-spacing:-.02em}
+.team-lead .lead-role{font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--cyan);margin-top:8px;text-transform:uppercase}
+.team-lead .lead-desc{font-size:15.5px;color:var(--text-2);max-width:520px;margin-top:14px}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.tmember{
+  background:var(--bg-2);border:1px solid var(--border);border-radius:var(--r-lg);
+  padding:26px 18px 22px;text-align:center;transition:border-color .2s ease,transform .2s ease;
+}
+.tmember:hover{border-color:var(--cyan);transform:translateY(-3px)}
+.tmember .avatar{
+  width:88px;height:88px;border-radius:50%;object-fit:cover;margin:0 auto 16px;
+  border:1px solid var(--border-strong);background:var(--bg-3);aspect-ratio:1/1;
+}
+.tmember .tname{font-size:18px;font-weight:700;color:var(--text-0);letter-spacing:-.01em}
+.tmember .trole{font-family:var(--mono);font-size:12.5px;color:var(--text-2);margin-top:8px;letter-spacing:.02em}
+.tmember .trole b{color:var(--cyan);font-weight:600}
+
 /* PROVA */
 .prova-head{margin-bottom:46px}
 .prova-block{margin-top:64px}
@@ -279,6 +303,7 @@ footer .mono{font-family:var(--mono)}
 /* RESPONSIVO */
 @media(max-width:860px){
   .grid-3,.steps,.plans,.compare,.metrics,.ic-grid{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
   .metrics{grid-template-columns:repeat(3,1fr);gap:10px}
   .g-ig{grid-template-columns:repeat(2,1fr)}
   .g-3,.g-2{grid-template-columns:repeat(2,1fr)}
@@ -388,6 +413,62 @@ footer .mono{font-family:var(--mono)}
       </div>
     </div>
     <p class="flow-line">VOCÊ PEDE  →  A MAIA EXECUTA NA AGÊNCIA NO BOLSO 24/7  →  ENTREGA PRONTA</p>
+  </div>
+</section>
+
+<!-- TIME -->
+<section id="time">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">O time</span>
+      <h2>Conheça o time que vai<br><span class="grad">operar no seu negócio</span>.</h2>
+      <p class="lead">A Maia é a IA que coordena. Por baixo dela, sete agentes especialistas executam cada frente do seu marketing, 24 horas por dia, sem fila e sem folga.</p>
+    </div>
+
+    <div class="team-lead reveal">
+      <img class="avatar-lead" src="/demo/assets/agentes/maia.webp" alt="Maia, a IA que coordena o time" loading="lazy" width="128" height="128">
+      <div class="lead-name">Maia</div>
+      <div class="lead-role">A IA que coordena o time</div>
+      <p class="lead-desc">Você fala com a Maia. Ela entende o pedido, aciona o agente certo e devolve a entrega pronta pra você aprovar.</p>
+    </div>
+
+    <div class="team-grid">
+      <div class="tmember reveal">
+        <img class="avatar" src="/demo/assets/agentes/lis.webp" alt="Lis, SDR e Atendimento" loading="lazy" width="88" height="88">
+        <div class="tname">Lis</div>
+        <div class="trole"><b>SDR</b> · Atendimento 24/7</div>
+      </div>
+      <div class="tmember reveal">
+        <img class="avatar" src="/demo/assets/agentes/theo.webp" alt="Théo, Copywriter" loading="lazy" width="88" height="88">
+        <div class="tname">Théo</div>
+        <div class="trole"><b>Copywriter</b></div>
+      </div>
+      <div class="tmember reveal">
+        <img class="avatar" src="/demo/assets/agentes/leo.webp" alt="Léo, Desenvolvedor" loading="lazy" width="88" height="88">
+        <div class="tname">Léo</div>
+        <div class="trole"><b>Dev</b></div>
+      </div>
+      <div class="tmember reveal">
+        <img class="avatar" src="/demo/assets/agentes/nina.webp" alt="Nina, Operações" loading="lazy" width="88" height="88">
+        <div class="tname">Nina</div>
+        <div class="trole"><b>Operações</b></div>
+      </div>
+      <div class="tmember reveal">
+        <img class="avatar" src="/demo/assets/agentes/eva.webp" alt="Eva, CRM" loading="lazy" width="88" height="88">
+        <div class="tname">Eva</div>
+        <div class="trole"><b>CRM</b></div>
+      </div>
+      <div class="tmember reveal">
+        <img class="avatar" src="/demo/assets/agentes/ravi.webp" alt="Ravi, Tráfego pago" loading="lazy" width="88" height="88">
+        <div class="tname">Ravi</div>
+        <div class="trole"><b>Tráfego pago</b></div>
+      </div>
+      <div class="tmember reveal">
+        <img class="avatar" src="/demo/assets/agentes/caio.webp" alt="Caio, Gestão de projetos" loading="lazy" width="88" height="88">
+        <div class="tname">Caio</div>
+        <div class="trole"><b>Gestão de projetos</b></div>
+      </div>
+    </div>
   </div>
 </section>
 
