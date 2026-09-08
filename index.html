@@ -707,11 +707,11 @@
           <div class="roi-card is-maia" aria-live="polite">
             <div class="roi-card-label">Com MAIA Enterprise</div>
             <div class="roi-card-headline">Esteira completa rodando no seu CNPJ:</div>
-            <div class="roi-card-value" id="roiMaiaTotalMaia">R$ 60.964</div>
-            <div class="roi-card-hook" style="font-size:0.85em; font-style:italic; color:var(--cyan); opacity:0.85; margin-top:8px; line-height:1.4">Setup único no ano 1 — anos seguintes você paga apenas R$ 2.997/mês</div>
+            <div class="roi-card-value" id="roiMaiaTotalMaia">R$ 32.164</div>
+            <div class="roi-card-hook" style="font-size:0.85em; font-style:italic; color:var(--cyan); opacity:0.85; margin-top:8px; line-height:1.4">Implantação única no ano 1 — nos anos seguintes você paga apenas R$ 597/mês</div>
             <ul class="roi-card-breakdown">
-              <li><span>Setup único</span><span>R$ 25.000</span></li>
-              <li><span>Mensalidade × 12</span><span>R$ 35.964</span></li>
+              <li><span>Implantação única</span><span>R$ 25.000</span></li>
+              <li><span>Recorrência × 12</span><span>R$ 7.164</span></li>
               <li><span>Contrato anual</span><span>fixo</span></li>
             </ul>
           </div>
@@ -745,8 +745,8 @@
   // Constantes
   var MULTIPLICADOR_CLT = 1.7;          // encargos CLT
   var MAIA_SETUP        = 25000;
-  var MAIA_MENSAL       = 2997;
-  var MAIA_ANUAL        = MAIA_SETUP + MAIA_MENSAL * 12; // 60.964
+  var MAIA_MENSAL       = 597;
+  var MAIA_ANUAL        = MAIA_SETUP + MAIA_MENSAL * 12; // 32.164
 
   // Pares slider+input
   var pairs = [
@@ -985,51 +985,180 @@
   </div>
 </section>
 
-<!-- INVESTIMENTO -->
+<!-- INVESTIMENTO / PLANOS -->
+<style>
+/* ===== Planos MAIA — scoped ===== */
+#investimento .planos-premissa{
+  max-width:760px; margin:0 auto clamp(40px,6vw,64px);
+  border:1px solid var(--border); border-radius:var(--radius-lg);
+  background:var(--bg-glass); backdrop-filter:blur(8px);
+  padding:clamp(20px,3vw,28px); text-align:center;
+}
+#investimento .planos-premissa p{ color:var(--text-2); margin:0; }
+#investimento .planos-premissa strong{ color:var(--text-0); }
+
+#investimento .planos-grid{
+  display:grid; grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:clamp(18px,2.2vw,26px); align-items:stretch;
+  margin-top:clamp(8px,1.5vw,16px);
+}
+#investimento .plano{
+  position:relative; display:flex; flex-direction:column;
+  border:1px solid var(--border); border-radius:var(--radius-lg);
+  background:var(--bg-2); padding:clamp(24px,2.6vw,32px);
+  transition:transform .25s ease, border-color .25s ease;
+}
+#investimento .plano:hover{ transform:translateY(-4px); border-color:rgba(0,212,255,0.30); }
+/* Enterprise em destaque */
+#investimento .plano.is-featured{
+  background:var(--grad-primary-soft);
+  border-color:rgba(0,212,255,0.38);
+  box-shadow:0 20px 60px -30px rgba(0,212,255,.5), 0 12px 44px -32px rgba(168,85,247,.55);
+}
+#investimento .plano-badge{
+  position:absolute; top:-13px; left:50%; transform:translateX(-50%);
+  font-family:var(--font-mono); font-size:.66rem; letter-spacing:.14em; text-transform:uppercase;
+  color:#0A0A0F; font-weight:700; white-space:nowrap;
+  background:var(--grad-primary); padding:6px 16px; border-radius:999px;
+  box-shadow:0 6px 18px -6px rgba(0,212,255,.6);
+}
+#investimento .plano-nome{
+  font-family:var(--font-mono); font-size:.82rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--cyan); margin-bottom:14px;
+}
+#investimento .plano.is-featured .plano-nome{ color:var(--text-0); }
+#investimento .plano-tagline{ color:var(--text-2); font-size:.92rem; margin:0 0 22px; min-height:2.6em; }
+#investimento .plano-preco{ margin-bottom:6px; }
+#investimento .plano-setup{
+  font-family:var(--font-mono); font-weight:600;
+  font-size:clamp(1.7rem,3.2vw,2.3rem); line-height:1.05;
+  color:var(--text-0);
+}
+#investimento .plano.is-featured .plano-setup{
+  background:var(--grad-primary); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+#investimento .plano-setup-label{
+  font-family:var(--font-mono); font-size:.7rem; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--text-3); display:block; margin-bottom:4px;
+}
+#investimento .plano-mensal{ color:var(--text-2); font-size:.95rem; margin:10px 0 0; }
+#investimento .plano-mensal strong{ color:var(--text-1); font-family:var(--font-mono); }
+#investimento .plano-divider{ height:1px; background:var(--border); margin:24px 0; }
+#investimento .plano-eyebrow{
+  font-family:var(--font-mono); font-size:.7rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--text-3); margin-bottom:12px;
+}
+#investimento .plano-features{ list-style:none; padding:0; margin:0 0 26px; display:grid; gap:11px; }
+#investimento .plano-features li{
+  position:relative; padding-left:28px; color:var(--text-1); font-size:.93rem; line-height:1.45;
+}
+#investimento .plano-features li::before{
+  content:""; position:absolute; left:0; top:2px; width:18px; height:18px;
+  border-radius:50%; background:var(--cyan-soft); border:1px solid rgba(0,212,255,.4);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300D4FF' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:center; background-size:11px;
+}
+#investimento .plano-cta{ margin-top:auto; }
+#investimento .plano-cta .btn{ width:100%; justify-content:center; }
+#investimento .planos-nota{
+  text-align:center; color:var(--text-3); font-size:.85rem;
+  max-width:720px; margin:clamp(28px,4vw,40px) auto 0; line-height:1.55;
+}
+#investimento .planos-nota strong{ color:var(--text-2); }
+@media (max-width:900px){
+  #investimento .planos-grid{ grid-template-columns:1fr; max-width:440px; margin-left:auto; margin-right:auto; }
+  #investimento .plano.is-featured{ order:-1; }
+  #investimento .plano-tagline{ min-height:0; }
+}
+</style>
 <section id="investimento">
-  <div class="container container-narrow">
+  <div class="container">
     <div class="section-header">
-      <span class="eyebrow">Investimento</span>
-      <h2>MAIA Enterprise</h2>
-      <p>Operação completa rodando no seu CNPJ. Investimento fixo, sem letra miúda.</p>
+      <span class="eyebrow">Planos</span>
+      <h2>Escolha o nível da<br><span class="gradient-text">sua operação</span></h2>
+      <p>A infraestrutura é sua: a MAIA roda no seu servidor, com as suas APIs. Você tem controle total e nunca fica refém. O que muda entre os planos é a implantação e o nível de suporte.</p>
     </div>
 
-    <div class="investment">
-      <div class="invest-price">
-        <div class="invest-price-item">
-          <div class="invest-price-label">Setup único</div>
-          <div class="invest-price-value mono"><span class="gradient-text">R$ 25.000</span></div>
+    <div class="planos-premissa">
+      <p><strong>Recorrência única de R$ 597/mês em todos os planos.</strong> Cobre a licença de uso, a atualização contínua das skills e as novas skills que entram no catálogo. O investimento de implantação varia conforme o escopo abaixo.</p>
+    </div>
+
+    <div class="planos-grid">
+
+      <!-- START -->
+      <div class="plano reveal">
+        <div class="plano-nome">Start</div>
+        <p class="plano-tagline">A MAIA instalada na sua operação, com o time essencial pronto para trabalhar.</p>
+        <div class="plano-preco">
+          <span class="plano-setup-label">Implantação</span>
+          <div class="plano-setup">R$ 1.497</div>
+          <p class="plano-mensal">mais <strong>R$ 597</strong>/mês de recorrência</p>
         </div>
-        <div class="invest-price-item">
-          <div class="invest-price-label">Mensalidade</div>
-          <div class="invest-price-value mono"><span class="gradient-text">R$ 2.997</span></div>
-        </div>
-        <div class="invest-price-item">
-          <div class="invest-price-label">Contrato</div>
-          <div class="invest-price-value mono"><span class="gradient-text">12 meses</span></div>
+        <div class="plano-divider"></div>
+        <div class="plano-eyebrow">O que está incluído</div>
+        <ul class="plano-features">
+          <li>MAIA instalada no seu próprio servidor</li>
+          <li>3 subagentes principais</li>
+          <li>Pacote de skills essenciais</li>
+          <li>Painel com marketplace de skills para upgrades avulsos, mais manual de uso</li>
+          <li>Suporte de atualização das skills incluído</li>
+        </ul>
+        <div class="plano-cta">
+          <a href="https://wa.me/5586981141438?text=Ol%C3%A1%20Salatiel%2C%20quero%20conhecer%20o%20plano%20Start%20da%20MAIA" class="btn btn-secondary" target="_blank" rel="noopener">Falar sobre o Start</a>
         </div>
       </div>
 
-      <p style="color:var(--text-2); margin-bottom:8px"><strong>Pagamento do setup:</strong> PIX à vista com 10% OFF (R$ 22.500) ou cartão em até 12x (juros da bandeira). <strong>White-label opcional</strong> (sua marca): +R$ 3.000.</p>
-
-      <h4 style="margin-top:32px; margin-bottom:16px; font-size:1rem; font-family:var(--font-mono); color:var(--cyan); text-transform:uppercase; letter-spacing:.14em">Incluído na mensalidade</h4>
-      <ul class="invest-included">
-        <li>Os 7 agentes coordenados operando todo dia</li>
-        <li>Atendimento 24/7 em até 3 contas</li>
-        <li>Pacote mensal de copy (páginas, roteiros, e-mails)</li>
-        <li>Integrações e ajustes técnicos</li>
-        <li>Estrutura e otimização de campanha Meta Ads</li>
-        <li>CRM e pós-venda automatizados</li>
-        <li>Reunião mensal de leitura de resultado (2h)</li>
-        <li>Refinamento contínuo do dossiê operacional</li>
-      </ul>
-
-      <p style="color:var(--text-3); font-size:.9rem; margin-top:24px">Não tem checkout direto. Venda consultiva. 30 minutos no WhatsApp ou Google Meet com o Salatiel pra alinhar escopo, integrações e cronograma.</p>
-
-      <div class="cta-row" style="justify-content:center; margin-top:32px">
-        <a href="https://wa.me/5586981141438?text=Ol%C3%A1%20Salatiel%2C%20quero%20agendar%20conversa%20sobre%20a%20MAIA%20Enterprise" class="btn glow-cta btn-lg" target="_blank" rel="noopener">Agendar conversa com o Salatiel</a>
+      <!-- PRO -->
+      <div class="plano reveal">
+        <div class="plano-nome">Pro</div>
+        <p class="plano-tagline">Todo o time entregue, com onboard de implantação e suporte ao vivo em grupo.</p>
+        <div class="plano-preco">
+          <span class="plano-setup-label">Implantação</span>
+          <div class="plano-setup">R$ 5.000</div>
+          <p class="plano-mensal">mais <strong>R$ 597</strong>/mês de recorrência</p>
+        </div>
+        <div class="plano-divider"></div>
+        <div class="plano-eyebrow">Tudo do Start, mais</div>
+        <ul class="plano-features">
+          <li>Todos os subagentes entregues</li>
+          <li>Catálogo de skills ampliado</li>
+          <li>1 onboard de implantação</li>
+          <li>Reunião de suporte em grupo, semanal e ao vivo</li>
+        </ul>
+        <div class="plano-cta">
+          <a href="https://wa.me/5586981141438?text=Ol%C3%A1%20Salatiel%2C%20quero%20conhecer%20o%20plano%20Pro%20da%20MAIA" class="btn btn-secondary" target="_blank" rel="noopener">Falar sobre o Pro</a>
+        </div>
       </div>
+
+      <!-- ENTERPRISE (destaque) -->
+      <div class="plano is-featured reveal">
+        <span class="plano-badge">Mais completo</span>
+        <div class="plano-nome">Enterprise</div>
+        <p class="plano-tagline">A MAIA completa, com prospecção ativa e implantação premium do início ao fim.</p>
+        <div class="plano-preco">
+          <span class="plano-setup-label">Implantação</span>
+          <div class="plano-setup">R$ 25.000</div>
+          <p class="plano-mensal">mais <strong>R$ 597</strong>/mês de recorrência</p>
+        </div>
+        <div class="plano-divider"></div>
+        <div class="plano-eyebrow">Tudo, no nível máximo</div>
+        <ul class="plano-features">
+          <li>MAIA completa: todas as skills premium e todas as atualizações</li>
+          <li>Todos os subagentes</li>
+          <li>Prospecção em massa e prospecção ativa, mais tudo que a MAIA tem hoje</li>
+          <li>2 onboards: diagnóstico do negócio e um segundo onboard à sua escolha</li>
+          <li>Suporte premium</li>
+        </ul>
+        <div class="plano-cta">
+          <a href="https://wa.me/5586981141438?text=Ol%C3%A1%20Salatiel%2C%20quero%20conhecer%20o%20plano%20Enterprise%20da%20MAIA" class="btn glow-cta" target="_blank" rel="noopener">Falar sobre o Enterprise</a>
+        </div>
+      </div>
+
     </div>
+
+    <p class="planos-nota">
+      A criação de novos subagentes sob medida é um serviço à parte, executado pela nossa equipe conforme a demanda. <strong>Não há checkout direto: a contratação é consultiva.</strong> São trinta minutos no WhatsApp ou no Google Meet com o Salatiel para alinhar escopo, integrações e cronograma.
+    </p>
   </div>
 </section>
 
@@ -1076,7 +1205,7 @@
       </details>
       <details class="faq-item">
         <summary>Como funciona o pagamento do setup?</summary>
-        <div class="faq-answer">Setup único de R$ 25.000. Você escolhe: PIX à vista com 10% OFF (R$ 22.500), ou parcela em até 12x no cartão com juros da bandeira. A mensalidade de R$ 2.997 começa a contar no go-live (dia 30).</div>
+        <div class="faq-answer">A implantação varia por plano: R$ 1.497 no Start, R$ 5.000 no Pro e R$ 25.000 no Enterprise. Você escolhe pagar via PIX à vista com 10% OFF ou parcelar em até 12x no cartão com juros da bandeira. A recorrência de R$ 597/mês, igual em todos os planos, começa a contar no go-live (dia 30) e cobre a licença de uso, a atualização contínua das skills e as novas skills do catálogo.</div>
       </details>
       <details class="faq-item">
         <summary>Posso ter a esteira com a minha marca, sem aparecer MAIA?</summary>
