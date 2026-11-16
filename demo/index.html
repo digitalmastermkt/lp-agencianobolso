@@ -174,6 +174,8 @@ h3{font-size:clamp(20px,3vw,26px)}
 .tmember .tname{font-size:18px;font-weight:700;color:var(--text-0);letter-spacing:-.01em}
 .tmember .trole{font-family:var(--mono);font-size:12.5px;color:var(--text-2);margin-top:8px;letter-spacing:.02em}
 .tmember .trole b{color:var(--cyan);font-weight:600}
+.tmember{position:relative}
+.tmember .tbadge{position:absolute;top:12px;right:12px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0A0A0F;background:var(--cyan);padding:4px 10px;border-radius:999px}
 
 /* PROVA */
 .prova-head{margin-bottom:46px}
@@ -422,7 +424,7 @@ footer .mono{font-family:var(--mono)}
     <div class="section-head reveal">
       <span class="eyebrow">O time</span>
       <h2>Conheça o time que vai<br><span class="grad">operar no seu negócio</span>.</h2>
-      <p class="lead">A Maia é a IA que coordena. Por baixo dela, sete agentes especialistas executam cada frente do seu marketing, 24 horas por dia, sem fila e sem folga.</p>
+      <p class="lead">A Maia é a IA que coordena. Por baixo dela, sete agentes especialistas executam cada frente do seu marketing, 24 horas por dia, sem fila e sem folga. No plano Magnata, o time chega a 14, com especialistas em jurídico, fiscal, financeiro, RH, engenharia, conteúdo e prospecção.</p>
     </div>
 
     <div class="team-lead reveal">
@@ -468,7 +470,50 @@ footer .mono{font-family:var(--mono)}
         <div class="tname">Caio</div>
         <div class="trole"><b>Gestão de projetos</b></div>
       </div>
+      <div class="tmember reveal">
+        <span class="tbadge">Magnata</span>
+        <img class="avatar" src="/assets/img/agentes/bia.webp" alt="Bia, Conteúdo, exclusivo do plano Magnata" loading="lazy" width="88" height="88">
+        <div class="tname">Bia</div>
+        <div class="trole"><b>Conteúdo</b> · Estratégia e roteiros</div>
+      </div>
+      <div class="tmember reveal">
+        <span class="tbadge">Magnata</span>
+        <img class="avatar" src="/assets/img/agentes/aline.webp" alt="Aline, Jurídico, exclusivo do plano Magnata" loading="lazy" width="88" height="88">
+        <div class="tname">Aline</div>
+        <div class="trole"><b>Jurídico</b> · Contratos, LGPD e marca</div>
+      </div>
+      <div class="tmember reveal">
+        <span class="tbadge">Magnata</span>
+        <img class="avatar" src="/assets/img/agentes/maria.webp" alt="Maria, Tributário, exclusivo do plano Magnata" loading="lazy" width="88" height="88">
+        <div class="tname">Maria</div>
+        <div class="trole"><b>Tributário</b> · Regimes, notas e prazos</div>
+      </div>
+      <div class="tmember reveal">
+        <span class="tbadge">Magnata</span>
+        <img class="avatar" src="/assets/img/agentes/boris.webp" alt="Boris, Engenharia, exclusivo do plano Magnata" loading="lazy" width="88" height="88">
+        <div class="tname">Boris</div>
+        <div class="trole"><b>Engenharia</b> · Sistemas e automações</div>
+      </div>
+      <div class="tmember reveal">
+        <span class="tbadge">Magnata</span>
+        <img class="avatar" src="/assets/img/agentes/geane.webp" alt="Geane, RH, exclusivo do plano Magnata" loading="lazy" width="88" height="88">
+        <div class="tname">Geane</div>
+        <div class="trole"><b>RH</b> · Admissão, folha e férias</div>
+      </div>
+      <div class="tmember reveal">
+        <span class="tbadge">Magnata</span>
+        <img class="avatar" src="/assets/img/agentes/marcia.webp" alt="Márcia, Financeiro, exclusivo do plano Magnata" loading="lazy" width="88" height="88">
+        <div class="tname">Márcia</div>
+        <div class="trole"><b>Financeiro</b> · Caixa, DRE e ERP</div>
+      </div>
+      <div class="tmember reveal">
+        <span class="tbadge">Magnata</span>
+        <img class="avatar" src="/assets/img/agentes/ruth.webp" alt="Ruth, Prospecção B2B, exclusivo do plano Magnata" loading="lazy" width="88" height="88">
+        <div class="tname">Ruth</div>
+        <div class="trole"><b>Prospecção B2B</b> · Leads e primeiro contato</div>
+      </div>
     </div>
+    <p class="lead" style="text-align:center;margin:36px auto 0;max-width:640px">Os cards com o selo Magnata são exclusivos desse plano. Você pede à Maia, e ela delega ao especialista certo.</p>
   </div>
 </section>
 
@@ -632,7 +677,7 @@ footer .mono{font-family:var(--mono)}
     <div class="plans plans-single reveal">
       <div class="plan feat">
         <div class="pname">MAIA Enterprise</div>
-        <div class="price">R$ 2.997<span class="per">/mês</span><small>+ setup único de R$ 25.000 (somente no 1º ano)</small></div>
+        <div class="price">R$ 597<span class="per">/mês</span><small>+ implantação única de R$ 12.000, em até 12x de R$ 1.000</small></div>
         <p class="pdesc">A agência inteira &mdash; conteúdo, vídeo, página de venda, análise de cliente e SDR &mdash; operada pela Maia dentro do seu negócio.</p>
         <ul>
           <li><span class="ic">✓</span> Esteira completa de marketing rodando no seu CNPJ</li>
@@ -640,12 +685,12 @@ footer .mono{font-family:var(--mono)}
           <li><span class="ic">✓</span> Análise de cliente e geração de prova social</li>
           <li><span class="ic">✓</span> SDR de IA operando 24/7, sem folga e sem férias</li>
           <li><span class="ic">✓</span> Sem contratar, treinar ou gerir equipe</li>
-          <li><span class="ic">✓</span> Implantação e setup feitos por nós no 1º ano</li>
+          <li><span class="ic">✓</span> Implantação feita por nós, com 1 onboard</li>
         </ul>
         <div class="plan-total">
           <span class="lab">1º ano (setup + 12 mensalidades)</span>
-          <span class="val">R$ 60.964</span>
-          <span class="note">Depois disso, só a mensalidade de R$ 2.997/mês.</span>
+          <span class="val">R$ 19.164</span>
+          <span class="note">Depois disso, só a mensalidade de R$ 597/mês. Sem fidelidade. Quatro planos, do Start ao Magnata, na <a href="/#investimento">página principal</a>.</span>
         </div>
         <a class="btn btn-primary btn-lg" href="https://wa.me/5586981141438?text=Quero%20a%20Ag%C3%AAncia%20no%20Bolso%20operando%20no%20meu%20neg%C3%B3cio" target="_blank" rel="noopener" data-cta="plano-enterprise-whatsapp">Quero a Agência no Bolso operando</a>
       </div>
@@ -668,7 +713,7 @@ footer .mono{font-family:var(--mono)}
         <div class="ic-card ic-good">
           <span class="ic-lab">Agência no Bolso · Maia</span>
           <ul>
-            <li><span class="ic">✓</span> Esteira completa por <strong>R$ 2.997/mês</strong></li>
+            <li><span class="ic">✓</span> Esteira completa por <strong>R$ 597/mês</strong> após a implantação</li>
             <li><span class="ic">✓</span> Quase o custo de 1 SDR &mdash; fazendo o trabalho de uma agência inteira</li>
             <li><span class="ic">✓</span> Opera 24/7, sem férias, sem rotatividade</li>
             <li><span class="ic">✓</span> Tudo no seu CNPJ, pronto pra escalar</li>
