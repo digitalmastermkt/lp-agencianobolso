@@ -29,7 +29,6 @@
     c.className = 'fx-hero-canvas'; c.setAttribute('aria-hidden', 'true');
     hero.insertBefore(c, inner);
 
-    var NAMES = ['LIS', 'THÉO', 'LÉO', 'NINA', 'EVA', 'RAVI', 'CAIO', 'BIA', 'ALINE', 'MARIA', 'BORIS', 'GEANE', 'MÁRCIA', 'RUTH'];
     var W = 0, H = 0, cx = 0, cy = 0, mobile = false;
     var ag = [], dust = [], parts = [];
     var raf = 0, last = 0, spawnT = 0, T = 0, active = false;
@@ -48,7 +47,7 @@
         ag.push({
           bx: cx + Math.cos(a) * W * (mobile ? 0.41 : 0.42) * f,
           by: cy + Math.sin(a) * H * (mobile ? 0.38 : 0.36) * f,
-          ph: i * 1.9, col: i % 2 ? PU : CY, fl: 0, name: NAMES[i], x: 0, y: 0
+          ph: i * 1.9, col: i % 2 ? PU : CY, fl: 0, x: 0, y: 0
         });
       }
       var m = mobile ? 18 : 60;
@@ -134,7 +133,6 @@
       }
 
       /* nos dos agentes */
-      if (!mobile) { ctx.font = '500 10px "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace'; ctx.textAlign = 'center'; }
       for (i = 0; i < ag.length; i++) {
         p = ag[i];
         ctx.fillStyle = 'rgba(' + p.col + ',' + (0.10 + p.fl * 0.25).toFixed(3) + ')';
@@ -144,10 +142,6 @@
         ctx.beginPath(); ctx.arc(p.x, p.y, 6 + p.fl * 5, 0, TAU); ctx.stroke();
         ctx.fillStyle = 'rgba(' + p.col + ',1)';
         dot(p.x, p.y, 3);
-        if (!mobile) {
-          ctx.fillStyle = 'rgba(160,160,176,' + (0.5 + p.fl * 0.5).toFixed(3) + ')';
-          ctx.fillText(p.name, p.x, p.y + 24);
-        }
       }
 
       /* no central (MAIA) pulsando, discreto por ficar atras do headline */
@@ -298,45 +292,199 @@
     });
   }
 
-  /* ---------- 2. Orquestracao: pedido -> MAIA -> agente certo ---------- */
-  function initOrch() {
-    var dia = d.querySelector('.orchestration-diagram'), box = d.querySelector('.fx-router');
-    if (reduce || !dia || !box) return;
-    var svg = dia.querySelector('svg'), center = dia.querySelector('.orchestration-node-center');
-    var reqEl = box.querySelector('.fx-router-req'), agEl = box.querySelector('.fx-router-agent'), av = box.querySelector('.fx-router-av');
-    if (!svg || !center || !reqEl || !agEl || !av) return;
-    /* [chave do avatar, nome, papel, pedido] — papeis conforme os cards de agentes */
-    var Q = [
-      ['aline', 'Aline', 'Jurídico', 'Revisa este contrato'],
-      ['lis', 'Lis', 'SDR · Atendimento', 'Responde este lead no Instagram'],
-      ['marcia', 'Márcia', 'Financeiro', 'Monta a DRE'],
-      ['theo', 'Théo', 'Copy · Conteúdo', 'Escreve a página de vendas'],
-      ['geane', 'Geane', 'RH', 'Custo de contratar CLT'],
-      ['ravi', 'Ravi', 'Tráfego pago', 'Estrutura a campanha de Meta Ads'],
-      ['maria', 'Maria', 'Tributário', 'Compara Simples e Presumido'],
-      ['leo', 'Léo', 'Dev · Deploy', 'Publica o site no ar'],
-      ['ruth', 'Ruth', 'Prospecção B2B', 'Monta a lista de leads B2B'],
-      ['eva', 'Eva', 'CRM · Pós-venda', 'Reativa os clientes parados'],
-      ['caio', 'Caio', 'Projetos', 'Prioriza as tarefas da semana'],
-      ['nina', 'Nina', 'Operações', 'Monta o briefing da campanha']
-    ];
-    var dotEl = d.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    dotEl.setAttribute('class', 'fx-orch-dot'); dotEl.setAttribute('r', '6'); dotEl.style.display = 'none';
-    svg.appendChild(dotEl);
+  /* ---------- 2a. Diagrama interativo: popup do agente + narracao ---------- */
+  /* Textos conforme os cards de agentes da pagina. [nome, funcao, plano, magnata?, o que faz] */
+  var MAG = 'Exclusivo Magnata';
+  var AG = {
+    maia:   ['MAIA', 'Orquestradora', 'Sua única interface', 0, ['Você fala só com ela', 'Aciona quem precisa e coordena a execução', 'Mantém a memória do seu negócio inteiro', 'Uma interface, até 14 especialistas']],
+    lis:    ['Lis', 'SDR · Atendimento', 'A partir do Start', 0, ['Atende e qualifica DMs em 30 segundos, 24/7', 'Treinada com seu dossiê de 13 blocos', 'Escala para o humano só quando o lead está pronto para fechar']],
+    theo:   ['Théo', 'Copy · Conteúdo · Persona', 'A partir do Pro', 0, ['Páginas de vendas completas', 'Roteiros de Reels, e-mails e carrosséis', 'Pesquisa de concorrência', 'Personas com 30 dimensões']],
+    leo:    ['Léo', 'Dev · Deploy · Infra', 'A partir do Enterprise', 0, ['Código, deploy e automações em Python e VPS', 'Integrações Meta API, OpenAI, Anthropic, Stripe, Pagar.me', 'Sites no GitHub Pages com domínio próprio']],
+    nina:   ['Nina', 'Operações · Coordenação', 'A partir do Enterprise', 0, ['Coordena entregas e gerencia prazos', 'Organiza arquivos e faz design ops', 'Monta briefings', 'Cuida do calendário operacional semanal']],
+    eva:    ['Eva', 'CRM · Pós-venda', 'A partir do Pro', 0, ['Sequência de boas-vindas e reativação', 'NPS e aniversário de cliente', 'Recuperação de carrinho abandonado', 'Integra com Active Campaign, Mailchimp ou seu CRM']],
+    ravi:   ['Ravi', 'Tráfego pago · Mídia', 'A partir do Enterprise', 0, ['Estrutura de campanha Meta Ads', 'Criativos (estático + Reel)', 'Segmentação por persona', 'Otimização semanal e relatório de ROI por campanha']],
+    caio:   ['Caio', 'Projetos · Roadmap', 'A partir do Enterprise', 0, ['Roadmap dos próximos 90 dias', 'Priorização semanal e memória de pendência', 'Cobrança proativa de tarefa atrasada', 'Relatório executivo mensal']],
+    bia:    ['Bia', 'Conteúdo · Roteiros', MAG, 1, ['Planeja a linha de conteúdo', 'Transforma ideias em roteiros prontos para gravar', 'Organiza o calendário editorial junto com o Théo']],
+    aline:  ['Aline', 'Jurídico · Apoio', MAG, 1, ['Revisa e redige contratos', 'Orienta sobre LGPD e registro de marca', 'Aponta riscos pela ótica da outra parte', 'Apoio técnico, que não substitui o advogado']],
+    maria:  ['Maria', 'Tributário · Fiscal', MAG, 1, ['Compara regimes (MEI, Simples, Presumido)', 'Calcula alíquota efetiva e Fator R', 'Prepara notas fiscais', 'Acompanha obrigações e prazos para você aprovar']],
+    boris:  ['Boris', 'Engenharia · Sistemas', MAG, 1, ['Constrói sites, sistemas, automações e integrações', 'Trabalha com disciplina de testes', 'Cada entrega é verificada antes de ir para produção']],
+    geane:  ['Geane', 'RH · Departamento pessoal', MAG, 1, ['Estrutura vagas e admissão', 'Calcula o custo real de uma contratação CLT', 'Prepara folha e férias para conferência da sua equipe ou do seu contador']],
+    marcia: ['Márcia', 'Financeiro · ERP', MAG, 1, ['Organiza contas a pagar e a receber', 'Fluxo de caixa, DRE e conciliação no ERP MAIA Gestão', 'Ela prepara; quem aprova os pagamentos é você']],
+    ruth:   ['Ruth', 'Prospecção B2B', MAG, 1, ['Monta listas de leads pré-qualificados', 'Faz o primeiro contato', 'Entrega à Lis e a você quem tem perfil para avançar']]
+  };
+  function avatar(k) { return '/assets/img/agentes/' + k + '.webp' + (k === 'boris' ? '?v=2' : ''); }
 
+  function initOrq() {
+    var dia = d.querySelector('.orq');
+    if (!dia) return;
+    var pop = d.createElement('dialog');
+    if (typeof pop.showModal !== 'function') return;
+    var KEY = 'maiaOrqMuted', muted = false, cur = null, curKey = '', openKey = '', lastNode = null, broken = {};
+    try { muted = w.localStorage.getItem(KEY) === '1'; } catch (e) {}
+
+    pop.className = 'orq-pop';
+    pop.setAttribute('aria-labelledby', 'orq-pop-name');
+    pop.innerHTML =
+      '<div class="orq-pop-in">' +
+        '<button type="button" class="orq-pop-x" aria-label="Fechar">×</button>' +
+        '<span class="orq-pop-photo"><img alt="" width="296" height="296" decoding="async"></span>' +
+        '<h3 class="orq-pop-name" id="orq-pop-name"></h3>' +
+        '<p class="orq-pop-role"></p>' +
+        '<span class="orq-pop-plan"></span>' +
+        '<ul class="orq-pop-list"></ul>' +
+        '<button type="button" class="orq-pop-play"></button>' +
+      '</div>';
+    d.body.appendChild(pop);
+    var photo = pop.querySelector('.orq-pop-photo'), img = photo.querySelector('img');
+    var nameEl = pop.querySelector('.orq-pop-name'), roleEl = pop.querySelector('.orq-pop-role');
+    var planEl = pop.querySelector('.orq-pop-plan'), listEl = pop.querySelector('.orq-pop-list');
+    var playBtn = pop.querySelector('.orq-pop-play'), muteBtn = dia.querySelector('.orq-mute');
+
+    function nodeOf(k) { return dia.querySelector('.orq-node[data-agent="' + k + '"]'); }
+    function paint() {
+      var on = !!cur && curKey === openKey;
+      playBtn.hidden = !!broken[openKey];
+      playBtn.textContent = on ? '■ Parar' : '▶ Ouvir apresentação';
+      playBtn.setAttribute('aria-label', (on ? 'Parar a apresentação de ' : 'Ouvir a apresentação de ') + (AG[openKey] ? AG[openKey][0] : ''));
+      if (muteBtn) {
+        muteBtn.setAttribute('aria-pressed', muted ? 'true' : 'false');
+        muteBtn.setAttribute('aria-label', muted ? 'Ativar narração' : 'Silenciar narração');
+        muteBtn.title = muted ? 'Ativar narração' : 'Silenciar narração';
+      }
+    }
+    function speaking(k) {
+      [].forEach.call(dia.querySelectorAll('.is-speaking'), function (n) { n.classList.remove('is-speaking'); });
+      photo.classList.remove('is-speaking');
+      var n = k && nodeOf(k);
+      if (n) n.classList.add('is-speaking');
+      if (k && k === openKey) photo.classList.add('is-speaking');
+    }
+    function stop() {
+      var a = cur;
+      cur = null; curKey = '';
+      if (a) {
+        a.onerror = a.onended = a.onplaying = null;
+        try { a.pause(); a.removeAttribute('src'); } catch (e) {}
+      }
+      speaking(''); paint();
+    }
+    /* Audio criado so no clique (sem preload); um por vez; falha esconde o botao */
+    function play(k) {
+      stop();
+      if (broken[k] || !w.Audio) return;
+      var a = new w.Audio();
+      function fail() { if (cur !== a) return; broken[k] = 1; stop(); }
+      a.preload = 'none';
+      cur = a; curKey = k;
+      a.onplaying = function () { if (cur === a) speaking(k); };
+      a.onended = function () { if (cur === a) stop(); };
+      a.onerror = fail;
+      a.src = '/assets/audio/agentes/' + k + '.mp3';
+      paint();
+      try {
+        var pr = a.play();
+        if (pr && pr.catch) pr.catch(function (err) {
+          if (cur !== a) return;
+          if (err && (err.name === 'NotAllowedError' || err.name === 'AbortError')) stop(); else fail();
+        });
+      } catch (e) { fail(); }
+    }
+    function setMuted(v) {
+      muted = v;
+      try { w.localStorage.setItem(KEY, v ? '1' : '0'); } catch (e) {}
+      if (v) stop(); else paint();
+    }
+    function open(k, gesture) {
+      var it = AG[k], i, li;
+      if (!it) return;
+      if (pop.open) pop.close();
+      openKey = k; lastNode = nodeOf(k);
+      img.src = avatar(k);
+      nameEl.textContent = it[0]; roleEl.textContent = it[1]; planEl.textContent = it[2];
+      pop.classList.toggle('is-mag', !!it[3]);
+      listEl.textContent = '';
+      for (i = 0; i < it[4].length; i++) { li = d.createElement('li'); li.textContent = it[4][i]; listEl.appendChild(li); }
+      paint();
+      pop.showModal();
+      if (gesture && !muted) play(k);
+    }
+
+    dia.addEventListener('click', function (e) {
+      var n = e.target.closest && e.target.closest('.orq-node');
+      if (n && dia.contains(n)) open(n.getAttribute('data-agent'), true);
+    });
+    /* hover/foco: so realca a linha do agente (MAIA realca todas) */
+    function hot(e, on) {
+      var n = e.target.closest && e.target.closest('.orq-node');
+      if (!n) return;
+      var k = n.getAttribute('data-agent'), ln;
+      if (k === 'maia') { dia.classList.toggle('is-all-hot', on); return; }
+      ln = dia.querySelector('.orq-line[data-line="' + k + '"]');
+      if (ln) ln.classList.toggle('is-hot', on);
+    }
+    dia.addEventListener('pointerover', function (e) { if (e.pointerType === 'mouse') hot(e, true); });
+    dia.addEventListener('pointerout', function (e) { hot(e, false); });
+    dia.addEventListener('focusin', function (e) { hot(e, true); });
+    dia.addEventListener('focusout', function (e) { hot(e, false); });
+
+    pop.querySelector('.orq-pop-x').addEventListener('click', function () { pop.close(); });
+    pop.addEventListener('click', function (e) { if (e.target === pop) pop.close(); }); /* clique fora */
+    pop.addEventListener('close', function () {
+      stop(); openKey = '';
+      if (lastNode && lastNode.focus) { try { lastNode.focus({ preventScroll: true }); } catch (e) {} }
+    });
+    playBtn.addEventListener('click', function () {
+      if (cur && curKey === openKey) { stop(); return; }
+      if (muted) setMuted(false);
+      play(openKey);
+    });
+    if (muteBtn) {
+      muteBtn.hidden = false;
+      muteBtn.addEventListener('click', function (e) { e.stopPropagation(); setMuted(!muted); });
+    }
+    paint();
+
+    /* link direto / depuracao: ?agente=lis abre o cartao (sem autoplay, nao ha gesto) */
+    var m = /[?&]agente=([a-z]+)/.exec(w.location.search);
+    if (m && AG[m[1]]) open(m[1], false);
+  }
+
+  /* ---------- 2b. Orquestracao: pedido -> MAIA -> agente certo (14 agentes) ---------- */
+  function initRoute() {
+    var dia = d.querySelector('.orq'), box = d.querySelector('.fx-router');
+    if (reduce || !dia || !box) return;
+    var center = dia.querySelector('.orq-center'), dotEl = dia.querySelector('.orq-dot');
+    var reqEl = box.querySelector('.fx-router-req'), agEl = box.querySelector('.fx-router-agent'), av = box.querySelector('.fx-router-av');
+    if (!center || !dotEl || !reqEl || !agEl || !av) return;
+    /* [chave, papel curto, pedido] — papeis conforme os cards de agentes */
+    var Q = [
+      ['aline', 'Jurídico', 'Revisa este contrato'],
+      ['lis', 'SDR · Atendimento', 'Responde este lead no Instagram'],
+      ['marcia', 'Financeiro', 'Monta a DRE'],
+      ['theo', 'Copy · Conteúdo', 'Escreve a página de vendas'],
+      ['geane', 'RH', 'Custo de contratar CLT'],
+      ['ravi', 'Tráfego pago', 'Estrutura a campanha de Meta Ads'],
+      ['maria', 'Tributário', 'Compara Simples e Presumido'],
+      ['leo', 'Dev · Deploy', 'Publica o site no ar'],
+      ['bia', 'Conteúdo · Roteiros', 'Monta o calendário editorial'],
+      ['ruth', 'Prospecção B2B', 'Monta a lista de leads B2B'],
+      ['eva', 'CRM · Pós-venda', 'Reativa os clientes parados'],
+      ['boris', 'Engenharia · Sistemas', 'Constrói a integração do sistema'],
+      ['caio', 'Projetos', 'Prioriza as tarefas da semana'],
+      ['nina', 'Operações', 'Monta o briefing da campanha']
+    ];
     var idx = 0, timer = 0, raf = 0, active = false, running = false;
     function later(fn, ms) { timer = setTimeout(fn, ms); }
     function reset() {
-      [].forEach.call(dia.querySelectorAll('.fx-lit'), function (n) { n.classList.remove('fx-lit'); });
-      [].forEach.call(svg.querySelectorAll('.fx-active'), function (n) { n.classList.remove('fx-active'); });
+      [].forEach.call(dia.querySelectorAll('.fx-lit,.fx-active'), function (n) { n.classList.remove('fx-lit'); n.classList.remove('fx-active'); });
       center.classList.remove('fx-think'); dotEl.style.display = 'none';
     }
     function cycle() {
       if (!active) { running = false; return; }
       running = true;
-      var it = Q[idx++ % Q.length];
-      var node = dia.querySelector('.orchestration-node[data-line="' + it[0] + '"]');
-      var ln = svg.querySelector('line[data-line="' + it[0] + '"]');
+      var it = Q[idx++ % Q.length], name = AG[it[0]][0];
+      var node = dia.querySelector('.orq-node[data-agent="' + it[0] + '"]');
+      var ln = dia.querySelector('.orq-line[data-line="' + it[0] + '"]');
       var i = 0;
       reset();
       box.className = 'fx-router is-routing';
@@ -347,27 +495,27 @@
         center.classList.remove('fx-think'); dotEl.style.display = 'none';
         if (node) node.classList.add('fx-lit');
         box.className = 'fx-router is-routed';
-        agEl.textContent = it[1] + ' · ' + it[2];
+        agEl.textContent = name + ' · ' + it[1];
         later(cycle, 2100);
       }
       function route() {
         if (!node || !ln) { later(lit, 450); return; }
         ln.classList.add('fx-active');
-        var x2 = +ln.getAttribute('x2'), y2 = +ln.getAttribute('y2'), t0 = 0;
-        dotEl.setAttribute('cx', 300); dotEl.setAttribute('cy', 300);
-        dotEl.style.display = '';
+        var x2 = parseFloat(node.style.getPropertyValue('--x')), y2 = parseFloat(node.style.getPropertyValue('--y')), t0 = 0;
+        dotEl.style.left = '50%'; dotEl.style.top = '50%';
+        dotEl.style.display = 'block';
         raf = w.requestAnimationFrame(function fr(ts) {
           if (!t0) t0 = ts;
           var k = Math.min((ts - t0) / 750, 1), e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
-          dotEl.setAttribute('cx', 300 + (x2 - 300) * e); dotEl.setAttribute('cy', 300 + (y2 - 300) * e);
+          dotEl.style.left = (50 + (x2 - 50) * e) + '%'; dotEl.style.top = (50 + (y2 - 50) * e) + '%';
           if (k < 1) raf = w.requestAnimationFrame(fr); else { raf = 0; lit(); }
         });
       }
       function type() {
-        if (i < it[3].length) { reqEl.textContent = it[3].slice(0, ++i); later(type, 26); return; }
+        if (i < it[2].length) { reqEl.textContent = it[2].slice(0, ++i); later(type, 26); return; }
         reqEl.classList.remove('is-typing');
         center.classList.add('fx-think');
-        av.src = '/assets/img/agentes/' + it[0] + '.webp';
+        av.src = avatar(it[0]);
         later(route, 650);
       }
       type();
@@ -383,5 +531,5 @@
   }
 
   root.classList.add('fx');
-  safe(initHero); safe(initTyping); safe(initReveal); safe(initTilt); safe(initOrch);
+  safe(initHero); safe(initTyping); safe(initReveal); safe(initTilt); safe(initOrq); safe(initRoute);
 })();

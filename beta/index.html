@@ -28,7 +28,7 @@
 <link rel="preload" as="image" href="/assets/img/brand/salatiel_hero.jpg" fetchpriority="high">
 
 <link rel="stylesheet" href="/assets/style.css?v=20260606-cnpj-footer">
-<link rel="stylesheet" href="/assets/maia-fx.css?v=20261116a">
+<link rel="stylesheet" href="/assets/maia-fx.css?v=20261116b">
 <meta name="robots" content="noindex">
 
 <!-- JSON-LD -->
@@ -159,6 +159,111 @@
       <p>Cada agente é especialista em uma função crítica do seu negócio. Memória persistente. Skills próprias. 24/7.</p>
     </div>
 
+    <!-- DIAGRAMA DE ORQUESTRAÇÃO INTERATIVO (MAIA + 14 agentes em dois anéis) -->
+    <div class="orchestration-wrap orq-wrap" id="orquestracao">
+      <p class="orq-hint">Toque em um agente para ver o que ele faz e ouvir a apresentação.</p>
+      <div class="orq" role="group" aria-label="Diagrama de orquestração: a MAIA no centro, ligada aos 7 agentes do Enterprise no anel interno e aos 7 exclusivos da Magnata no anel externo.">
+        <svg class="orq-svg" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <circle class="orq-ring" cx="500" cy="500" r="225"/>
+          <circle class="orq-ring orq-ring-mag" cx="500" cy="500" r="415"/>
+          <line class="orq-line" data-line="lis" x1="500" y1="500" x2="500.0" y2="275.0"/>
+          <line class="orq-line" data-line="theo" x1="500" y1="500" x2="675.9" y2="359.7"/>
+          <line class="orq-line" data-line="leo" x1="500" y1="500" x2="719.4" y2="550.1"/>
+          <line class="orq-line" data-line="nina" x1="500" y1="500" x2="597.6" y2="702.7"/>
+          <line class="orq-line" data-line="eva" x1="500" y1="500" x2="402.4" y2="702.7"/>
+          <line class="orq-line" data-line="ravi" x1="500" y1="500" x2="280.6" y2="550.1"/>
+          <line class="orq-line" data-line="caio" x1="500" y1="500" x2="324.1" y2="359.7"/>
+          <line class="orq-line orq-line-mag" data-line="bia" x1="500" y1="500" x2="680.1" y2="126.1"/>
+          <line class="orq-line orq-line-mag" data-line="aline" x1="500" y1="500" x2="904.6" y2="407.7"/>
+          <line class="orq-line orq-line-mag" data-line="maria" x1="500" y1="500" x2="824.5" y2="758.7"/>
+          <line class="orq-line orq-line-mag" data-line="boris" x1="500" y1="500" x2="500.0" y2="915.0"/>
+          <line class="orq-line orq-line-mag" data-line="geane" x1="500" y1="500" x2="175.5" y2="758.7"/>
+          <line class="orq-line orq-line-mag" data-line="marcia" x1="500" y1="500" x2="95.4" y2="407.7"/>
+          <line class="orq-line orq-line-mag" data-line="ruth" x1="500" y1="500" x2="319.9" y2="126.1"/>
+        </svg>
+        <span class="orq-dot" aria-hidden="true"></span>
+
+        <button type="button" class="orq-node orq-center" data-agent="maia" style="--x:50%;--y:50%" aria-haspopup="dialog" aria-label="MAIA, orquestradora central. Abrir apresentação">
+          <span class="orq-av"><img src="/assets/img/agentes/maia.webp" alt="" loading="lazy" decoding="async" width="360" height="360"></span>
+          <span class="orq-label">MAIA</span>
+        </button>
+
+        <button type="button" class="orq-node" data-agent="lis" style="--x:50.00%;--y:27.50%" aria-haspopup="dialog" aria-label="Lis, SDR e atendimento. Abrir apresentação">
+          <span class="orq-av"><img src="/assets/img/agentes/lis.webp" alt="" loading="lazy" decoding="async" width="200" height="200"></span>
+          <span class="orq-label">Lis</span>
+        </button>
+        <button type="button" class="orq-node" data-agent="theo" style="--x:67.59%;--y:35.97%" aria-haspopup="dialog" aria-label="Théo, Copy, conteúdo e persona. Abrir apresentação">
+          <span class="orq-av"><img src="/assets/img/agentes/theo.webp" alt="" loading="lazy" decoding="async" width="200" height="200"></span>
+          <span class="orq-label">Théo</span>
+        </button>
+        <button type="button" class="orq-node" data-agent="leo" style="--x:71.94%;--y:55.01%" aria-haspopup="dialog" aria-label="Léo, Dev, deploy e infra. Abrir apresentação">
+          <span class="orq-av"><img src="/assets/img/agentes/leo.webp" alt="" loading="lazy" decoding="async" width="200" height="200"></span>
+          <span class="orq-label">Léo</span>
+        </button>
+        <button type="button" class="orq-node" data-agent="nina" style="--x:59.76%;--y:70.27%" aria-haspopup="dialog" aria-label="Nina, Operações e coordenação. Abrir apresentação">
+          <span class="orq-av"><img src="/assets/img/agentes/nina.webp" alt="" loading="lazy" decoding="async" width="200" height="200"></span>
+          <span class="orq-label">Nina</span>
+        </button>
+        <button type="button" class="orq-node" data-agent="eva" style="--x:40.24%;--y:70.27%" aria-haspopup="dialog" aria-label="Eva, CRM e pós-venda. Abrir apresentação">
+          <span class="orq-av"><img src="/assets/img/agentes/eva.webp" alt="" loading="lazy" decoding="async" width="200" height="200"></span>
+          <span class="orq-label">Eva</span>
+        </button>
+        <button type="button" class="orq-node" data-agent="ravi" style="--x:28.06%;--y:55.01%" aria-haspopup="dialog" aria-label="Ravi, Tráfego pago e mídia. Abrir apresentação">
+          <span class="orq-av"><img src="/assets/img/agentes/ravi.webp" alt="" loading="lazy" decoding="async" width="200" height="200"></span>
+          <span class="orq-label">Ravi</span>
+        </button>
+        <button type="button" class="orq-node" data-agent="caio" style="--x:32.41%;--y:35.97%" aria-haspopup="dialog" aria-label="Caio, Projetos e roadmap. Abrir apresentação">
+          <span class="orq-av"><img src="/assets/img/agentes/caio.webp" alt="" loading="lazy" decoding="async" width="200" height="200"></span>
+          <span class="orq-label">Caio</span>
+        </button>
+        <button type="button" class="orq-node orq-mag" data-agent="bia" style="--x:68.01%;--y:12.61%" aria-haspopup="dialog" aria-label="Bia, Conteúdo e roteiros, exclusivo Magnata. Abrir apresentação">
+          <span class="orq-av"><img src="/assets/img/agentes/bia.webp" alt="" loading="lazy" decoding="async" width="200" height="200"></span>
+          <span class="orq-label">Bia</span>
+        </button>
+        <button type="button" class="orq-node orq-mag" data-agent="aline" style="--x:90.46%;--y:40.77%" aria-haspopup="dialog" aria-label="Aline, Jurídico de apoio, exclusivo Magnata. Abrir apresentação">
+          <span class="orq-av"><img src="/assets/img/agentes/aline.webp" alt="" loading="lazy" decoding="async" width="200" height="200"></span>
+          <span class="orq-label">Aline</span>
+        </button>
+        <button type="button" class="orq-node orq-mag" data-agent="maria" style="--x:82.45%;--y:75.87%" aria-haspopup="dialog" aria-label="Maria, Tributário e fiscal, exclusivo Magnata. Abrir apresentação">
+          <span class="orq-av"><img src="/assets/img/agentes/maria.webp" alt="" loading="lazy" decoding="async" width="200" height="200"></span>
+          <span class="orq-label">Maria</span>
+        </button>
+        <button type="button" class="orq-node orq-mag" data-agent="boris" style="--x:50.00%;--y:91.50%" aria-haspopup="dialog" aria-label="Boris, Engenharia e sistemas, exclusivo Magnata. Abrir apresentação">
+          <span class="orq-av"><img src="/assets/img/agentes/boris.webp?v=2" alt="" loading="lazy" decoding="async" width="200" height="200"></span>
+          <span class="orq-label">Boris</span>
+        </button>
+        <button type="button" class="orq-node orq-mag" data-agent="geane" style="--x:17.55%;--y:75.87%" aria-haspopup="dialog" aria-label="Geane, RH e departamento pessoal, exclusivo Magnata. Abrir apresentação">
+          <span class="orq-av"><img src="/assets/img/agentes/geane.webp" alt="" loading="lazy" decoding="async" width="200" height="200"></span>
+          <span class="orq-label">Geane</span>
+        </button>
+        <button type="button" class="orq-node orq-mag" data-agent="marcia" style="--x:9.54%;--y:40.77%" aria-haspopup="dialog" aria-label="Márcia, Financeiro e ERP, exclusivo Magnata. Abrir apresentação">
+          <span class="orq-av"><img src="/assets/img/agentes/marcia.webp" alt="" loading="lazy" decoding="async" width="200" height="200"></span>
+          <span class="orq-label">Márcia</span>
+        </button>
+        <button type="button" class="orq-node orq-mag" data-agent="ruth" style="--x:31.99%;--y:12.61%" aria-haspopup="dialog" aria-label="Ruth, Prospecção B2B, exclusivo Magnata. Abrir apresentação">
+          <span class="orq-av"><img src="/assets/img/agentes/ruth.webp" alt="" loading="lazy" decoding="async" width="200" height="200"></span>
+          <span class="orq-label">Ruth</span>
+        </button>
+
+        <button type="button" class="orq-mute" aria-pressed="false" aria-label="Silenciar narração" title="Silenciar narração" hidden>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path class="orq-mute-on" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path class="orq-mute-off" d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+
+      <p class="orq-legend"><span><i class="orq-key"></i>Enterprise · 7 agentes</span><span><i class="orq-key orq-key-mag"></i>Magnata · +7 exclusivos</span></p>
+
+      <!-- Roteador (MAIA FX): estado estático válido sem JS -->
+      <div class="fx-router is-routed" aria-hidden="true">
+        <div class="fx-router-bar"><i></i><i></i><i></i><span>maia://orquestracao</span></div>
+        <div class="fx-router-row"><span class="fx-router-k">pedido</span><span class="fx-router-req">Revisa este contrato</span></div>
+        <div class="fx-router-row"><span class="fx-router-k">maia →</span><img class="fx-router-av" src="/assets/img/agentes/aline.webp" alt="" width="28" height="28" loading="lazy" decoding="async"><span class="fx-router-agent">Aline · Jurídico</span></div>
+      </div>
+
+      <p class="orchestration-caption"><span class="orchestration-dot"></span>A MAIA coordena, os agentes executam. Memória persistente. Skills próprias. Uma única interface.</p>
+    </div>
+
+    <details class="agents-list">
+      <summary>Ver todos em lista</summary>
     <div class="agents-grid">
       <article class="agent-card">
         <img class="agent-portrait" decoding="async" src="/assets/img/agentes/lis.webp" alt="Lis — SDR de IA da esteira MAIA" loading="lazy" width="800" height="800">
@@ -268,6 +373,7 @@
         <p class="agent-desc">Monta listas de leads pré-qualificados e faz o primeiro contato, entregando à Lis e a você quem tem perfil para avançar.</p>
       </article>
     </div>
+    </details>
   </div>
 </section>
 <style>
@@ -304,94 +410,6 @@
   </div>
 </section>
 
-<!-- DIAGRAMA DE ORQUESTRAÇÃO (rede neural viva) -->
-<section id="orquestracao">
-  <div class="grid-bg"></div>
-  <div class="container">
-    <div class="section-header">
-      <span class="eyebrow">Orquestração em tempo real</span>
-      <h2>A MAIA coordena.<br>Os agentes executam.</h2>
-      <p>Cada agente especialista, cada interação coordenada pela MAIA. Você vê uma única operação. Por trás, 7 inteligências falando entre si em tempo real.</p>
-    </div>
-
-    <div class="orchestration-wrap">
-      <div class="orchestration-diagram" role="img" aria-label="Diagrama de rede: MAIA no centro conectada aos 7 agentes Lis, Théo, Léo, Nina, Eva, Ravi e Caio por linhas pulsantes de dados.">
-
-        <!-- Linhas SVG (atrás dos retratos) -->
-        <svg class="orchestration-svg" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-          <defs>
-            <linearGradient id="lineGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="600" y2="600">
-              <stop offset="0%"  stop-color="#00D4FF" stop-opacity="0.85"/>
-              <stop offset="100%" stop-color="#A855F7" stop-opacity="0.85"/>
-            </linearGradient>
-            <filter id="lineGlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="2" result="blur"/>
-              <feMerge>
-                <feMergeNode in="blur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-          </defs>
-
-          <!-- 7 linhas do centro (300,300) até cada agente -->
-          <line class="orchestration-line" data-line="lis"  x1="300" y1="300" x2="300"    y2="80"/>
-          <line class="orchestration-line" data-line="theo" x1="300" y1="300" x2="471.97" y2="162.87"/>
-          <line class="orchestration-line" data-line="leo"  x1="300" y1="300" x2="514.51" y2="349.05"/>
-          <line class="orchestration-line" data-line="nina" x1="300" y1="300" x2="395.30" y2="498.18"/>
-          <line class="orchestration-line" data-line="eva"  x1="300" y1="300" x2="204.70" y2="498.18"/>
-          <line class="orchestration-line" data-line="ravi" x1="300" y1="300" x2="85.49"  y2="349.05"/>
-          <line class="orchestration-line" data-line="caio" x1="300" y1="300" x2="128.03" y2="162.87"/>
-        </svg>
-
-        <!-- MAIA central -->
-        <div class="orchestration-node orchestration-node-center" data-tip="MAIA — Orquestradora central">
-          <img src="/assets/img/agentes/maia.webp" alt="MAIA — Orquestradora central da esteira" loading="lazy" decoding="async" width="360" height="360">
-          <span class="orchestration-label">MAIA</span>
-        </div>
-
-        <!-- 7 agentes em órbita -->
-        <div class="orchestration-node" style="--x:50%;--y:13.33%"   data-line="lis"  data-tip="MAIA &harr; Lis — SDR / Atendimento 24/7">
-          <img src="/assets/img/agentes/lis.webp" alt="Lis — SDR" loading="lazy" decoding="async" width="200" height="200">
-          <span class="orchestration-label">Lis</span>
-        </div>
-        <div class="orchestration-node" style="--x:78.66%;--y:27.14%" data-line="theo"   data-tip="MAIA &harr; Théo — Copy, conteúdo e persona">
-          <img src="/assets/img/agentes/theo.webp" alt="Théo — Copy" loading="lazy" decoding="async" width="200" height="200">
-          <span class="orchestration-label">Théo</span>
-        </div>
-        <div class="orchestration-node" style="--x:85.75%;--y:58.17%" data-line="leo" data-tip="MAIA &harr; Léo — Dev, deploy e infra">
-          <img src="/assets/img/agentes/leo.webp" alt="Léo — Dev" loading="lazy" decoding="async" width="200" height="200">
-          <span class="orchestration-label">Léo</span>
-        </div>
-        <div class="orchestration-node" style="--x:65.88%;--y:83.03%" data-line="nina"   data-tip="MAIA &harr; Nina — Operações e coordenação">
-          <img src="/assets/img/agentes/nina.webp" alt="Nina — Operações" loading="lazy" decoding="async" width="200" height="200">
-          <span class="orchestration-label">Nina</span>
-        </div>
-        <div class="orchestration-node" style="--x:34.12%;--y:83.03%" data-line="eva"    data-tip="MAIA &harr; Eva — CRM e pós-venda">
-          <img src="/assets/img/agentes/eva.webp" alt="Eva — CRM" loading="lazy" decoding="async" width="200" height="200">
-          <span class="orchestration-label">Eva</span>
-        </div>
-        <div class="orchestration-node" style="--x:14.25%;--y:58.17%" data-line="ravi"    data-tip="MAIA &harr; Ravi — Tráfego pago e mídia">
-          <img src="/assets/img/agentes/ravi.webp" alt="Ravi — Tráfego" loading="lazy" decoding="async" width="200" height="200">
-          <span class="orchestration-label">Ravi</span>
-        </div>
-        <div class="orchestration-node" style="--x:21.34%;--y:27.14%" data-line="caio"  data-tip="MAIA &harr; Caio — Projetos e roadmap">
-          <img src="/assets/img/agentes/caio.webp" alt="Caio — Projetos" loading="lazy" decoding="async" width="200" height="200">
-          <span class="orchestration-label">Caio</span>
-        </div>
-
-      </div>
-
-      <!-- Roteador (MAIA FX): estado estático válido sem JS -->
-      <div class="fx-router is-routed" aria-hidden="true">
-        <div class="fx-router-bar"><i></i><i></i><i></i><span>maia://orquestracao</span></div>
-        <div class="fx-router-row"><span class="fx-router-k">pedido</span><span class="fx-router-req">Revisa este contrato</span></div>
-        <div class="fx-router-row"><span class="fx-router-k">maia →</span><img class="fx-router-av" src="/assets/img/agentes/aline.webp" alt="" width="28" height="28" loading="lazy" decoding="async"><span class="fx-router-agent">Aline · Jurídico</span></div>
-      </div>
-
-      <p class="orchestration-caption"><span class="orchestration-dot"></span>Sinais trafegando agora entre os 8 agentes. Memória persistente. Skills próprias. Uma única interface.</p>
-    </div>
-  </div>
-</section>
 
 <!-- COMO FUNCIONA NA PRÁTICA (split com Salatiel) -->
 <section>
@@ -1574,6 +1592,6 @@
 })();
 </script>
 
-<script src="/assets/maia-fx.js?v=20261116a" defer></script>
+<script src="/assets/maia-fx.js?v=20261116b" defer></script>
 </body>
 </html>
