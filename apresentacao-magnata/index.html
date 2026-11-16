@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<!--
+  APRESENTAÇÃO DE LANÇAMENTO · MAIA MAGNATA
+  Funciona offline: basta abrir este arquivo no Chrome (mantenha as pastas img/ e fonts/ ao lado).
+
+  NAVEGAÇÃO
+    seta direita / espaço / clique ... avança
+    seta esquerda / clique na borda esquerda ... volta
+    F ... tela cheia          N ... notas do apresentador
+    Home / End ... primeiro / último slide
+    Ir direto a um slide: acrescente #/12 ao endereço.
+
+  SLIDE OPCIONAL "CONDIÇÃO DE LANÇAMENTO" (oculto por padrão)
+    1. Procure neste arquivo por  id="condicao"
+    2. Na mesma linha, apague a palavra  oculto  de  class="slide oculto"
+    3. Preencha os textos entre [colchetes] e salve. O slide aparece logo depois dos planos.
+    Para esconder de novo, devolva a palavra  oculto.
+-->
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lançamento MAIA Magnata</title>
+<style>
+@font-face{font-family:'Inter';font-weight:400;src:url(fonts/Inter-Regular.ttf) format('truetype')}
+@font-face{font-family:'Inter';font-weight:500;src:url(fonts/Inter-Medium.ttf) format('truetype')}
+@font-face{font-family:'Inter';font-weight:700;src:url(fonts/InterDisplay-Bold.ttf) format('truetype')}
+@font-face{font-family:'Inter';font-weight:900;src:url(fonts/InterDisplay-Black.ttf) format('truetype')}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;src:url(fonts/IBMPlexMono-Medium.ttf) format('truetype')}
+:root{--bg-0:#0A0A0F;--bg-2:#15151F;--bg-3:#1C1C28;--border:rgba(255,255,255,.10);--border-strong:rgba(255,255,255,.18);
+--text-0:#fff;--text-1:#E5E5E5;--text-2:#A0A0B0;--cyan:#00D4FF;--purple:#A855F7;--red:#FF5A5A;--orange:#FF8A3D;--gold:#FFC34A;--green:#34D399;
+--grad:linear-gradient(135deg,#00D4FF 0%,#A855F7 100%);--mono:'IBM Plex Mono',Consolas,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#000;overflow:hidden;font-family:'Inter',Arial,sans-serif;color:var(--text-0);-webkit-font-smoothing:antialiased;cursor:default;user-select:none}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform:translate(-50%,-50%) scale(var(--s,1));background:var(--bg-0);overflow:hidden}
+#stage::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 700px at 8% 0%,rgba(0,212,255,.16),transparent 65%),radial-gradient(1000px 800px at 100% 100%,rgba(168,85,247,.18),transparent 65%)}
+#stage::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:80px 80px;-webkit-mask-image:radial-gradient(circle at 50% 50%,#000 30%,transparent 85%);mask-image:radial-gradient(circle at 50% 50%,#000 30%,transparent 85%)}
+.slide{position:absolute;inset:0;z-index:1;padding:80px 130px 120px;display:flex;flex-direction:column;justify-content:center;gap:34px;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility 0s .45s}
+.slide.on{opacity:1;visibility:visible;transition:opacity .45s ease}
+.slide.oculto{display:none}
+.notes{display:none}
+.a{opacity:0}
+.slide.on .a{animation:up .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*130ms + 150ms)}
+@keyframes up{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:none}}
+.eyebrow{font-family:var(--mono);font-size:30px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+h1,h2,h3,h4{font-weight:900;letter-spacing:-.025em;line-height:1.06}
+h1.mega{font-size:190px;line-height:.98}
+h2{font-size:96px}
+h2.big{font-size:118px}
+h2.mega2{font-size:112px}
+h3{font-size:64px}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.08em}
+.loss{background:linear-gradient(135deg,#FF5A5A,#FF8A3D);-webkit-background-clip:text;background-clip:text;color:transparent}
+.dim2{color:var(--text-2)}
+.nw{white-space:nowrap}
+.lead,.ask,.w,.card p,.chip-card span,.step span,.foot-line{text-wrap:balance}
+.lead{font-size:48px;line-height:1.3;color:var(--text-1);font-weight:500}
+.mono{font-family:var(--mono);font-size:32px}
+.dim{color:var(--text-2)}
+.foot-line{font-size:42px;color:var(--text-2);font-weight:500}
+.split{display:flex;align-items:center;gap:80px;width:100%}
+.col{flex:1;display:flex;flex-direction:column;gap:34px;min-width:0}
+.center{display:flex;flex-direction:column;align-items:center;text-align:center;gap:40px}
+.lbl{font-family:var(--mono);font-size:26px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+/* capa */
+.hero{position:relative;width:640px;height:640px;flex:none;display:grid;place-items:center}
+.hero img{width:500px;height:500px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,.14);box-shadow:0 0 120px rgba(0,212,255,.45),0 0 220px rgba(168,85,247,.35)}
+.ring{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(0,212,255,.35);animation:ring 4s ease-out infinite}
+.ring.r2{animation-delay:2s;border-color:rgba(168,85,247,.4)}
+@keyframes ring{from{transform:scale(.78);opacity:.9}to{transform:scale(1.12);opacity:0}}
+/* dor */
+.chips4{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:20px}
+.chip-card{background:rgba(255,90,90,.08);border:2px solid rgba(255,90,90,.35);border-radius:24px;padding:50px 36px;display:flex;flex-direction:column;gap:12px}
+.chip-card b{font-size:64px;font-weight:900}
+.chip-card span{font-size:38px;color:var(--text-2);line-height:1.25}
+/* fluxo */
+.flow{display:flex;align-items:stretch;gap:18px;margin-top:16px}
+.step{flex:1;background:var(--bg-2);border:2px solid var(--border-strong);border-radius:24px;padding:42px 28px;display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.step em{font-style:normal;font-family:var(--mono);font-size:34px;width:84px;height:84px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--cyan);color:var(--cyan)}
+.step img{width:84px;height:84px;border-radius:50%;object-fit:cover;border:2px solid var(--cyan)}
+.step b{font-size:48px;font-weight:900;line-height:1.1}
+.step span{font-size:34px;color:var(--text-2);line-height:1.25}
+.step.hl{background:linear-gradient(135deg,rgba(0,212,255,.2),rgba(168,85,247,.2));border-color:var(--cyan)}
+.arrow{flex:none;width:44px;align-self:center;height:4px;background:var(--grad);position:relative;border-radius:2px}
+.arrow::after{content:"";position:absolute;right:-2px;top:-9px;border-left:18px solid var(--purple);border-top:11px solid transparent;border-bottom:11px solid transparent}
+/* time de 7 */
+.team7{display:grid;grid-template-columns:repeat(7,1fr);gap:22px;margin-top:10px}
+.mem{background:var(--bg-2);border:2px solid var(--border);border-radius:22px;padding:22px 12px 26px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+.mem img{width:188px;height:188px;border-radius:50%;object-fit:cover;border:3px solid rgba(0,212,255,.5)}
+.mem b{font-size:44px;font-weight:900}
+.mem span{font-family:var(--mono);font-size:25px;color:var(--text-2);line-height:1.3}
+/* escada */
+.stairs{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;align-items:end;height:520px;margin-top:10px}
+.st{position:relative;background:var(--bg-2);border:2px solid var(--border-strong);border-radius:24px 24px 0 0;padding:32px;display:flex;flex-direction:column;gap:10px;justify-content:flex-start}
+.st b{font-size:60px;font-weight:900}
+.st span{font-size:36px;color:var(--text-2);font-weight:500}
+.s1{height:200px}.s2{height:290px}.s3{height:380px}
+.s4{height:500px;background:linear-gradient(160deg,rgba(0,212,255,.28),rgba(168,85,247,.3));border-color:var(--cyan);box-shadow:0 0 80px rgba(0,212,255,.3)}
+.s4 span{color:#fff}
+u{text-decoration:none;font-family:var(--mono);font-size:26px;letter-spacing:.14em;text-transform:uppercase;background:var(--grad);color:#0A0A0F;padding:6px 18px;border-radius:99px;align-self:flex-start;font-weight:500}
+/* virada */
+.tags{display:flex;flex-wrap:wrap;gap:18px}
+.tags span{font-family:var(--mono);font-size:34px;padding:14px 30px;border-radius:99px;border:2px solid rgba(0,212,255,.5);background:rgba(0,212,255,.1);color:#fff}
+/* agente */
+.agent{display:flex;align-items:center;gap:90px}
+.portrait{position:relative;flex:none;width:620px;height:620px;border-radius:44px;padding:5px;background:var(--grad);box-shadow:0 0 110px rgba(0,212,255,.3),0 0 180px rgba(168,85,247,.25)}
+.portrait img{width:100%;height:100%;object-fit:cover;border-radius:40px;display:block}
+.badge{position:absolute;left:28px;top:28px;font-family:var(--mono);font-size:26px;letter-spacing:.12em;text-transform:uppercase;background:rgba(10,10,15,.85);border:2px solid var(--cyan);color:var(--cyan);padding:8px 20px;border-radius:99px}
+.agent .col{gap:22px}
+h2.name{font-size:140px;line-height:1}
+.asks{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.ask{font-size:36px;line-height:1.25;color:#fff;background:var(--bg-2);border:2px solid var(--border-strong);border-left:6px solid var(--cyan);border-radius:16px;padding:18px 26px;font-weight:500}
+.obs{font-family:var(--mono);font-size:28px;color:var(--gold);line-height:1.35}
+/* ERP */
+.mods{flex:.85;display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.mod{font-size:44px;font-weight:900;background:var(--bg-2);border:2px solid var(--border-strong);border-radius:24px;padding:50px 30px;position:relative;overflow:hidden}
+.mod::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--grad)}
+.rule{border:2px solid var(--gold);background:rgba(255,195,74,.09);border-radius:24px;padding:28px 34px;display:flex;flex-direction:column;gap:10px}
+.rule b{font-size:52px;font-weight:900;color:var(--gold)}
+.rule span{font-size:34px;color:var(--text-1);line-height:1.3}
+/* vários negócios */
+.multi{position:relative;flex:none;width:720px;height:700px}
+.mcore{position:absolute;left:50%;top:50%;width:280px;height:280px;margin:-140px 0 0 -140px}
+.mcore img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:4px solid var(--cyan);box-shadow:0 0 110px rgba(0,212,255,.5)}
+.biz{position:absolute;font-size:44px;font-weight:900;background:var(--bg-2);border:2px solid var(--purple);border-radius:22px;padding:28px 40px;box-shadow:0 0 50px rgba(168,85,247,.25);white-space:nowrap}
+.biz:nth-child(1){left:50%;top:0;margin-left:-135px}
+.biz:nth-child(2){left:0;bottom:30px}
+.biz:nth-child(3){right:0;bottom:30px}
+/* órbita */
+.orbit{position:relative;flex:none}
+.orbit svg{position:absolute;inset:0;width:100%;height:100%}
+.ray{stroke:rgba(255,255,255,.12);stroke-width:2}
+.pulse{stroke:var(--cyan);stroke-width:5;stroke-linecap:round;stroke-dasharray:46 700;stroke-dashoffset:46;opacity:0}
+.slide.on .pulse{animation:pulse 3.9s linear infinite;animation-delay:calc(var(--pd) + 1.4s)}
+@keyframes pulse{0%{stroke-dashoffset:46;opacity:1}40%{stroke-dashoffset:-310;opacity:1}46%,100%{stroke-dashoffset:-310;opacity:0}}
+.core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;padding:5px;background:var(--grad);box-shadow:0 0 110px rgba(0,212,255,.55);animation:glow 3s ease-in-out infinite}
+.core img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+@keyframes glow{50%{box-shadow:0 0 160px rgba(168,85,247,.7)}}
+.node{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px;opacity:0}
+.slide.on .node{animation:pop .5s cubic-bezier(.2,.9,.3,1.3) both;animation-delay:calc(var(--i)*90ms + 500ms)}
+@keyframes pop{from{opacity:0;transform:translate(-50%,-50%) scale(.4)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.node img{border-radius:50%;object-fit:cover;border:3px solid rgba(0,212,255,.6);background:var(--bg-2);display:block}
+.node span{font-family:var(--mono);font-size:22px;color:#fff;background:rgba(10,10,15,.8);padding:1px 10px;border-radius:99px}
+/* demo */
+.s-demo{gap:28px}
+.demo-head{display:flex;align-items:center;gap:30px}
+.demo-head img{width:150px;height:150px;border-radius:50%;object-fit:cover;border:4px solid var(--cyan)}
+.demo-head>div{flex:1;display:flex;flex-direction:column;gap:10px}
+.live{color:var(--red);display:flex;align-items:center;gap:16px}
+.live i{width:22px;height:22px;border-radius:50%;background:var(--red);animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.25}}
+.fict{font-family:var(--mono);font-size:26px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border:2px solid var(--gold);padding:10px 24px;border-radius:99px}
+.prompt{background:#0d0d15;border:2px solid var(--cyan);border-radius:26px;padding:32px 44px;display:flex;flex-direction:column;gap:14px;box-shadow:0 0 70px rgba(0,212,255,.18)}
+.prompt p{font-family:var(--mono);font-size:44px;line-height:1.36;color:#fff;user-select:text;cursor:text}
+.watch{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.watch>.lbl{grid-column:1/-1}
+.w{background:var(--bg-2);border:2px solid var(--border-strong);border-radius:20px;padding:24px 26px;font-size:34px;font-weight:500;line-height:1.25;display:flex;gap:18px;align-items:center}
+.w em{font-style:normal;flex:none;font-family:var(--mono);width:56px;height:56px;border-radius:50%;background:var(--grad);color:#0A0A0F;display:grid;place-items:center;font-size:28px}
+/* cards */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.card{background:var(--bg-2);border:2px solid var(--border-strong);border-radius:28px;padding:44px;display:flex;flex-direction:column;gap:18px}
+.card.hl{background:linear-gradient(150deg,rgba(0,212,255,.2),rgba(168,85,247,.22));border-color:var(--cyan)}
+.card b{font-size:60px;font-weight:900;line-height:1.05}
+.card p{font-size:40px;color:var(--text-1);line-height:1.3}
+.card .num{font-size:120px;font-weight:900;line-height:1.1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.three .card b{font-size:46px;color:var(--text-1)}
+/* planos */
+.s-plans{gap:26px}
+.plans{display:grid;grid-template-columns:1fr 1fr 1fr 1.18fr;gap:22px;align-items:stretch}
+.plan{position:relative;background:var(--bg-2);border:2px solid var(--border-strong);border-radius:28px;padding:36px 30px;display:flex;flex-direction:column;gap:12px}
+.plan h4{font-size:50px}
+.price{font-size:70px;font-weight:900;letter-spacing:-.03em;line-height:1.05;margin-top:8px;white-space:nowrap}
+.mes{font-family:var(--mono);font-size:28px;color:var(--cyan);line-height:1.35;min-height:118px}
+.plan ul{list-style:none;display:flex;flex-direction:column;gap:12px;border-top:2px solid var(--border);padding-top:20px}
+.plan li{font-size:32px;line-height:1.22;color:var(--text-1);padding-left:34px;position:relative}
+.plan li::before{content:"";position:absolute;left:0;top:12px;width:16px;height:16px;border-radius:50%;background:var(--grad)}
+.plan.top{background:linear-gradient(160deg,rgba(0,212,255,.24),rgba(168,85,247,.28));border-color:var(--cyan);box-shadow:0 0 90px rgba(0,212,255,.3)}
+.plan.top u{position:absolute;right:26px;top:36px}
+.plan.top li{color:#fff;font-weight:500}
+.s-aud{gap:28px}
+.aud{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.aud .card{padding:36px 34px;gap:16px}
+.aud .card b{font-size:46px;line-height:1.1}
+.aud .card p{font-size:33px;line-height:1.3}
+.agenda{display:flex;justify-content:space-between;gap:14px;background:var(--bg-2);border:2px solid var(--border-strong);border-radius:22px;padding:22px 28px}
+.agenda span{display:flex;align-items:center;gap:10px;font-size:25px;font-weight:500;color:var(--text-1);white-space:nowrap}
+.agenda em{font-style:normal;flex:none;font-family:var(--mono);font-size:22px;width:40px;height:40px;border-radius:50%;background:var(--grad);color:#0A0A0F;display:grid;place-items:center}
+.rules4{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:8px}
+.r4{background:var(--bg-2);border:2px solid var(--border-strong);border-radius:26px;padding:38px 40px;display:flex;align-items:center;gap:32px}
+.r4 em{font-style:normal;flex:none;font-family:var(--mono);font-size:44px;width:96px;height:96px;border-radius:50%;background:var(--grad);color:#0A0A0F;display:grid;place-items:center}
+.r4 div{display:flex;flex-direction:column;gap:10px;min-width:0}
+.r4 b{font-size:50px;font-weight:900;line-height:1.08;letter-spacing:-.02em}
+.r4 p{font-size:36px;line-height:1.28;color:var(--text-1);text-wrap:balance}
+/* QR */
+.qrcol{flex:none;display:flex;flex-direction:column;align-items:center;gap:26px}
+.again{font-size:36px;line-height:1.32;color:var(--text-1);border-left:6px solid var(--gold);padding-left:26px;text-wrap:balance}
+.qrbox{flex:none;width:640px;height:640px;background:#fff;border-radius:36px;padding:14px;box-shadow:0 0 120px rgba(0,212,255,.4),0 0 200px rgba(168,85,247,.3)}
+.qr{width:100%;height:100%;display:block}
+.url{font-family:var(--mono);font-size:44px;white-space:nowrap;color:var(--cyan)}
+.sym{width:200px;height:200px}
+/* moldura */
+#logo{position:absolute;left:112px;bottom:14px;height:100px;z-index:5;opacity:.9}
+#num{position:absolute;right:130px;bottom:46px;z-index:5;font-family:var(--mono);font-size:26px;color:var(--text-2)}
+#bar{position:absolute;left:0;bottom:0;height:8px;width:0;background:var(--grad);z-index:6;transition:width .4s ease}
+#np{position:absolute;left:60px;right:60px;bottom:60px;z-index:20;background:rgba(8,8,14,.96);border:2px solid var(--gold);border-radius:24px;padding:30px 40px;display:none;box-shadow:0 20px 80px #000}
+#np.show{display:block}
+#np h5{font-family:var(--mono);font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-weight:500}
+#np p{font-size:36px;line-height:1.36;color:#fff}
+#fsb{position:fixed;right:18px;top:18px;z-index:50;font:500 18px 'Inter','Segoe UI Symbol',Arial,sans-serif;color:#E5E5E5;background:rgba(21,21,31,.85);border:1px solid rgba(255,255,255,.25);border-radius:99px;padding:9px 18px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s}
+#fsb.show{opacity:.9;pointer-events:auto}
+#fsb:hover{opacity:1;border-color:#00D4FF}
+</style>
+</head>
+<body>
+<div id="stage">
+<section class="slide " >
+<div class="split">
+<div class="col">
+<p class="eyebrow a" style="--i:0;font-size:27px;letter-spacing:.1em;white-space:nowrap">Lançamento · Digital Master · Agência no Bolso</p>
+<h1 class="a mega" style="--i:1">MAIA<br><span class="grad">Magnata</span></h1>
+<p class="lead a" style="--i:2">A IA que sai do marketing e das vendas<br>e entra na empresa inteira.</p>
+<p class="mono dim a" style="--i:3">Salatiel Batista</p>
+</div>
+<div class="hero a" style="--i:2"><div class="ring r1"></div><div class="ring r2"></div><img src="img/maia.webp" alt="MAIA"></div>
+</div>
+<aside class="notes">Abra com energia. Dê as boas-vindas aos três públicos: quem já é cliente, quem viu a apresentação da Enterprise e quem está chegando agora. Avise: hoje não tem repeteco, o foco é o que é novo. Desde 2016 no mercado, mais de 100 empresários atendidos.</aside>
+</section>
+
+<section class="slide " >
+<p class="eyebrow a" style="--i:0">Combinados</p>
+<h2 class="a" style="--i:1">Antes de <span class="grad">começar</span></h2>
+<div class="rules4">
+<div class="r4 a" style="--i:2"><em>1</em><div><b>Foco total</b><p>Silencie o celular e feche as outras abas.</p></div></div>
+<div class="r4 a" style="--i:3"><em>2</em><div><b>Ambiente tranquilo</b><p>Procure um lugar sem interrupções.</p></div></div>
+<div class="r4 a" style="--i:4"><em>3</em><div><b>Câmera aberta, se puder</b><p>A gente interage melhor se vendo.</p></div></div>
+<div class="r4 a" style="--i:5"><em>4</em><div><b>Anote as suas dúvidas</b><p>Respondo todas no final.</p></div></div>
+</div>
+<aside class="notes">Tom acolhedor, sem bronca. Dê 30 segundos para as pessoas se ajeitarem: silenciar o celular, fechar as outras abas, achar um lugar tranquilo e abrir a câmera, se puderem. Lembre que as dúvidas ficam para o final, para não quebrar as demonstrações ao vivo: peça para anotarem, você responde todas.</aside>
+</section>
+
+<section class="slide s-aud" >
+<p class="eyebrow a" style="--i:0">Alinhamento</p>
+<h2 class="a" style="--i:1">O que você vai ver <span class="grad">hoje</span></h2>
+<div class="aud">
+<div class="card a" style="--i:2"><span class="lbl">01 · Cliente</span><b>Você já é cliente MAIA</b><p>O que entra de novo para você e como fica a sua migração.</p></div>
+<div class="card a" style="--i:3"><span class="lbl">02 · Enterprise</span><b>Você já viu a MAIA Enterprise</b><p>O que mudou desde então: 7 agentes novos, ERP e 4 planos. Sem repetir o que você já viu.</p></div>
+<div class="card a" style="--i:4"><span class="lbl">03 · Primeira vez</span><b>É a sua primeira vez</b><p>Em 3 minutos você entende o que é a MAIA. Depois, vê tudo funcionando ao vivo.</p></div>
+</div>
+<div class="agenda a" style="--i:5"><span><em>1</em>O que é a MAIA</span><span><em>2</em>As novidades da Magnata</span><span><em>3</em>Demonstrações ao vivo</span><span><em>4</em>Para quem já é cliente</span><span><em>5</em>Próximo passo</span></div>
+<aside class="notes">Alinhe a sala antes de começar. Peça para levantar a mão, ou comentar no chat, quem é de cada grupo: quem já é cliente MAIA, quem já viu a apresentação da Enterprise e quem está aqui pela primeira vez. Prometa: ninguém vai ver conteúdo repetido. Passe pela agenda em uma frase: o que é a MAIA, as novidades da Magnata, demonstrações ao vivo, a parte de quem já é cliente e o próximo passo.</aside>
+</section>
+
+<section class="slide " >
+<p class="eyebrow a" style="--i:0">O problema</p>
+<h2 class="a big" style="--i:1">Tudo passa por você.<br><span class="loss">Você é o gargalo.</span></h2>
+<div class="chips4">
+<div class="chip-card a" style="--i:2"><b>Jurídico</b><span>o contrato espera você ler</span></div>
+<div class="chip-card a" style="--i:3"><b>Fiscal</b><span>o imposto espera você decidir</span></div>
+<div class="chip-card a" style="--i:4"><b>Financeiro</b><span>o caixa espera você conferir</span></div>
+<div class="chip-card a" style="--i:5"><b>RH</b><span>a vaga espera você escrever</span></div>
+</div>
+<aside class="notes">Pergunte para a sala: quantas decisões desta semana ficaram paradas esperando você? Contrato, imposto, caixa, contratação. O empresário vira o funil por onde tudo tem que passar. Não prometa milagre: a proposta é tirar o operacional da sua mesa, a decisão continua sua.</aside>
+</section>
+
+<section class="slide " >
+<p class="eyebrow a" style="--i:0">Para quem chegou agora</p>
+<h2 class="a" style="--i:1">A MAIA não é um chatbot.<br>É uma <span class="grad">IA orquestradora</span>.</h2>
+<div class="flow">
+<div class="step a" style="--i:2"><em>1</em><b>Você pede</b><span>no WhatsApp ou no Telegram</span></div>
+<i class="arrow a" style="--i:3"></i>
+<div class="step hl a" style="--i:3"><img src="img/maia.webp" alt="MAIA"><b>A MAIA delega</b><span>ao especialista certo</span></div>
+<i class="arrow a" style="--i:4"></i>
+<div class="step a" style="--i:4"><em>3</em><b>O agente executa</b><span>cada um na sua área</span></div>
+<i class="arrow a" style="--i:5"></i>
+<div class="step a" style="--i:5"><em>4</em><b>Você aprova</b><span>a palavra final é sua</span></div>
+</div>
+<p class="foot-line a" style="--i:6">Roda dentro do seu negócio, em VPS própria.</p>
+<aside class="notes">Slide para os convidados novos. Seja rápido, no máximo 2 minutos. A MAIA roda em uma VPS própria do cliente e conversa pelo WhatsApp ou Telegram. Você pede, ela delega ao especialista certo e você aprova. Quem já conhece: peça paciência, a novidade começa em dois slides.</aside>
+</section>
+
+<section class="slide " >
+<p class="eyebrow a" style="--i:0">De onde viemos</p><h2 class="a" style="--i:1">O time de <span class="grad">7 especialistas</span></h2><div class="team7"><div class="mem a" style="--i:2"><img src="img/lis.webp" alt="Lis"><b>Lis</b><span>SDR<br>Atendimento</span></div><div class="mem a" style="--i:3"><img src="img/theo.webp" alt="Théo"><b>Théo</b><span>Copy<br>Conteúdo<br>Persona</span></div><div class="mem a" style="--i:4"><img src="img/leo.webp" alt="Léo"><b>Léo</b><span>Dev<br>Deploy<br>Infra</span></div><div class="mem a" style="--i:5"><img src="img/nina.webp" alt="Nina"><b>Nina</b><span>Operações<br>Coordenação</span></div><div class="mem a" style="--i:6"><img src="img/eva.webp" alt="Eva"><b>Eva</b><span>CRM<br>Pós-venda</span></div><div class="mem a" style="--i:7"><img src="img/ravi.webp" alt="Ravi"><b>Ravi</b><span>Tráfego pago<br>Mídia</span></div><div class="mem a" style="--i:8"><img src="img/caio.webp" alt="Caio"><b>Caio</b><span>Projetos<br>Roadmap</span></div></div><p class="foot-line a" style="--i:9">Marketing, vendas e operação comercial. Até hoje.</p>
+<aside class="notes">Passe rápido, um nome por respiração: Lis atende e qualifica, Théo escreve copy e conteúdo, Léo é o dev, Nina coordena as operações, Eva cuida de CRM e pós-venda, Ravi roda o tráfego pago, Caio toca projetos e roadmap. Quem já é cliente conhece todos. Gancho: esse time resolve marketing e vendas. E o resto da empresa?</aside>
+</section>
+
+<section class="slide " >
+<p class="eyebrow a" style="--i:0">O que mudou</p>
+<h2 class="a" style="--i:1">De 3 para <span class="grad">4 planos</span></h2>
+<div class="stairs">
+<div class="st s1 a" style="--i:2"><b>Start</b><span>Lis</span></div>
+<div class="st s2 a" style="--i:3"><b>Pro</b><span>3 agentes</span></div>
+<div class="st s3 a" style="--i:4"><b>Enterprise</b><span>7 agentes</span></div>
+<div class="st s4 a" style="--i:5"><u>Novo</u><b>Magnata</b><span>14 agentes + ERP</span></div>
+</div>
+<aside class="notes">Mostre a escada: Start, Pro, Enterprise e, agora, Magnata no topo. Cada degrau soma o anterior. A Magnata é o plano novo e é sobre ela que vamos falar o resto do tempo. Os preços vêm no final.</aside>
+</section>
+
+<section class="slide " >
+<p class="eyebrow a" style="--i:0">A virada</p>
+<h2 class="a big" style="--i:1"><span class="dim2">De marketing e vendas</span><br>para a <span class="grad">empresa inteira</span>.</h2>
+<div class="tags a" style="--i:3"><span>Conteúdo</span><span>Jurídico</span><span>Tributário</span><span>Engenharia</span><span>RH</span><span>Financeiro</span><span>Prospecção B2B</span></div>
+<p class="lead a" style="--i:4">7 agentes novos. Um ERP próprio. Vários negócios numa MAIA só.</p>
+<aside class="notes">Esta é a frase do lançamento. Pause depois de dizer. Até ontem a MAIA cuidava de marketing e vendas. A partir de hoje ela entra no jurídico, no fiscal, no financeiro, no RH. Anuncie: vou apresentar os 7 novos, um por um.</aside>
+</section>
+
+<section class="slide " >
+<div class="agent">
+<div class="portrait a" style="--i:0"><img src="img/bia.webp" alt="Bia"><span class="badge">Novo 1/7</span></div>
+<div class="col">
+<p class="eyebrow a" style="--i:1">Conteúdo</p>
+<h2 class="a name" style="--i:2">Bia</h2>
+<p class="lead a" style="--i:3">Estratégia de conteúdo e roteiros</p>
+<div class="asks"><p class="ask a" style="--i:4">“Monta a linha editorial do mês para o meu Instagram.”</p><p class="ask a" style="--i:5">“Roteiriza uma série de Reels sobre o meu serviço principal.”</p><p class="ask a" style="--i:6">“Transforma esta live em carrosséis.”</p></div>
+
+</div></div>
+<aside class="notes">Bia pensa a estratégia de conteúdo e entrega os roteiros. Leia um dos pedidos em voz alta para a sala sentir como é simples pedir.</aside>
+</section>
+
+<section class="slide " >
+<div class="agent">
+<div class="portrait a" style="--i:0"><img src="img/aline.webp" alt="Aline"><span class="badge">Novo 2/7</span></div>
+<div class="col">
+<p class="eyebrow a" style="--i:1">Jurídico</p>
+<h2 class="a name" style="--i:2">Aline</h2>
+<p class="lead a" style="--i:3">Contratos, LGPD e registro de marca</p>
+<div class="asks"><p class="ask a" style="--i:4">“Revisa este contrato e aponta os riscos para mim.”</p><p class="ask a" style="--i:5">“Minha política de privacidade atende à LGPD?”</p><p class="ask a" style="--i:6">“Quais os passos para registrar a minha marca?”</p></div>
+<p class="obs a" style="--i:7">Lê o contrato pela ótica da outra parte.<br>Apoio técnico: não substitui advogado.</p>
+</div></div>
+<aside class="notes">Aline revisa contratos, cuida de LGPD e orienta o registro de marca. O diferencial: ela lê pela ótica da outra parte e mostra onde você está exposto. Diga com todas as letras: é apoio técnico, não substitui advogado.</aside>
+</section>
+
+<section class="slide " >
+<div class="agent">
+<div class="portrait a" style="--i:0"><img src="img/maria.webp" alt="Maria"><span class="badge">Novo 3/7</span></div>
+<div class="col">
+<p class="eyebrow a" style="--i:1">Tributário</p>
+<h2 class="a name" style="--i:2">Maria</h2>
+<p class="lead a" style="--i:3">Regimes, alíquota efetiva, Fator R, notas e prazos</p>
+<div class="asks"><p class="ask a" style="--i:4">“Vale sair do MEI para o Simples agora?”</p><p class="ask a" style="--i:5">“Calcula minha alíquota efetiva e o Fator R.”</p><p class="ask a" style="--i:6">“Quais obrigações vencem este mês?”</p></div>
+<p class="obs a" style="--i:7">MEI · Simples · Lucro Presumido</p>
+</div></div>
+<aside class="notes">Maria compara regimes (MEI, Simples, Presumido), calcula alíquota efetiva e Fator R, acompanha notas e prazos. Ela prepara a conta, a decisão continua sendo sua.</aside>
+</section>
+
+<section class="slide " >
+<div class="agent">
+<div class="portrait a" style="--i:0"><img src="img/boris.webp" alt="Boris"><span class="badge">Novo 4/7</span></div>
+<div class="col">
+<p class="eyebrow a" style="--i:1">Engenharia</p>
+<h2 class="a name" style="--i:2">Boris</h2>
+<p class="lead a" style="--i:3">Sites, sistemas, automações e integrações</p>
+<div class="asks"><p class="ask a" style="--i:4">“Cria um sistema de agendamento para o meu negócio.”</p><p class="ask a" style="--i:5">“Integra o formulário do site com o meu CRM.”</p><p class="ask a" style="--i:6">“Automatiza o envio do relatório semanal.”</p></div>
+<p class="obs a" style="--i:7">Entrega com testes.</p>
+</div></div>
+<aside class="notes">Boris é a engenharia: sites, sistemas, automações e integrações, sempre com testes. Destaque a palavra testes: ele prova que funciona antes de entregar.</aside>
+</section>
+
+<section class="slide " >
+<div class="agent">
+<div class="portrait a" style="--i:0"><img src="img/geane.webp" alt="Geane"><span class="badge">Novo 5/7</span></div>
+<div class="col">
+<p class="eyebrow a" style="--i:1">RH</p>
+<h2 class="a name" style="--i:2">Geane</h2>
+<p class="lead a" style="--i:3">Vagas, admissão, custo CLT, folha e férias</p>
+<div class="asks"><p class="ask a" style="--i:4">“Abre uma vaga de vendedor com a descrição completa.”</p><p class="ask a" style="--i:5">“Quanto custa de verdade contratar um CLT?”</p><p class="ask a" style="--i:6">“Monta o checklist de admissão e a escala de férias.”</p></div>
+
+</div></div>
+<aside class="notes">Geane cuida de gente: abre vaga, organiza admissão, calcula o custo CLT, prepara folha e férias. Ela prepara, quem fecha a folha é uma pessoa.</aside>
+</section>
+
+<section class="slide " >
+<div class="agent">
+<div class="portrait a" style="--i:0"><img src="img/marcia.webp" alt="Márcia"><span class="badge">Novo 6/7</span></div>
+<div class="col">
+<p class="eyebrow a" style="--i:1">Financeiro</p>
+<h2 class="a name" style="--i:2">Márcia</h2>
+<p class="lead a" style="--i:3">Contas a pagar e receber, fluxo de caixa, DRE e conciliação</p>
+<div class="asks"><p class="ask a" style="--i:4">“O que vence esta semana em contas a pagar?”</p><p class="ask a" style="--i:5">“Projeta o meu fluxo de caixa.”</p><p class="ask a" style="--i:6">“Fecha a DRE do mês e concilia o extrato.”</p></div>
+<p class="obs a" style="--i:7">Trabalha direto no ERP.</p>
+</div></div>
+<aside class="notes">Márcia é o financeiro: contas a pagar e receber, fluxo de caixa, DRE e conciliação, direto no ERP. Reforce: ela não paga conta sozinha, prepara e você aprova.</aside>
+</section>
+
+<section class="slide " >
+<div class="agent">
+<div class="portrait a" style="--i:0"><img src="img/ruth.webp" alt="Ruth"><span class="badge">Novo 7/7</span></div>
+<div class="col">
+<p class="eyebrow a" style="--i:1">Prospecção B2B</p>
+<h2 class="a name" style="--i:2">Ruth</h2>
+<p class="lead a" style="--i:3">Leads pré-qualificados e primeiro contato</p>
+<div class="asks"><p class="ask a" style="--i:4">“Encontra empresas com o perfil do meu cliente ideal.”</p><p class="ask a" style="--i:5">“Pré-qualifica esta lista de leads.”</p><p class="ask a" style="--i:6">“Escreve o primeiro contato para cada uma.”</p></div>
+
+</div></div>
+<aside class="notes">Ruth faz prospecção B2B: levanta leads pré-qualificados e prepara o primeiro contato. A Lis atende quem chega, a Ruth vai buscar.</aside>
+</section>
+
+<section class="slide " >
+<div class="split">
+<div class="col" style="flex:1.2">
+<p class="eyebrow a" style="--i:0">Novidade · Magnata</p>
+<h2 class="a" style="--i:1">ERP <span class="grad">MAIA Gestão</span></h2>
+<p class="lead a" style="--i:2;font-size:44px;text-wrap:wrap">Um ERP próprio, integrado aos agentes.<br>Já roda na operação da Digital Master.</p>
+<div class="rule a" style="--i:9"><b>A IA prepara. Você aprova.</b><span>Não paga conta, não emite nota e não fecha folha sozinha.</span></div>
+</div>
+<div class="mods">
+<div class="mod a" style="--i:3">Financeiro</div><div class="mod a" style="--i:4">Contas</div>
+<div class="mod a" style="--i:5">DRE</div><div class="mod a" style="--i:6">Orçamento</div>
+<div class="mod a" style="--i:7">Fiscal</div><div class="mod a" style="--i:8">RH</div>
+</div></div>
+<aside class="notes">O ERP MAIA Gestão é nosso, não é integração com sistema de terceiro. Financeiro, contas, DRE, orçamento, fiscal e RH. Prova: ele já roda na operação da própria Digital Master. Regra de ouro, diga devagar: a IA prepara e a pessoa aprova. Ela não paga conta, não emite nota e não fecha folha sozinha.</aside>
+</section>
+
+<section class="slide " >
+<div class="split">
+<div class="col">
+<p class="eyebrow a" style="--i:0">Exclusivo Magnata</p>
+<h2 class="a" style="--i:1;white-space:nowrap">Vários negócios.<br><span class="grad">Uma MAIA só.</span></h2>
+<p class="lead a" style="--i:2;font-size:44px;text-wrap:wrap">Tem mais de uma empresa?<br>Você comanda todas no mesmo lugar.</p>
+</div>
+<div class="multi">
+<div class="biz a" style="--i:3">Negócio 1</div>
+<div class="biz a" style="--i:4">Negócio 2</div>
+<div class="biz a" style="--i:5">Negócio 3</div>
+<div class="mcore a" style="--i:2"><img src="img/maia.webp" alt="MAIA"></div>
+</div></div>
+<aside class="notes">Para o empresário que tem mais de um negócio: na Magnata, uma única MAIA atende vários. É exclusivo da Magnata.</aside>
+</section>
+
+<section class="slide " >
+<div class="split"><div class="col" style="flex:.8"><p class="eyebrow a" style="--i:0">Por dentro</p><h2 class="a" style="--i:1;font-size:80px;white-space:nowrap">A MAIA<br><span class="grad">nunca executa</span>.<br>Só delega.</h2><p class="lead a" style="--i:2">Por isso ela está sempre disponível para responder você.</p><p class="mono dim a" style="--i:3">1 orquestra. 14 executam.</p></div><div class="orbit" style="width:860px;height:860px"><svg viewBox="0 0 860 860"><line class="ray" x1="430" y1="430" x2="430.0" y2="85.0"/><line class="pulse" style="--pd:0.00s" x1="430" y1="430" x2="430.0" y2="85.0"/><line class="ray" x1="430" y1="430" x2="579.7" y2="119.2"/><line class="pulse" style="--pd:0.28s" x1="430" y1="430" x2="579.7" y2="119.2"/><line class="ray" x1="430" y1="430" x2="699.7" y2="214.9"/><line class="pulse" style="--pd:0.56s" x1="430" y1="430" x2="699.7" y2="214.9"/><line class="ray" x1="430" y1="430" x2="766.4" y2="353.2"/><line class="pulse" style="--pd:0.84s" x1="430" y1="430" x2="766.4" y2="353.2"/><line class="ray" x1="430" y1="430" x2="766.4" y2="506.8"/><line class="pulse" style="--pd:1.12s" x1="430" y1="430" x2="766.4" y2="506.8"/><line class="ray" x1="430" y1="430" x2="699.7" y2="645.1"/><line class="pulse" style="--pd:1.40s" x1="430" y1="430" x2="699.7" y2="645.1"/><line class="ray" x1="430" y1="430" x2="579.7" y2="740.8"/><line class="pulse" style="--pd:1.68s" x1="430" y1="430" x2="579.7" y2="740.8"/><line class="ray" x1="430" y1="430" x2="430.0" y2="775.0"/><line class="pulse" style="--pd:1.96s" x1="430" y1="430" x2="430.0" y2="775.0"/><line class="ray" x1="430" y1="430" x2="280.3" y2="740.8"/><line class="pulse" style="--pd:2.24s" x1="430" y1="430" x2="280.3" y2="740.8"/><line class="ray" x1="430" y1="430" x2="160.3" y2="645.1"/><line class="pulse" style="--pd:2.52s" x1="430" y1="430" x2="160.3" y2="645.1"/><line class="ray" x1="430" y1="430" x2="93.6" y2="506.8"/><line class="pulse" style="--pd:2.80s" x1="430" y1="430" x2="93.6" y2="506.8"/><line class="ray" x1="430" y1="430" x2="93.6" y2="353.2"/><line class="pulse" style="--pd:3.08s" x1="430" y1="430" x2="93.6" y2="353.2"/><line class="ray" x1="430" y1="430" x2="160.3" y2="214.9"/><line class="pulse" style="--pd:3.36s" x1="430" y1="430" x2="160.3" y2="214.9"/><line class="ray" x1="430" y1="430" x2="280.3" y2="119.2"/><line class="pulse" style="--pd:3.64s" x1="430" y1="430" x2="280.3" y2="119.2"/></svg><div class="core" style="width:220px;height:220px"><img src="img/maia.webp" alt="MAIA"></div><div class="node" style="left:430.0px;top:85.0px;--i:0"><img src="img/lis.webp" alt="Lis" style="width:100px;height:100px"><span>Lis</span></div><div class="node" style="left:579.7px;top:119.2px;--i:1"><img src="img/theo.webp" alt="Théo" style="width:100px;height:100px"><span>Théo</span></div><div class="node" style="left:699.7px;top:214.9px;--i:2"><img src="img/leo.webp" alt="Léo" style="width:100px;height:100px"><span>Léo</span></div><div class="node" style="left:766.4px;top:353.2px;--i:3"><img src="img/nina.webp" alt="Nina" style="width:100px;height:100px"><span>Nina</span></div><div class="node" style="left:766.4px;top:506.8px;--i:4"><img src="img/bia.webp" alt="Bia" style="width:100px;height:100px"><span>Bia</span></div><div class="node" style="left:699.7px;top:645.1px;--i:5"><img src="img/aline.webp" alt="Aline" style="width:100px;height:100px"><span>Aline</span></div><div class="node" style="left:579.7px;top:740.8px;--i:6"><img src="img/maria.webp" alt="Maria" style="width:100px;height:100px"><span>Maria</span></div><div class="node" style="left:430.0px;top:775.0px;--i:7"><img src="img/boris.webp" alt="Boris" style="width:100px;height:100px"><span>Boris</span></div><div class="node" style="left:280.3px;top:740.8px;--i:8"><img src="img/eva.webp" alt="Eva" style="width:100px;height:100px"><span>Eva</span></div><div class="node" style="left:160.3px;top:645.1px;--i:9"><img src="img/ravi.webp" alt="Ravi" style="width:100px;height:100px"><span>Ravi</span></div><div class="node" style="left:93.6px;top:506.8px;--i:10"><img src="img/caio.webp" alt="Caio" style="width:100px;height:100px"><span>Caio</span></div><div class="node" style="left:93.6px;top:353.2px;--i:11"><img src="img/geane.webp" alt="Geane" style="width:100px;height:100px"><span>Geane</span></div><div class="node" style="left:160.3px;top:214.9px;--i:12"><img src="img/marcia.webp" alt="Márcia" style="width:100px;height:100px"><span>Márcia</span></div><div class="node" style="left:280.3px;top:119.2px;--i:13"><img src="img/ruth.webp" alt="Ruth" style="width:100px;height:100px"><span>Ruth</span></div></div></div>
+<aside class="notes">Explique a arquitetura em uma frase: a MAIA é a presidente do conselho, não a estagiária. Ela nunca executa, só delega para os 14 especialistas. Enquanto um agente trabalha, ela continua livre para conversar com você. É isso que vocês vão ver agora nas demonstrações: eu disparo um pedido e continuo falando.</aside>
+</section>
+
+<section class="slide s-demo" >
+<div class="demo-head a" style="--i:0"><img src="img/aline.webp" alt=""><div><p class="eyebrow live"><i></i>Demo ao vivo 1/5</p><h3>Jurídico · Aline</h3></div><span class="fict">Dados fictícios</span></div>
+<div class="prompt a" style="--i:1"><span class="lbl">Pedido</span><p>Revisa este contrato de prestação de serviço pela ótica do contratante, me dá os 3 maiores riscos com nota e sugere a cláusula corrigida.</p></div>
+<div class="watch"><span class="lbl a" style="--i:2">O que observar</span><div class="w a" style="--i:3"><em>1</em>Lê pela ótica do contratante</div><div class="w a" style="--i:4"><em>2</em>3 riscos, cada um com nota</div><div class="w a" style="--i:5"><em>3</em>Cláusula corrigida pronta</div></div>
+<aside class="notes">DEMO 1. Dispare o pedido (leia ou cole), siga falando e volte quando a resposta chegar. Tenha prints de reserva caso a resposta demore ou a conexão falhe. Reforce: os dados são fictícios. Pedido: Revisa este contrato de prestação de serviço pela ótica do contratante, me dá os 3 maiores riscos com nota e sugere a cláusula corrigida.</aside>
+</section>
+
+<section class="slide s-demo" >
+<div class="demo-head a" style="--i:0"><img src="img/maria.webp" alt=""><div><p class="eyebrow live"><i></i>Demo ao vivo 2/5</p><h3>Contábil · Maria</h3></div><span class="fict">Dados fictícios</span></div>
+<div class="prompt a" style="--i:1"><span class="lbl">Pedido</span><p>Empresa de serviços fatura <span class="nw">R$ 40 mil/mês</span>, folha de <span class="nw">R$ 9 mil</span>. Compara Simples Anexo III, Anexo V e Lucro Presumido, calcula o Fator R e diz qual paga menos imposto.</p></div>
+<div class="watch"><span class="lbl a" style="--i:2">O que observar</span><div class="w a" style="--i:3"><em>1</em>Fator R calculado</div><div class="w a" style="--i:4"><em>2</em>Os 3 cenários lado a lado</div><div class="w a" style="--i:5"><em>3</em>Qual paga menos, com a conta</div></div>
+<aside class="notes">DEMO 2. Dispare o pedido (leia ou cole), siga falando e volte quando a resposta chegar. Tenha prints de reserva caso a resposta demore ou a conexão falhe. Reforce: os dados são fictícios. Pedido: Empresa de serviços fatura R$ 40 mil/mês, folha de R$ 9 mil. Compara Simples Anexo III, Anexo V e Lucro Presumido, calcula o Fator R e diz qual paga menos imposto.</aside>
+</section>
+
+<section class="slide s-demo" >
+<div class="demo-head a" style="--i:0"><img src="img/geane.webp" alt=""><div><p class="eyebrow live"><i></i>Demo ao vivo 3/5</p><h3>RH · Geane</h3></div><span class="fict">Dados fictícios</span></div>
+<div class="prompt a" style="--i:1"><span class="lbl">Pedido</span><p>Quero contratar uma assistente CLT com salário de <span class="nw">R$ 2.200.</span> Monta a descrição da vaga e o custo mensal total com encargos.</p></div>
+<div class="watch"><span class="lbl a" style="--i:2">O que observar</span><div class="w a" style="--i:3"><em>1</em>Descrição da vaga pronta</div><div class="w a" style="--i:4"><em>2</em>Custo total, não só o salário</div><div class="w a" style="--i:5"><em>3</em>Encargos linha a linha</div></div>
+<aside class="notes">DEMO 3. Dispare o pedido (leia ou cole), siga falando e volte quando a resposta chegar. Tenha prints de reserva caso a resposta demore ou a conexão falhe. Reforce: os dados são fictícios. Pedido: Quero contratar uma assistente CLT com salário de R$ 2.200. Monta a descrição da vaga e o custo mensal total com encargos.</aside>
+</section>
+
+<section class="slide s-demo" >
+<div class="demo-head a" style="--i:0"><img src="img/marcia.webp" alt=""><div><p class="eyebrow live"><i></i>Demo ao vivo 4/5</p><h3>Financeiro · Márcia</h3></div><span class="fict">Dados fictícios</span></div>
+<div class="prompt a" style="--i:1"><span class="lbl">Pedido</span><p>Receita <span class="nw">R$ 85 mil</span>, custos <span class="nw">R$ 38 mil</span>, despesas fixas <span class="nw">R$ 27 mil</span>. Monta a DRE gerencial e aponta o gargalo.</p></div>
+<div class="watch"><span class="lbl a" style="--i:2">O que observar</span><div class="w a" style="--i:3"><em>1</em>DRE gerencial estruturada</div><div class="w a" style="--i:4"><em>2</em>Margens calculadas</div><div class="w a" style="--i:5"><em>3</em>O gargalo apontado</div></div>
+<aside class="notes">DEMO 4. Dispare o pedido (leia ou cole), siga falando e volte quando a resposta chegar. Tenha prints de reserva caso a resposta demore ou a conexão falhe. Reforce: os dados são fictícios. Pedido: Receita R$ 85 mil, custos R$ 38 mil, despesas fixas R$ 27 mil. Monta a DRE gerencial e aponta o gargalo.</aside>
+</section>
+
+<section class="slide s-demo" >
+<div class="demo-head a" style="--i:0"><img src="img/ruth.webp" alt=""><div><p class="eyebrow live"><i></i>Demo ao vivo 5/5</p><h3>Prospecção · Ruth</h3></div><span class="fict">Dados fictícios</span></div>
+<div class="prompt a" style="--i:1"><span class="lbl">Pedido</span><p>Lista de 10 clínicas odontológicas em Teresina com Instagram ativo e rascunho do primeiro contato. Não envia nada.</p></div>
+<div class="watch"><span class="lbl a" style="--i:2">O que observar</span><div class="w a" style="--i:3"><em>1</em>Leads pré-qualificados</div><div class="w a" style="--i:4"><em>2</em>Rascunho do primeiro contato</div><div class="w a" style="--i:5"><em>3</em>Nada é enviado sem você</div></div>
+<aside class="notes">DEMO 5. Dispare o pedido (leia ou cole), siga falando e volte quando a resposta chegar. Tenha prints de reserva caso a resposta demore ou a conexão falhe. Reforce: os dados são fictícios. Pedido: Lista de 10 clínicas odontológicas em Teresina com Instagram ativo e rascunho do primeiro contato. Não envia nada.</aside>
+</section>
+
+<section class="slide " >
+<p class="eyebrow a" style="--i:0">Para quem já é cliente</p>
+<h2 class="a" style="--i:1">Promessa feita, <span class="grad">promessa cumprida</span>.</h2>
+<div class="two">
+<div class="card hl a" style="--i:2"><span class="lbl">Entrou no Enterprise antigo</span><b>Migra para a Magnata</b><p>Você recebeu a promessa de todas as atualizações. A migração é por aditivo individual.</p></div>
+<div class="card a" style="--i:3"><span class="lbl">Fica no Enterprise novo</span><b>Recebe correções</b><p>Quem ficar no Enterprise novo recebe as correções do plano.</p></div>
+</div>
+<aside class="notes">Fale olhando para os clientes atuais. Quem entrou no Enterprise antigo ouviu a promessa de todas as atualizações, e ela vale: migra para a Magnata por aditivo individual, tratado um a um. Quem ficar no Enterprise novo recebe correções. Não cite nomes de clientes nem valores individuais.</aside>
+</section>
+
+<section class="slide s-plans oculto" >
+<p class="eyebrow a" style="--i:0">Os 4 planos e o investimento</p>
+<div class="plans">
+<div class="plan a" style="--i:1"><h4>Start</h4><div class="price"><span class="nw">R$ 1.497</span></div><div class="mes">+ <span class="nw">R$ 297/mês</span></div><ul><li>Lis</li><li>Atendimento no WhatsApp e no Instagram</li></ul></div>
+<div class="plan a" style="--i:2"><h4>Pro</h4><div class="price"><span class="nw">R$ 5.000</span></div><div class="mes">+ <span class="nw">R$ 597/mês</span></div><ul><li>Tudo do Start</li><li>+ Théo e Eva</li></ul></div>
+<div class="plan a" style="--i:3"><h4>Enterprise</h4><div class="price"><span class="nw">R$ 12.000</span></div><div class="mes">em até 12x<br>de <span class="nw">R$ 1.000</span><br>+ <span class="nw">R$ 597/mês</span></div><ul><li>7 agentes</li></ul></div>
+<div class="plan top a" style="--i:4"><u>Novo</u><h4>Magnata</h4><div class="price"><span class="nw">R$ 25.000</span></div><div class="mes">+ <span class="nw">R$ 597/mês</span></div><ul><li>14 agentes</li><li>ERP MAIA Gestão</li><li>Vários negócios</li><li>Todas as atualizações</li><li>2 onboards</li><li>Suporte dedicado</li></ul></div>
+</div>
+<aside class="notes">Apresente da esquerda para a direita, sem pressa. Start: Lis e atendimento no WhatsApp e Instagram. Pro: mais Théo e Eva. Enterprise: os 7 agentes. Magnata: 14 agentes, ERP, vários negócios, todas as atualizações, 2 onboards e suporte dedicado. Só preço cheio. Não negocie condição no palco: isso é assunto do diagnóstico.</aside>
+</section>
+
+<section class="slide oculto" id="condicao">
+<p class="eyebrow a" style="--i:0">Condição de lançamento</p>
+<h2 class="a" style="--i:1">[Título da condição de lançamento]</h2>
+<p class="lead a" style="--i:2">[Descreva aqui a condição: o que é, para quem vale e até quando.]</p>
+<div class="rule a" style="--i:3"><b>[Prazo ou limite]</b><span>[Regra da condição]</span></div>
+<aside class="notes">Slide opcional. Só aparece se você remover a classe "oculto" no HTML. Preencha os textos entre colchetes antes de apresentar.</aside>
+</section>
+
+<section class="slide " >
+<p class="eyebrow a" style="--i:0">Garantia e regras</p>
+<h2 class="a" style="--i:1">Jogo <span class="grad">limpo</span>.</h2>
+<div class="three">
+<div class="card a" style="--i:2"><div class="num">7 dias</div><b>Start e Pro</b></div>
+<div class="card hl a" style="--i:3"><div class="num">30 dias</div><b>Enterprise e Magnata</b></div>
+<div class="card a" style="--i:4"><div class="num">Zero</div><b>fidelidade</b></div>
+</div>
+<p class="foot-line a" style="--i:5">O cliente assina as próprias ferramentas de IA.</p>
+<aside class="notes">Garantia: 7 dias no Start e no Pro, 30 dias no Enterprise e na Magnata. Sem fidelidade. E transparência: as ferramentas de IA são assinadas pelo próprio cliente.</aside>
+</section>
+
+<section class="slide " >
+<div class="split">
+<div class="col">
+<p class="eyebrow a" style="--i:0">Próximo passo</p>
+<h2 class="a big" style="--i:1">Agende sua<br><span class="grad">conversa</span>.</h2>
+<p class="lead a" style="--i:2">Aponte a câmera e escolha o horário.<br>30 minutos, só você e eu.</p>
+<p class="again a" style="--i:3">Já participou de uma apresentação da MAIA? Agende também: na conversa eu apresento a condição de Black Friday.</p>
+</div>
+<div class="qrcol a" style="--i:2"><div class="qrbox"><svg class="qr" viewBox="0 0 37 37" shape-rendering="crispEdges" role="img" aria-label="QR code para agendar diagnóstico"><rect width="37" height="37" fill="#fff"/><path d="M4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM12 4h1v1h-1zM13 4h1v1h-1zM14 4h1v1h-1zM15 4h1v1h-1zM18 4h1v1h-1zM20 4h1v1h-1zM22 4h1v1h-1zM23 4h1v1h-1zM24 4h1v1h-1zM26 4h1v1h-1zM27 4h1v1h-1zM28 4h1v1h-1zM29 4h1v1h-1zM30 4h1v1h-1zM31 4h1v1h-1zM32 4h1v1h-1zM4 5h1v1h-1zM10 5h1v1h-1zM12 5h1v1h-1zM14 5h1v1h-1zM17 5h1v1h-1zM18 5h1v1h-1zM21 5h1v1h-1zM26 5h1v1h-1zM32 5h1v1h-1zM4 6h1v1h-1zM6 6h1v1h-1zM7 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM13 6h1v1h-1zM14 6h1v1h-1zM15 6h1v1h-1zM16 6h1v1h-1zM17 6h1v1h-1zM19 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM23 6h1v1h-1zM26 6h1v1h-1zM28 6h1v1h-1zM29 6h1v1h-1zM30 6h1v1h-1zM32 6h1v1h-1zM4 7h1v1h-1zM6 7h1v1h-1zM7 7h1v1h-1zM8 7h1v1h-1zM10 7h1v1h-1zM12 7h1v1h-1zM13 7h1v1h-1zM15 7h1v1h-1zM16 7h1v1h-1zM17 7h1v1h-1zM19 7h1v1h-1zM21 7h1v1h-1zM23 7h1v1h-1zM26 7h1v1h-1zM28 7h1v1h-1zM29 7h1v1h-1zM30 7h1v1h-1zM32 7h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM13 8h1v1h-1zM14 8h1v1h-1zM15 8h1v1h-1zM17 8h1v1h-1zM18 8h1v1h-1zM19 8h1v1h-1zM20 8h1v1h-1zM23 8h1v1h-1zM26 8h1v1h-1zM28 8h1v1h-1zM29 8h1v1h-1zM30 8h1v1h-1zM32 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM13 9h1v1h-1zM14 9h1v1h-1zM15 9h1v1h-1zM16 9h1v1h-1zM18 9h1v1h-1zM20 9h1v1h-1zM21 9h1v1h-1zM22 9h1v1h-1zM23 9h1v1h-1zM24 9h1v1h-1zM26 9h1v1h-1zM32 9h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM27 10h1v1h-1zM28 10h1v1h-1zM29 10h1v1h-1zM30 10h1v1h-1zM31 10h1v1h-1zM32 10h1v1h-1zM12 11h1v1h-1zM13 11h1v1h-1zM14 11h1v1h-1zM15 11h1v1h-1zM19 11h1v1h-1zM20 11h1v1h-1zM21 11h1v1h-1zM23 11h1v1h-1zM24 11h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM9 12h1v1h-1zM10 12h1v1h-1zM11 12h1v1h-1zM14 12h1v1h-1zM17 12h1v1h-1zM19 12h1v1h-1zM20 12h1v1h-1zM21 12h1v1h-1zM22 12h1v1h-1zM23 12h1v1h-1zM26 12h1v1h-1zM29 12h1v1h-1zM31 12h1v1h-1zM32 12h1v1h-1zM6 13h1v1h-1zM7 13h1v1h-1zM8 13h1v1h-1zM12 13h1v1h-1zM13 13h1v1h-1zM14 13h1v1h-1zM15 13h1v1h-1zM17 13h1v1h-1zM21 13h1v1h-1zM22 13h1v1h-1zM23 13h1v1h-1zM24 13h1v1h-1zM25 13h1v1h-1zM26 13h1v1h-1zM27 13h1v1h-1zM28 13h1v1h-1zM32 13h1v1h-1zM7 14h1v1h-1zM9 14h1v1h-1zM10 14h1v1h-1zM11 14h1v1h-1zM14 14h1v1h-1zM16 14h1v1h-1zM17 14h1v1h-1zM20 14h1v1h-1zM22 14h1v1h-1zM24 14h1v1h-1zM25 14h1v1h-1zM27 14h1v1h-1zM28 14h1v1h-1zM30 14h1v1h-1zM31 14h1v1h-1zM5 15h1v1h-1zM6 15h1v1h-1zM8 15h1v1h-1zM9 15h1v1h-1zM13 15h1v1h-1zM22 15h1v1h-1zM24 15h1v1h-1zM26 15h1v1h-1zM27 15h1v1h-1zM28 15h1v1h-1zM32 15h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM9 16h1v1h-1zM10 16h1v1h-1zM13 16h1v1h-1zM14 16h1v1h-1zM15 16h1v1h-1zM18 16h1v1h-1zM21 16h1v1h-1zM23 16h1v1h-1zM29 16h1v1h-1zM30 16h1v1h-1zM4 17h1v1h-1zM6 17h1v1h-1zM7 17h1v1h-1zM11 17h1v1h-1zM12 17h1v1h-1zM14 17h1v1h-1zM16 17h1v1h-1zM18 17h1v1h-1zM19 17h1v1h-1zM20 17h1v1h-1zM21 17h1v1h-1zM23 17h1v1h-1zM26 17h1v1h-1zM30 17h1v1h-1zM31 17h1v1h-1zM32 17h1v1h-1zM5 18h1v1h-1zM7 18h1v1h-1zM9 18h1v1h-1zM10 18h1v1h-1zM11 18h1v1h-1zM14 18h1v1h-1zM17 18h1v1h-1zM21 18h1v1h-1zM23 18h1v1h-1zM24 18h1v1h-1zM26 18h1v1h-1zM27 18h1v1h-1zM30 18h1v1h-1zM31 18h1v1h-1zM32 18h1v1h-1zM6 19h1v1h-1zM7 19h1v1h-1zM8 19h1v1h-1zM11 19h1v1h-1zM12 19h1v1h-1zM14 19h1v1h-1zM15 19h1v1h-1zM18 19h1v1h-1zM20 19h1v1h-1zM22 19h1v1h-1zM24 19h1v1h-1zM27 19h1v1h-1zM28 19h1v1h-1zM31 19h1v1h-1zM5 20h1v1h-1zM6 20h1v1h-1zM7 20h1v1h-1zM9 20h1v1h-1zM10 20h1v1h-1zM14 20h1v1h-1zM15 20h1v1h-1zM16 20h1v1h-1zM18 20h1v1h-1zM19 20h1v1h-1zM22 20h1v1h-1zM24 20h1v1h-1zM25 20h1v1h-1zM27 20h1v1h-1zM28 20h1v1h-1zM29 20h1v1h-1zM31 20h1v1h-1zM6 21h1v1h-1zM7 21h1v1h-1zM8 21h1v1h-1zM9 21h1v1h-1zM11 21h1v1h-1zM14 21h1v1h-1zM16 21h1v1h-1zM18 21h1v1h-1zM19 21h1v1h-1zM21 21h1v1h-1zM24 21h1v1h-1zM25 21h1v1h-1zM27 21h1v1h-1zM29 21h1v1h-1zM30 21h1v1h-1zM31 21h1v1h-1zM4 22h1v1h-1zM6 22h1v1h-1zM7 22h1v1h-1zM8 22h1v1h-1zM10 22h1v1h-1zM11 22h1v1h-1zM12 22h1v1h-1zM17 22h1v1h-1zM18 22h1v1h-1zM19 22h1v1h-1zM20 22h1v1h-1zM21 22h1v1h-1zM24 22h1v1h-1zM25 22h1v1h-1zM27 22h1v1h-1zM30 22h1v1h-1zM8 23h1v1h-1zM12 23h1v1h-1zM14 23h1v1h-1zM15 23h1v1h-1zM16 23h1v1h-1zM17 23h1v1h-1zM18 23h1v1h-1zM19 23h1v1h-1zM21 23h1v1h-1zM22 23h1v1h-1zM23 23h1v1h-1zM26 23h1v1h-1zM30 23h1v1h-1zM5 24h1v1h-1zM6 24h1v1h-1zM8 24h1v1h-1zM10 24h1v1h-1zM13 24h1v1h-1zM14 24h1v1h-1zM17 24h1v1h-1zM18 24h1v1h-1zM20 24h1v1h-1zM21 24h1v1h-1zM22 24h1v1h-1zM23 24h1v1h-1zM24 24h1v1h-1zM25 24h1v1h-1zM26 24h1v1h-1zM27 24h1v1h-1zM28 24h1v1h-1zM29 24h1v1h-1zM30 24h1v1h-1zM12 25h1v1h-1zM13 25h1v1h-1zM14 25h1v1h-1zM20 25h1v1h-1zM21 25h1v1h-1zM22 25h1v1h-1zM24 25h1v1h-1zM28 25h1v1h-1zM29 25h1v1h-1zM30 25h1v1h-1zM31 25h1v1h-1zM32 25h1v1h-1zM4 26h1v1h-1zM5 26h1v1h-1zM6 26h1v1h-1zM7 26h1v1h-1zM8 26h1v1h-1zM9 26h1v1h-1zM10 26h1v1h-1zM12 26h1v1h-1zM13 26h1v1h-1zM15 26h1v1h-1zM18 26h1v1h-1zM21 26h1v1h-1zM22 26h1v1h-1zM23 26h1v1h-1zM24 26h1v1h-1zM26 26h1v1h-1zM28 26h1v1h-1zM29 26h1v1h-1zM31 26h1v1h-1zM4 27h1v1h-1zM10 27h1v1h-1zM12 27h1v1h-1zM14 27h1v1h-1zM15 27h1v1h-1zM17 27h1v1h-1zM18 27h1v1h-1zM19 27h1v1h-1zM24 27h1v1h-1zM28 27h1v1h-1zM29 27h1v1h-1zM4 28h1v1h-1zM6 28h1v1h-1zM7 28h1v1h-1zM8 28h1v1h-1zM10 28h1v1h-1zM13 28h1v1h-1zM15 28h1v1h-1zM21 28h1v1h-1zM24 28h1v1h-1zM25 28h1v1h-1zM26 28h1v1h-1zM27 28h1v1h-1zM28 28h1v1h-1zM30 28h1v1h-1zM4 29h1v1h-1zM6 29h1v1h-1zM7 29h1v1h-1zM8 29h1v1h-1zM10 29h1v1h-1zM12 29h1v1h-1zM15 29h1v1h-1zM17 29h1v1h-1zM19 29h1v1h-1zM21 29h1v1h-1zM22 29h1v1h-1zM23 29h1v1h-1zM24 29h1v1h-1zM27 29h1v1h-1zM28 29h1v1h-1zM29 29h1v1h-1zM32 29h1v1h-1zM4 30h1v1h-1zM6 30h1v1h-1zM7 30h1v1h-1zM8 30h1v1h-1zM10 30h1v1h-1zM12 30h1v1h-1zM16 30h1v1h-1zM17 30h1v1h-1zM18 30h1v1h-1zM21 30h1v1h-1zM23 30h1v1h-1zM27 30h1v1h-1zM30 30h1v1h-1zM32 30h1v1h-1zM4 31h1v1h-1zM10 31h1v1h-1zM13 31h1v1h-1zM14 31h1v1h-1zM20 31h1v1h-1zM24 31h1v1h-1zM26 31h1v1h-1zM27 31h1v1h-1zM28 31h1v1h-1zM29 31h1v1h-1zM31 31h1v1h-1zM4 32h1v1h-1zM5 32h1v1h-1zM6 32h1v1h-1zM7 32h1v1h-1zM8 32h1v1h-1zM9 32h1v1h-1zM10 32h1v1h-1zM12 32h1v1h-1zM13 32h1v1h-1zM17 32h1v1h-1zM19 32h1v1h-1zM22 32h1v1h-1zM23 32h1v1h-1zM24 32h1v1h-1zM26 32h1v1h-1zM27 32h1v1h-1zM31 32h1v1h-1z" fill="#0A0A0F"/></svg></div><p class="url">agendar.agencianobolso.com.br</p></div>
+</div>
+<aside class="notes">Deixe este slide na tela por pelo menos 1 minuto. Peça para todos pegarem o celular agora, apontarem a câmera e escolherem o horário: são 30 minutos, só você e a pessoa. Quem preferir digita agendar.agencianobolso.com.br. Fale direto com quem já participou de uma apresentação da MAIA: agende também, porque é na conversa que você apresenta a condição de Black Friday. Não detalhe a condição no palco.</aside>
+</section>
+
+<section class="slide " >
+<div class="center">
+<img class="sym a" style="--i:0" src="img/maia-symbol.svg" alt="">
+<h2 class="a mega2" style="--i:1">Movimento gera resultado.</h2>
+<h2 class="a mega2 grad" style="--i:3">Torne-se uma pessoa extraordinária.</h2>
+<p class="mono dim a" style="--i:5">Salatiel Batista · Digital Master · Agência no Bolso</p>
+</div>
+<aside class="notes">Feche com os dois bordões, devagar, um de cada vez. Agradeça a presença, volte ao slide do QR se alguém ainda não agendou e abra para perguntas.</aside>
+</section>
+<img id="logo" src="img/logo-horizontal-ondark.png" alt="Agência no Bolso">
+<div id="num"></div>
+<div id="bar"></div>
+<div id="np"><h5>Notas do apresentador · tecla N para fechar</h5><p></p></div>
+</div>
+<button id="fsb" type="button" tabindex="-1">⛶ tela cheia</button>
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  var slides=[].slice.call(document.querySelectorAll('.slide')).filter(function(s){return !s.classList.contains('oculto')});
+  var num=document.getElementById('num'),bar=document.getElementById('bar'),np=document.getElementById('np'),cur=-1;
+  function fit(){stage.style.setProperty('--s',Math.min(innerWidth/1920,innerHeight/1080))}
+  function pad(n){return n<10?'0'+n:''+n}
+  function go(i,silent){
+    i=Math.max(0,Math.min(slides.length-1,i));
+    if(i===cur)return;
+    if(cur>=0)slides[cur].classList.remove('on');
+    cur=i;slides[i].classList.add('on');
+    num.textContent=pad(i+1)+' / '+pad(slides.length);
+    bar.style.width=((i+1)/slides.length*100)+'%';
+    np.querySelector('p').textContent=slides[i].querySelector('.notes').textContent;
+    if(!silent){try{history.replaceState(null,'','#/'+(i+1))}catch(e){location.hash='#/'+(i+1)}}
+  }
+  function fromHash(){var m=/#\/(\d+)/.exec(location.hash);go(m?parseInt(m[1],10)-1:0,true)}
+  function fs(){
+    var d=document,el=d.documentElement,p;
+    try{
+      if(d.fullscreenElement||d.webkitFullscreenElement)p=(d.exitFullscreen||d.webkitExitFullscreen).call(d);
+      else p=(el.requestFullscreen||el.webkitRequestFullscreen).call(el);
+      if(p&&p.catch)p.catch(function(){});
+    }catch(e){}
+  }
+  var fsb=document.getElementById('fsb'),fst;
+  function showFsb(){fsb.classList.add('show');clearTimeout(fst);fst=setTimeout(function(){fsb.classList.remove('show')},3000)}
+  fsb.addEventListener('click',function(e){e.stopPropagation();fs();fsb.blur()});
+  addEventListener('mousemove',showFsb);showFsb();
+  addEventListener('resize',fit);addEventListener('hashchange',fromHash);
+  addEventListener('keydown',function(e){
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
+    var k=e.key;
+    if(k==='ArrowRight'||k==='ArrowDown'||k===' '||k==='PageDown'||k==='Enter'){e.preventDefault();go(cur+1)}
+    else if(k==='ArrowLeft'||k==='ArrowUp'||k==='PageUp'||k==='Backspace'){e.preventDefault();go(cur-1)}
+    else if(k==='Home')go(0);else if(k==='End')go(slides.length-1);
+    else if(k==='f'||k==='F'||e.code==='KeyF')fs();
+    else if(k==='n'||k==='N'||e.code==='KeyN')np.classList.toggle('show');
+  });
+  addEventListener('click',function(e){
+    if(e.target.closest('#np,.prompt,#fsb'))return;
+    if(String(getSelection()))return;
+    go(e.clientX<innerWidth*0.12?cur-1:cur+1);
+  });
+  fit();fromHash();
+  /* auditoria de layout: abrir com ?audit (uso interno, não afeta a apresentação) */
+  if(/audit/.test(location.search)){
+    var st=document.createElement('style');st.textContent='.a,.node{opacity:1!important;animation:none!important}';document.head.appendChild(st);
+    document.fonts.ready.then(function(){
+      var out=[],s=Math.min(innerWidth/1920,innerHeight/1080),R=stage.getBoundingClientRect();
+      slides.forEach(function(sl,i){
+        go(i,true);
+        [].forEach.call(sl.querySelectorAll('*'),function(el){
+          if(el.closest('.notes')||el.closest('svg')||el.classList.contains('ring'))return;
+          var r=el.getBoundingClientRect();if(!r.width)return;
+          var x=[(r.left-R.left)/s,(r.top-R.top)/s,(r.right-R.left)/s,(r.bottom-R.top)/s].map(Math.round);
+          if(x[0]<60||x[1]<40||x[2]>1860||x[3]>975)out.push((i+1)+':'+el.tagName+'.'+el.className+'['+x+']');
+          if(el.scrollWidth>el.clientWidth+2&&getComputedStyle(el).display!=='inline')out.push((i+1)+':OVF '+el.tagName+'.'+el.className);
+        });
+      });
+      [].forEach.call(document.images,function(im){if(!(im.complete&&im.naturalWidth))out.push('IMG '+im.getAttribute('src'))});
+      var fl=[];document.fonts.forEach(function(f){fl.push(f.weight+':'+f.status)});
+      document.title='AUDIT n='+slides.length+' fonts='+fl.join(',')+' :: '+(out.join(' | ')||'OK');
+    });
+  }
+})();
+</script>
+</body>
+</html>
