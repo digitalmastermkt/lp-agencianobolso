@@ -1,5 +1,6 @@
 /* MAIA · Calculadora "time + ERP" — carregado só pelo beta/index.html.
-   Compara o custo de montar no mercado o time e as ferramentas que o plano cobre com o custo da MAIA.
+   Soma o custo de montar no mercado o time e as ferramentas que o plano cobre. Não contém nem revela o preço da MAIA:
+   na Magnata compara com uma âncora hipotética de R$ 80 mil; nos outros planos aponta para a seção de investimento.
    Valores padrão são referências editáveis (exceto o salário mínimo 2026, R$ 1.621). */
 (function () {
   'use strict';
@@ -7,11 +8,9 @@
   if (!root) return;
 
   var CLT = 1.7; // mesmo multiplicador de encargos da calculadora anterior
+  var ANCORA = 80000; // valor hipotético de comparação, só na Magnata
   var PLANS = [
-    { id: 'start',      nome: 'Start',      setup: 1497,  mensal: 297 },
-    { id: 'pro',        nome: 'Pro',        setup: 5000,  mensal: 597 },
-    { id: 'enterprise', nome: 'Enterprise', setup: 12000, mensal: 597 },
-    { id: 'magnata',    nome: 'Magnata',    setup: 25000, mensal: 597 }
+    { id: 'start', nome: 'Start' }, { id: 'pro', nome: 'Pro' }, { id: 'enterprise', nome: 'Enterprise' }, { id: 'magnata', nome: 'Magnata' }
   ];
   // nivel = índice do primeiro plano que cobre a função. tipo: clt (salário base ×1,7) | terc (mensalidade) | soft (assinatura)
   var ROWS = [
@@ -134,28 +133,29 @@
     });
 
     var anualMercado = mensalMercado * 12;
-    var maiaRec = plan.mensal * 12;
-    var maiaAno1 = plan.setup + maiaRec;
-    var eco1 = anualMercado - maiaAno1;
-    var eco2 = anualMercado - maiaRec;
-    var folga = mensalMercado - plan.mensal;
+    var isMag = plan.id === 'magnata';
 
     $('mcBd').innerHTML = bd.length ? bd.join('') : '<li class="mc-bd-empty"><span>Nenhuma função ligada</span><span>R$ 0</span></li>';
     tween('mcMercado', anualMercado);
-    tween('mcMaia', maiaAno1);
     [].forEach.call(root.querySelectorAll('[data-plan-name]'), function (el) { el.textContent = plan.nome; });
-    $('mcSetup').textContent = brl(plan.setup);
-    $('mcRec').textContent = brl(maiaRec);
-    $('mcMensal').textContent = brl(plan.mensal);
 
-    var neg = eco1 < 0;
-    $('mcSav').classList.toggle('is-neg', neg);
-    $('mcEcoLabel').textContent = neg ? 'No 1º ano a MAIA custa a mais' : 'Economia estimada no 1º ano';
-    tween('mcEco1', Math.abs(eco1));
-    $('mcEco2Label').textContent = eco2 < 0 ? 'A partir do 2º ano, a MAIA custa a mais:' : 'A partir do 2º ano (só a mensalidade):';
-    tween('mcEco2', Math.abs(eco2), function (v) { return brl(v) + '/ano'; });
-    $('mcPayback').textContent = folga <= 0 ? 'não se paga com esta estrutura'
-      : (plan.setup / folga < 1 ? 'menos de 1 mês' : (plan.setup / folga).toFixed(1).replace('.', ',') + ' meses');
+    // card de ancoragem (Magnata) ou card simples (demais planos)
+    $('mcAnchorMag').hidden = !isMag;
+    $('mcAnchorOther').hidden = isMag;
+    var vazio = 'Ligue as funções que você teria para comparar.';
+    $('mcAnchorLine').textContent = anualMercado >= ANCORA
+      ? 'Seria só ' + (ANCORA / anualMercado * 100).toFixed(1).replace('.', ',') + '% do que esse time custa em 1 ano.'
+      : vazio;
+    $('mcOtherLine').textContent = anualMercado > 0
+      ? 'A MAIA ' + plan.nome + ' cobre essas funções por uma fração desse custo.'
+      : vazio;
+
+    // barras: escala pelo maior valor em jogo
+    var escala = Math.max(anualMercado, isMag ? ANCORA : 0);
+    tween('mcBarMercadoV', anualMercado);
+    $('mcBarMercado').style.width = (escala > 0 ? anualMercado / escala * 100 : 0) + '%';
+    $('mcBarMaiaWrap').hidden = !isMag;
+    $('mcBarMaia').style.width = (isMag && escala > 0 ? Math.max(2, ANCORA / escala * 100) : 0) + '%';
 
     tween('mcMidiaAno', num($('mcMidia')) * 12);
 

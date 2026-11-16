@@ -800,10 +800,10 @@
 
     <div class="mc" id="maiaCalc">
       <div class="mc-plans" role="radiogroup" aria-label="Plano MAIA">
-        <button type="button" class="mc-plan" role="radio" aria-checked="false" data-plan="start"><b>Start</b><span>1.497 + 297/mês</span></button>
-        <button type="button" class="mc-plan" role="radio" aria-checked="false" data-plan="pro"><b>Pro</b><span>5.000 + 597/mês</span></button>
-        <button type="button" class="mc-plan" role="radio" aria-checked="false" data-plan="enterprise"><b>Enterprise</b><span>12.000 + 597/mês</span></button>
-        <button type="button" class="mc-plan" role="radio" aria-checked="true" data-plan="magnata"><b>Magnata</b><span>25.000 + 597/mês</span></button>
+        <button type="button" class="mc-plan" role="radio" aria-checked="false" data-plan="start"><b>Start</b></button>
+        <button type="button" class="mc-plan" role="radio" aria-checked="false" data-plan="pro"><b>Pro</b></button>
+        <button type="button" class="mc-plan" role="radio" aria-checked="false" data-plan="enterprise"><b>Enterprise</b></button>
+        <button type="button" class="mc-plan" role="radio" aria-checked="true" data-plan="magnata"><b>Magnata</b></button>
       </div>
 
       <div class="roi-calc">
@@ -818,7 +818,7 @@
               <label for="mcMidia">Verba mensal de tráfego pago (mídia)</label>
               <div class="roi-input-wrap"><span class="roi-prefix">R$</span><input type="number" id="mcMidia" min="0" max="1000000" step="100" value="3000" inputmode="numeric"><span class="roi-prefix">/mês</span></div>
             </div>
-            <p><strong>Fica fora da economia.</strong> A verba de mídia continua sendo paga por você direto às plataformas, com ou sem a MAIA. O que entra na conta é o custo de quem gerencia os anúncios.</p>
+            <p><strong>Fica fora da conta.</strong> A verba de mídia continua sendo paga por você direto às plataformas, com ou sem a MAIA. O que entra na conta é o custo de quem gerencia os anúncios.</p>
           </div>
         </div>
 
@@ -831,27 +831,32 @@
               <div class="roi-card-value" id="mcMercado">R$ 0</div>
               <ul class="roi-card-breakdown" id="mcBd"></ul>
             </div>
-            <div class="roi-card is-maia" aria-live="polite">
-              <div class="roi-card-label">Com MAIA <span data-plan-name>Magnata</span></div>
-              <div class="roi-card-headline">Custo da MAIA no 1º ano:</div>
-              <div class="roi-card-value" id="mcMaia">R$ 0</div>
-              <ul class="roi-card-breakdown">
-                <li><span>Implantação única</span><span id="mcSetup">R$ 0</span></li>
-                <li><span>Mensalidade × 12</span><span id="mcRec">R$ 0</span></li>
-                <li><span>Do 2º ano em diante</span><span><span id="mcMensal">R$ 0</span>/mês</span></li>
-              </ul>
+            <div class="roi-card is-maia mc-anchor" aria-live="polite">
+              <div id="mcAnchorMag">
+                <div class="roi-card-label">E SE A MAIA CUSTASSE</div>
+                <div class="roi-card-value">R$ 80.000</div>
+                <p class="mc-anchor-line" id="mcAnchorLine">Ligue as funções que você teria para comparar.</p>
+                <p class="mc-anchor-close">E ela não custa nem a metade disso.</p>
+              </div>
+              <div id="mcAnchorOther" hidden>
+                <div class="roi-card-label">Com MAIA <span data-plan-name>Magnata</span></div>
+                <p class="mc-anchor-line" id="mcOtherLine">A MAIA Magnata cobre essas funções por uma fração desse custo.</p>
+                <a class="mc-anchor-link" href="#investimento">Ver investimento <span aria-hidden="true">→</span></a>
+              </div>
             </div>
           </div>
 
-          <div class="roi-savings" id="mcSav" aria-live="polite">
-            <div class="roi-savings-label" id="mcEcoLabel">Economia estimada no 1º ano</div>
-            <div class="roi-savings-value" id="mcEco1">R$ 0</div>
-            <div class="roi-savings-meta">
-              <span><span id="mcEco2Label">A partir do 2º ano (só a mensalidade):</span> <strong id="mcEco2">R$ 0/ano</strong></span>
-              <span>Payback da implantação: <strong id="mcPayback">—</strong></span>
+          <div class="mc-bars" id="mcBars" aria-live="polite">
+            <div class="mc-bar">
+              <div class="mc-bar-head"><span>Time no mercado</span><strong id="mcBarMercadoV">R$ 0</strong></div>
+              <div class="mc-bar-track"><i id="mcBarMercado"></i></div>
+            </div>
+            <div class="mc-bar is-maia" id="mcBarMaiaWrap">
+              <div class="mc-bar-head"><span>MAIA, mesmo se custasse R$ 80 mil</span></div>
+              <div class="mc-bar-track"><i id="mcBarMaia"></i></div>
             </div>
           </div>
-          <p class="mc-outside">Verba de mídia: <strong id="mcMidiaAno">R$ 0</strong>/ano. Continua igual nos dois cenários e não entra na economia.</p>
+          <p class="mc-outside">Verba de mídia: <strong id="mcMidiaAno">R$ 0</strong>/ano. Continua igual com ou sem a MAIA e não entra na conta.</p>
 
           <div class="roi-cta-wrap">
             <a id="mcCta" href="https://wa.me/5586981141438?text=Ol%C3%A1%20Salatiel%2C%20rodei%20a%20calculadora%20de%20ROI%20e%20quero%20conversar%20sobre%20a%20MAIA%20Magnata" class="btn glow-cta btn-lg" target="_blank" rel="noopener">Quero a MAIA Magnata</a>
@@ -862,14 +867,14 @@
       <ul class="mc-honest">
         <li><strong>A MAIA não substitui advogado nem contador responsável</strong> onde a lei exige assinatura profissional. Ela prepara; o profissional ou o dono aprova.</li>
         <li><strong>Você paga à parte</strong> as suas próprias ferramentas de IA (Claude e APIs complementares) e a VPS, sem repasse. A verba de mídia continua.</li>
-        <li><strong>O cálculo é uma estimativa</strong> com valores de referência editáveis, não uma promessa de resultado. O ganho depende da implantação e do uso no seu negócio.</li>
+        <li><strong>O custo de mercado é uma estimativa</strong> com valores de referência editáveis, não uma promessa de resultado. Os R$ 80 mil são uma comparação hipotética, não o preço: o investimento real de cada plano está na seção de investimento.</li>
       </ul>
     </div>
   </div>
 </section>
 
-<link rel="stylesheet" href="/assets/maia-calc.css?v=20261116c">
-<script src="/assets/maia-calc.js?v=20261116c" defer></script>
+<link rel="stylesheet" href="/assets/maia-calc.css?v=20261116d">
+<script src="/assets/maia-calc.js?v=20261116d" defer></script>
 
 <!-- PARA QUEM É / NÃO É -->
 <section>
