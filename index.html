@@ -788,207 +788,92 @@
   </div>
 </section>
 
-<!-- CALCULADORA DE ROI · MAIA Enterprise -->
+<!-- CALCULADORA · TIME + ERP × MAIA (assets/maia-calc.js) -->
 <section id="roi-calc-maia">
   <div class="container">
     <div class="section-header">
-      <span class="eyebrow">Calculadora de ROI</span>
-      <h2>Quanto você está <span class="gradient-text">pagando hoje</span>?</h2>
-      <p>Calcule o que você gastaria mantendo a estrutura tradicional vs o que paga com o plano MAIA Enterprise. Mexa nos campos — atualiza em tempo real.</p>
+      <span class="eyebrow">Calculadora · Time + ERP</span>
+      <h2>Quanto custaria montar <span class="gradient-text">esse time</span> no mercado?</h2>
+      <p>Cada agente da MAIA assume o trabalho de uma função da sua empresa, e a Magnata ainda inclui o ERP. Escolha o plano, ligue só os custos que você realmente teria e ajuste os valores. A conta atualiza na hora.</p>
     </div>
 
-    <div class="roi-calc" id="roiCalcMaia">
-      <!-- INPUTS -->
-      <div class="roi-inputs">
-        <h3>Sua estrutura atual</h3>
+    <div class="mc" id="maiaCalc">
+      <div class="mc-plans" role="radiogroup" aria-label="Plano MAIA">
+        <button type="button" class="mc-plan" role="radio" aria-checked="false" data-plan="start"><b>Start</b></button>
+        <button type="button" class="mc-plan" role="radio" aria-checked="false" data-plan="pro"><b>Pro</b></button>
+        <button type="button" class="mc-plan" role="radio" aria-checked="false" data-plan="enterprise"><b>Enterprise</b></button>
+        <button type="button" class="mc-plan" role="radio" aria-checked="true" data-plan="magnata"><b>Magnata</b></button>
+      </div>
 
-        <div class="roi-field">
-          <div class="roi-field-label">
-            <label for="roiMaiaAgencia">Custo atual com agência de marketing</label>
-            <div class="roi-input-wrap">
-              <span class="roi-prefix">R$</span>
-              <input type="number" id="roiMaiaAgenciaNum" min="0" max="30000" step="100" value="5000" inputmode="numeric" aria-label="Valor mensal pago à agência de marketing">
-              <span class="roi-prefix">/mês</span>
+      <div class="roi-calc">
+        <div class="roi-inputs">
+          <h3>Time e ferramentas que a MAIA <span data-plan-name>Magnata</span> cobre</h3>
+          <p class="mc-ref">Referência editável — ajuste para a sua realidade. Ligue a chave só no custo que você teria.</p>
+          <div class="mc-rows" id="mcRows"><noscript>Ative o JavaScript para usar a calculadora.</noscript></div>
+          <div class="roi-derived">R$ 1.621 = salário mínimo 2026. Nas linhas CLT o custo real é o salário base ×1,7 (INSS 20% + FGTS 8% + férias 1/3 + 13º + provisão rescisória + benefícios). Terceirizados e software entram pela mensalidade, sem encargos.</div>
+
+          <div class="mc-media">
+            <div class="mc-media-head">
+              <label for="mcMidia">Verba mensal de tráfego pago (mídia)</label>
+              <div class="roi-input-wrap"><span class="roi-prefix">R$</span><input type="number" id="mcMidia" min="0" max="1000000" step="100" value="3000" inputmode="numeric"><span class="roi-prefix">/mês</span></div>
             </div>
+            <p><strong>Fica fora da conta.</strong> A verba de mídia continua sendo paga por você direto às plataformas, com ou sem a MAIA. O que entra na conta é o custo de quem gerencia os anúncios.</p>
           </div>
-          <input type="range" id="roiMaiaAgencia" class="roi-slider" min="0" max="30000" step="100" value="5000" aria-label="Custo agência (slider)">
         </div>
 
-        <div class="roi-field">
-          <div class="roi-field-label">
-            <label for="roiMaiaTrafego">Investimento mensal em tráfego pago</label>
-            <div class="roi-input-wrap">
-              <span class="roi-prefix">R$</span>
-              <input type="number" id="roiMaiaTrafegoNum" min="0" max="50000" step="100" value="3000" inputmode="numeric" aria-label="Valor mensal em tráfego pago">
-              <span class="roi-prefix">/mês</span>
+        <div class="roi-output">
+          <h3>Comparação anual</h3>
+          <div class="roi-cards">
+            <div class="roi-card is-current" aria-live="polite">
+              <div class="roi-card-label">Montar no mercado</div>
+              <div class="roi-card-headline">Time e ferramentas equivalentes, por ano:</div>
+              <div class="roi-card-value" id="mcMercado">R$ 0</div>
+              <ul class="roi-card-breakdown" id="mcBd"></ul>
+            </div>
+            <div class="roi-card is-maia mc-anchor" aria-live="polite">
+              <div id="mcAnchorMag">
+                <div class="roi-card-label">E SE A MAIA CUSTASSE</div>
+                <div class="roi-card-value">R$ 80.000</div>
+                <p class="mc-anchor-line" id="mcAnchorLine">Ligue as funções que você teria para comparar.</p>
+                <p class="mc-anchor-close">E ela não custa nem a metade disso.</p>
+              </div>
+              <div id="mcAnchorOther" hidden>
+                <div class="roi-card-label">Com MAIA <span data-plan-name>Magnata</span></div>
+                <p class="mc-anchor-line" id="mcOtherLine">A MAIA Magnata cobre essas funções por uma fração desse custo.</p>
+                <a class="mc-anchor-link" href="#investimento">Ver investimento <span aria-hidden="true">→</span></a>
+              </div>
             </div>
           </div>
-          <input type="range" id="roiMaiaTrafego" class="roi-slider" min="0" max="50000" step="100" value="3000" aria-label="Tráfego pago (slider)">
-        </div>
 
-        <div class="roi-field">
-          <div class="roi-field-label">
-            <label for="roiMaiaSdrs">Nº de SDRs / atendentes humanos</label>
-            <div class="roi-input-wrap">
-              <input type="number" id="roiMaiaSdrsNum" min="0" max="50" step="1" value="5" inputmode="numeric" aria-label="Número de SDRs">
-              <span class="roi-prefix">pessoas</span>
+          <div class="mc-bars" id="mcBars" aria-live="polite">
+            <div class="mc-bar">
+              <div class="mc-bar-head"><span>Time no mercado</span><strong id="mcBarMercadoV">R$ 0</strong></div>
+              <div class="mc-bar-track"><i id="mcBarMercado"></i></div>
+            </div>
+            <div class="mc-bar is-maia" id="mcBarMaiaWrap">
+              <div class="mc-bar-head"><span>MAIA, mesmo se custasse R$ 80 mil</span></div>
+              <div class="mc-bar-track"><i id="mcBarMaia"></i></div>
             </div>
           </div>
-          <input type="range" id="roiMaiaSdrs" class="roi-slider" min="0" max="50" step="1" value="5" aria-label="Número de SDRs (slider)">
-        </div>
+          <p class="mc-outside">Verba de mídia: <strong id="mcMidiaAno">R$ 0</strong>/ano. Continua igual com ou sem a MAIA e não entra na conta.</p>
 
-        <div class="roi-field">
-          <div class="roi-field-label">
-            <label for="roiMaiaSalario">Salário base por SDR (sem encargos)</label>
-            <div class="roi-input-wrap">
-              <span class="roi-prefix">R$</span>
-              <input type="number" id="roiMaiaSalarioNum" min="1621" max="10000" step="50" value="1621" inputmode="numeric" aria-label="Salário base por SDR">
-              <span class="roi-prefix">/mês</span>
-            </div>
+          <div class="roi-cta-wrap">
+            <a id="mcCta" href="https://wa.me/5586981141438?text=Ol%C3%A1%20Salatiel%2C%20rodei%20a%20calculadora%20de%20ROI%20e%20quero%20conversar%20sobre%20a%20MAIA%20Magnata" class="btn glow-cta btn-lg" target="_blank" rel="noopener">Quero a MAIA Magnata</a>
           </div>
-          <input type="range" id="roiMaiaSalario" class="roi-slider" min="1621" max="10000" step="50" value="1621" aria-label="Salário base por SDR (slider)">
-          <div class="roi-derived">Default R$ 1.621 = salário mínimo 2026. Custo CLT real ≈ <strong id="roiMaiaCustoCLT">R$ 2.756</strong>/mês por funcionário (×1,7: INSS 20% + FGTS 8% + férias 1/3 + 13º + provisão rescisória + benefícios).</div>
         </div>
       </div>
 
-      <!-- OUTPUT -->
-      <div class="roi-output">
-        <h3>Comparação anual</h3>
-
-        <div class="roi-cards">
-          <div class="roi-card is-current" aria-live="polite">
-            <div class="roi-card-label">Estrutura atual</div>
-            <div class="roi-card-headline">Sua operação tradicional custa por ano:</div>
-            <div class="roi-card-value" id="roiMaiaAtualTotal">R$ 0</div>
-            <ul class="roi-card-breakdown">
-              <li><span>Agência</span><span id="roiMaiaBdAgencia">R$ 0</span></li>
-              <li><span>Tráfego pago</span><span id="roiMaiaBdTrafego">R$ 0</span></li>
-              <li><span>SDRs (CLT)</span><span id="roiMaiaBdSdrs">R$ 0</span></li>
-            </ul>
-          </div>
-
-          <div class="roi-card is-maia" aria-live="polite">
-            <div class="roi-card-label">Com MAIA Enterprise</div>
-            <div class="roi-card-headline">Esteira completa rodando no seu CNPJ:</div>
-            <div class="roi-card-value" id="roiMaiaTotalMaia">R$ 19.164</div>
-            <div class="roi-card-hook" style="font-size:0.85em; font-style:italic; color:var(--cyan); opacity:0.85; margin-top:8px; line-height:1.4">Implantação única no ano 1 — nos anos seguintes você paga apenas R$ 597/mês</div>
-            <ul class="roi-card-breakdown">
-              <li><span>Implantação única</span><span>R$ 12.000</span></li>
-              <li><span>Recorrência × 12</span><span>R$ 7.164</span></li>
-              <li><span>Fidelidade</span><span>sem</span></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="roi-savings" aria-live="polite">
-          <div class="roi-savings-label">Você economiza por ano</div>
-          <div class="roi-savings-value" id="roiMaiaEconomia">R$ 0</div>
-          <div class="roi-savings-meta">
-            <span>Payback em <strong id="roiMaiaPayback">— meses</strong></span>
-            <span>ROI 1º ano: <strong id="roiMaiaRoi">—%</strong></span>
-          </div>
-        </div>
-
-        <div class="roi-cta-wrap">
-          <a href="https://wa.me/5586981141438?text=Ol%C3%A1%20Salatiel%2C%20rodei%20a%20calculadora%20de%20ROI%20e%20quero%20conversar%20sobre%20a%20MAIA%20Enterprise" class="btn glow-cta btn-lg" target="_blank" rel="noopener">Quero o MAIA Enterprise</a>
-        </div>
-        <p class="roi-fineprint">Cálculo conservador. Não inclui ganho de receita por tempo de resposta menor (+30% em conversão típica) nem horas devolvidas para o C-level.</p>
-      </div>
+      <ul class="mc-honest">
+        <li><strong>A MAIA não substitui advogado nem contador responsável</strong> onde a lei exige assinatura profissional. Ela prepara; o profissional ou o dono aprova.</li>
+        <li><strong>Você paga à parte</strong> as suas próprias ferramentas de IA (Claude e APIs complementares) e a VPS, sem repasse. A verba de mídia continua.</li>
+        <li><strong>O custo de mercado é uma estimativa</strong> com valores de referência editáveis, não uma promessa de resultado. Os R$ 80 mil são uma comparação hipotética, não o preço: o investimento real de cada plano está na seção de investimento.</li>
+      </ul>
     </div>
-    <p class="roi-infra-note" style="font-size:0.75em; color:var(--text-3); text-align:center; margin-top:24px; max-width:760px; margin-left:auto; margin-right:auto; line-height:1.5">* Ferramentas externas: o cliente assina diretamente as ferramentas de que precisar (Claude e APIs complementares), conforme a necessidade dele, sem repasse.</p>
   </div>
 </section>
 
-<script>
-(function(){
-  // Formatador BR
-  var fmtBR = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
-  function brl(n){ if (!isFinite(n)) n = 0; return fmtBR.format(Math.round(n)); }
-
-  // Constantes
-  var MULTIPLICADOR_CLT = 1.7;          // encargos CLT
-  var MAIA_SETUP        = 12000;
-  var MAIA_MENSAL       = 597;
-  var MAIA_ANUAL        = MAIA_SETUP + MAIA_MENSAL * 12; // 19.164
-
-  // Pares slider+input
-  var pairs = [
-    { s: 'roiMaiaAgencia',  n: 'roiMaiaAgenciaNum'  },
-    { s: 'roiMaiaTrafego',  n: 'roiMaiaTrafegoNum'  },
-    { s: 'roiMaiaSdrs',     n: 'roiMaiaSdrsNum'     },
-    { s: 'roiMaiaSalario',  n: 'roiMaiaSalarioNum'  }
-  ];
-
-  function bindPair(p){
-    var s = document.getElementById(p.s);
-    var n = document.getElementById(p.n);
-    if (!s || !n) return;
-    s.addEventListener('input', function(){
-      n.value = s.value;
-      recompute();
-    });
-    n.addEventListener('input', function(){
-      var v = Number(n.value || 0);
-      var min = Number(s.min), max = Number(s.max);
-      if (v < min) v = min; if (v > max) v = max;
-      s.value = v;
-      recompute();
-    });
-    n.addEventListener('blur', function(){
-      var v = Number(n.value || 0);
-      var min = Number(s.min), max = Number(s.max);
-      if (v < min) v = min; if (v > max) v = max;
-      n.value = v;
-      s.value = v;
-      recompute();
-    });
-  }
-  pairs.forEach(bindPair);
-
-  var lastEconomia = null;
-  function recompute(){
-    var agencia  = Number(document.getElementById('roiMaiaAgencia').value)  || 0;
-    var trafego  = Number(document.getElementById('roiMaiaTrafego').value)  || 0;
-    var sdrs     = Number(document.getElementById('roiMaiaSdrs').value)     || 0;
-    var salario  = Number(document.getElementById('roiMaiaSalario').value)  || 0;
-
-    var custoCLT      = salario * MULTIPLICADOR_CLT;
-    var custoSdrMes   = sdrs * custoCLT;
-    var custoMensal   = agencia + trafego + custoSdrMes;
-    var custoAnual    = custoMensal * 12;
-
-    var economia      = custoAnual - MAIA_ANUAL;
-    var payback       = custoMensal > 0 ? (MAIA_ANUAL / custoMensal) : 0;
-    var roi           = MAIA_ANUAL > 0 ? (economia / MAIA_ANUAL) * 100 : 0;
-
-    document.getElementById('roiMaiaCustoCLT').textContent     = brl(custoCLT);
-    document.getElementById('roiMaiaBdAgencia').textContent    = brl(agencia * 12);
-    document.getElementById('roiMaiaBdTrafego').textContent    = brl(trafego * 12);
-    document.getElementById('roiMaiaBdSdrs').textContent       = brl(custoSdrMes * 12);
-    document.getElementById('roiMaiaAtualTotal').textContent   = brl(custoAnual);
-    document.getElementById('roiMaiaTotalMaia').textContent    = brl(MAIA_ANUAL);
-
-    var econEl = document.getElementById('roiMaiaEconomia');
-    econEl.textContent = economia >= 0 ? brl(economia) : '— ' + brl(Math.abs(economia));
-    if (lastEconomia !== null && economia !== lastEconomia){
-      econEl.classList.remove('is-pulse');
-      // forçar reflow pra reiniciar animação
-      void econEl.offsetWidth;
-      econEl.classList.add('is-pulse');
-    }
-    lastEconomia = economia;
-
-    document.getElementById('roiMaiaPayback').textContent = (payback > 0 && isFinite(payback))
-      ? (payback < 1 ? '< 1 mês' : (payback.toFixed(1).replace('.', ',') + ' meses'))
-      : '—';
-
-    document.getElementById('roiMaiaRoi').textContent = (isFinite(roi))
-      ? (Math.round(roi).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '%')
-      : '—%';
-  }
-  recompute();
-})();
-</script>
+<link rel="stylesheet" href="/assets/maia-calc.css?v=20261116d">
+<script src="/assets/maia-calc.js?v=20261116d" defer></script>
 
 <!-- PARA QUEM É / NÃO É -->
 <section>
