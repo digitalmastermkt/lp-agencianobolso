@@ -280,6 +280,10 @@ h2.huge{font-size:128px;line-height:1.02}
 .inc b{color:var(--cyan);font-family:var(--mono);font-size:26px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:6px;font-weight:500}
 .cta-side{display:flex;flex-direction:column;gap:18px}
 .mini{position:absolute;right:130px;top:70px;font-family:var(--mono);font-size:24px;color:var(--gold);border:2px dashed var(--gold);border-radius:16px;padding:12px 22px;z-index:4}
+.ctx{flex:none;width:820px;height:615px;border-radius:36px;padding:4px;background:var(--grad);box-shadow:0 0 90px rgba(0,212,255,.25),0 0 160px rgba(168,85,247,.2)}
+.ctx img{width:100%;height:100%;object-fit:cover;border-radius:33px;display:block}
+.demo-head .pac{width:260px;height:150px;border-radius:22px;object-fit:cover;border:3px solid var(--purple)}
+.bgimg{position:absolute;inset:0;z-index:-1;opacity:.18;background-size:cover;background-position:center}
 </style>
 </head>
 <body>
@@ -340,15 +344,19 @@ h2.huge{font-size:128px;line-height:1.02}
 </section>
 
 <section class="slide ">
-<div class="dor">
+<div class="split" style="gap:70px">
+<div class="col dor">
 <p class="tag a" style="--i:0">Dor 1</p>
-<h2 class="a huge" style="--i:1">Marcou, confirmou...<br><span class="loss">e não apareceu.</span></h2>
-<p class="lead a" style="--i:2">Cadeira vazia com a luz acesa, o profissional parado e o aluguel correndo.</p>
+<h2 class="a" style="--i:1;font-size:92px;line-height:1.04">Marcou, confirmou...<br><span class="loss">e não apareceu.</span></h2>
+<p class="lead a" style="--i:2;font-size:42px">Cadeira vazia com a luz acesa, o profissional parado e o aluguel correndo.</p>
+</div>
+<div class="ctx a" style="--i:2"><img src="img/ctx-dor1.jpg" alt=""></div>
 </div>
 <aside class="notes">Roteiro 2.2, 3 min. Ninguém avisou a tempo de colocar outro paciente no lugar. Você não perde paciente por falta de paciente: perde porque ninguém tampa o buraco antes de virar prejuízo.</aside>
 </section>
 
 <section class="slide ">
+<div class="bgimg" style="background-image:url(img/ctx-dor2.jpg)"></div>
 <div class="split">
 <div class="col">
 <p class="eyebrow a" style="--i:0;color:var(--red)">Dor 2</p>
@@ -366,37 +374,49 @@ h2.huge{font-size:128px;line-height:1.02}
 </section>
 
 <section class="slide ">
-<div class="dor">
+<div class="split" style="gap:70px">
+<div class="col dor">
 <p class="tag a" style="--i:0">Dor 3</p>
-<h2 class="a huge" style="--i:1">Você pagou pelo anúncio.<br><span class="loss">O lead esfriou.</span></h2>
-<p class="lead a" style="--i:2">Ninguém respondeu a tempo. E o paciente que veio uma vez e nunca mais voltou está parado no seu WhatsApp.</p>
+<h2 class="a" style="--i:1;font-size:92px;line-height:1.04">Você pagou pelo anúncio.<br><span class="loss">O lead esfriou.</span></h2>
+<p class="lead a" style="--i:2;font-size:42px">Ninguém respondeu a tempo. E o paciente que veio uma vez e nunca mais voltou está parado no seu WhatsApp.</p>
+</div>
+<div class="ctx a" style="--i:2"><img src="img/ctx-dor3.jpg" alt=""></div>
 </div>
 <aside class="notes">Roteiro 2.4, 2 min. Dói no bolso duas vezes. O problema nunca foi volume de lead, é o que acontece depois que ele chega. E quantos pacientes antigos estão parados no WhatsApp sem ninguém chamar de volta?</aside>
 </section>
 
 <section class="slide ">
-<div class="dor">
+<div class="split" style="gap:70px">
+<div class="col dor">
 <p class="tag a" style="--i:0">Dor 4</p>
-<h2 class="a huge" style="--i:1">Você abriu uma clínica<br><span class="loss">ou comprou um emprego?</span></h2>
-<p class="lead a" style="--i:2">Secretária faltou, WhatsApp acumulou, fornecedor cobrou, planilha não bate. E quem segura é você.</p>
+<h2 class="a" style="--i:1;font-size:92px;line-height:1.04">Você abriu uma clínica<br><span class="loss">ou comprou um emprego?</span></h2>
+<p class="lead a" style="--i:2;font-size:42px">Secretária faltou, WhatsApp acumulou, fornecedor cobrou, planilha não bate. E quem segura é você.</p>
+</div>
+<div class="ctx a" style="--i:2"><img src="img/ctx-dor4.jpg" alt=""></div>
 </div>
 <aside class="notes">Roteiro 2.5, 3 min. Você estudou anos para cuidar de gente, ou de bicho, e passa metade do dia apagando incêndio. A recepção confirma um por um, atende telefone e recebe paciente ao mesmo tempo. Faça a pergunta do slide devagar.</aside>
 </section>
 
 <section class="slide ">
-<div class="dor">
+<div class="split" style="gap:70px">
+<div class="col dor">
 <p class="tag a" style="--i:0">Dor 5</p>
-<h2 class="a huge" style="--i:1">Quanto entrou? Quanto faltou?<br><span class="loss">Quanto sobrou?</span></h2>
-<p class="lead a" style="--i:2">Conta a pagar no caderno, nota fiscal no susto, imposto que você não sabe se paga a mais.</p>
+<h2 class="a" style="--i:1;font-size:92px;line-height:1.04">Quanto entrou? Quanto faltou?<br><span class="loss">Quanto sobrou?</span></h2>
+<p class="lead a" style="--i:2;font-size:42px">Conta a pagar no caderno, nota fiscal no susto, imposto que você não sabe se paga a mais.</p>
+</div>
+<div class="ctx a" style="--i:2"><img src="img/ctx-dor5.jpg" alt=""></div>
 </div>
 <aside class="notes">Roteiro 2.6, 2 min. Você me responde em dez segundos quanto faturou, quanto saiu e quanto sobrou no mês passado? Contratar alguém, com o custo de CLT, vira medo. Sem número na mão, você decide no escuro.</aside>
 </section>
 
 <section class="slide ">
-<div class="dor">
+<div class="split" style="gap:70px">
+<div class="col dor">
 <p class="tag a" style="--i:0">Dor 6</p>
-<h2 class="a huge" style="--i:1">Último post:<br><span class="loss">há 3 semanas.</span></h2>
-<p class="lead a" style="--i:2">O paciente pesquisa a clínica antes de marcar. Quem vai gravar, escrever e postar? Você, entre um atendimento e outro?</p>
+<h2 class="a" style="--i:1;font-size:92px;line-height:1.04">Último post:<br><span class="loss">há 3 semanas.</span></h2>
+<p class="lead a" style="--i:2;font-size:42px">O paciente pesquisa a clínica antes de marcar. Quem vai gravar, escrever e postar? Você, entre um atendimento e outro?</p>
+</div>
+<div class="ctx a" style="--i:2"><img src="img/ctx-dor6.jpg" alt=""></div>
 </div>
 <aside class="notes">Roteiro 2.7, 2 min. O Instagram parado passa a sensação de clínica abandonada. Se precisar encurtar a aula, este slide pode ser pulado.</aside>
 </section>
@@ -440,7 +460,7 @@ h2.huge{font-size:128px;line-height:1.02}
 </section>
 
 <section class="slide s-demo">
-<div class="demo-head a" style="--i:0"><img src="img/lis.webp" alt=""><div><p class="eyebrow live"><i></i>Demo ao vivo · o paciente das 21h</p><h3>Atendimento · Lis</h3></div><span class="fict">Clínica fictícia</span></div>
+<div class="demo-head a" style="--i:0"><img src="img/lis.webp" alt=""><div><p class="eyebrow live"><i></i>Demo ao vivo · o paciente das 21h</p><h3>Atendimento · Lis</h3></div><img class="pac" src="img/ctx-paciente.jpg" alt=""><span class="fict">Clínica fictícia</span></div>
 <div class="prompt a" style="--i:1"><span class="lbl">Mensagem 1 · eu sou o paciente</span><p>Oi, boa noite, queria marcar uma avaliação, vocês têm horário essa semana?</p></div>
 <div class="prompt a" style="--i:2"><span class="lbl">Mensagem 2</span><p>Não vou conseguir ir amanhã, posso remarcar?</p></div>
 <div class="watch"><span class="lbl a" style="--i:3">O que observar</span><div class="w a" style="--i:4"><em>1</em>Responde em segundos</div><div class="w a" style="--i:5"><em>2</em>Tom da recepção, não de robô</div><div class="w a" style="--i:6"><em>3</em>Remarca e a vaga volta</div></div>
