@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<!--
+  AULA CLÍNICA CHEIA · 23/11/2026 · 19h27
+  Navegação: seta direita / espaço / clique avança; seta esquerda volta.
+  F = tela cheia · N = notas do apresentador · Home/End = primeiro/último · #/12 vai ao slide 12.
+  Roteiro completo com as falas: roteiro.html (mesma pasta).
+-->
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clínica Cheia · Aula ao vivo</title>
+<style>
+@font-face{font-family:'Inter';font-weight:400;src:url(fonts/Inter-Regular.ttf) format('truetype')}
+@font-face{font-family:'Inter';font-weight:500;src:url(fonts/Inter-Medium.ttf) format('truetype')}
+@font-face{font-family:'Inter';font-weight:700;src:url(fonts/InterDisplay-Bold.ttf) format('truetype')}
+@font-face{font-family:'Inter';font-weight:900;src:url(fonts/InterDisplay-Black.ttf) format('truetype')}
+@font-face{font-family:'IBM Plex Mono';font-weight:500;src:url(fonts/IBMPlexMono-Medium.ttf) format('truetype')}
+:root{--bg-0:#0A0A0F;--bg-2:#15151F;--bg-3:#1C1C28;--border:rgba(255,255,255,.10);--border-strong:rgba(255,255,255,.18);
+--text-0:#fff;--text-1:#E5E5E5;--text-2:#A0A0B0;--cyan:#00D4FF;--purple:#A855F7;--red:#FF5A5A;--orange:#FF8A3D;--gold:#FFC34A;--green:#34D399;
+--grad:linear-gradient(135deg,#00D4FF 0%,#A855F7 100%);--mono:'IBM Plex Mono',Consolas,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#000;overflow:hidden;font-family:'Inter',Arial,sans-serif;color:var(--text-0);-webkit-font-smoothing:antialiased;cursor:default;user-select:none}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform:translate(-50%,-50%) scale(var(--s,1));background:var(--bg-0);overflow:hidden}
+#stage::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 700px at 8% 0%,rgba(0,212,255,.16),transparent 65%),radial-gradient(1000px 800px at 100% 100%,rgba(168,85,247,.18),transparent 65%)}
+#stage::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:80px 80px;-webkit-mask-image:radial-gradient(circle at 50% 50%,#000 30%,transparent 85%);mask-image:radial-gradient(circle at 50% 50%,#000 30%,transparent 85%)}
+.slide{position:absolute;inset:0;z-index:1;padding:80px 130px 120px;display:flex;flex-direction:column;justify-content:center;gap:34px;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility 0s .45s}
+.slide.on{opacity:1;visibility:visible;transition:opacity .45s ease}
+.slide.oculto{display:none}
+.notes{display:none}
+.a{opacity:0}
+.slide.on .a{animation:up .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*130ms + 150ms)}
+@keyframes up{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:none}}
+.eyebrow{font-family:var(--mono);font-size:30px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+h1,h2,h3,h4{font-weight:900;letter-spacing:-.025em;line-height:1.06}
+h1.mega{font-size:190px;line-height:.98}
+h2{font-size:96px}
+h2.big{font-size:118px}
+h2.mega2{font-size:112px}
+h3{font-size:64px}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.08em}
+.loss{background:linear-gradient(135deg,#FF5A5A,#FF8A3D);-webkit-background-clip:text;background-clip:text;color:transparent}
+.dim2{color:var(--text-2)}
+.nw{white-space:nowrap}
+.lead,.ask,.w,.card p,.chip-card span,.step span,.foot-line{text-wrap:balance}
+.lead{font-size:48px;line-height:1.3;color:var(--text-1);font-weight:500}
+.mono{font-family:var(--mono);font-size:32px}
+.dim{color:var(--text-2)}
+.foot-line{font-size:42px;color:var(--text-2);font-weight:500}
+.split{display:flex;align-items:center;gap:80px;width:100%}
+.col{flex:1;display:flex;flex-direction:column;gap:34px;min-width:0}
+.center{display:flex;flex-direction:column;align-items:center;text-align:center;gap:40px}
+.lbl{font-family:var(--mono);font-size:26px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan)}
+/* capa */
+.hero{position:relative;width:640px;height:640px;flex:none;display:grid;place-items:center}
+.hero img{width:500px;height:500px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,.14);box-shadow:0 0 120px rgba(0,212,255,.45),0 0 220px rgba(168,85,247,.35)}
+.ring{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(0,212,255,.35);animation:ring 4s ease-out infinite}
+.ring.r2{animation-delay:2s;border-color:rgba(168,85,247,.4)}
+@keyframes ring{from{transform:scale(.78);opacity:.9}to{transform:scale(1.12);opacity:0}}
+/* dor */
+.chips4{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:20px}
+.chip-card{background:rgba(255,90,90,.08);border:2px solid rgba(255,90,90,.35);border-radius:24px;padding:50px 36px;display:flex;flex-direction:column;gap:12px}
+.chip-card b{font-size:64px;font-weight:900}
+.chip-card span{font-size:38px;color:var(--text-2);line-height:1.25}
+/* fluxo */
+.flow{display:flex;align-items:stretch;gap:18px;margin-top:16px}
+.step{flex:1;background:var(--bg-2);border:2px solid var(--border-strong);border-radius:24px;padding:42px 28px;display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.step em{font-style:normal;font-family:var(--mono);font-size:34px;width:84px;height:84px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--cyan);color:var(--cyan)}
+.step img{width:84px;height:84px;border-radius:50%;object-fit:cover;border:2px solid var(--cyan)}
+.step b{font-size:48px;font-weight:900;line-height:1.1}
+.step span{font-size:34px;color:var(--text-2);line-height:1.25}
+.step.hl{background:linear-gradient(135deg,rgba(0,212,255,.2),rgba(168,85,247,.2));border-color:var(--cyan)}
+.arrow{flex:none;width:44px;align-self:center;height:4px;background:var(--grad);position:relative;border-radius:2px}
+.arrow::after{content:"";position:absolute;right:-2px;top:-9px;border-left:18px solid var(--purple);border-top:11px solid transparent;border-bottom:11px solid transparent}
+/* time de 7 */
+.team7{display:grid;grid-template-columns:repeat(7,1fr);gap:22px;margin-top:10px}
+.mem{background:var(--bg-2);border:2px solid var(--border);border-radius:22px;padding:22px 12px 26px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px}
+.mem img{width:188px;height:188px;border-radius:50%;object-fit:cover;border:3px solid rgba(0,212,255,.5)}
+.mem b{font-size:44px;font-weight:900}
+.mem span{font-family:var(--mono);font-size:25px;color:var(--text-2);line-height:1.3}
+/* escada */
+.stairs{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;align-items:end;height:520px;margin-top:10px}
+.st{position:relative;background:var(--bg-2);border:2px solid var(--border-strong);border-radius:24px 24px 0 0;padding:32px;display:flex;flex-direction:column;gap:10px;justify-content:flex-start}
+.st b{font-size:60px;font-weight:900}
+.st span{font-size:36px;color:var(--text-2);font-weight:500}
+.s1{height:200px}.s2{height:290px}.s3{height:380px}
+.s4{height:500px;background:linear-gradient(160deg,rgba(0,212,255,.28),rgba(168,85,247,.3));border-color:var(--cyan);box-shadow:0 0 80px rgba(0,212,255,.3)}
+.s4 span{color:#fff}
+u{text-decoration:none;font-family:var(--mono);font-size:26px;letter-spacing:.14em;text-transform:uppercase;background:var(--grad);color:#0A0A0F;padding:6px 18px;border-radius:99px;align-self:flex-start;font-weight:500}
+/* virada */
+.tags{display:flex;flex-wrap:wrap;gap:18px}
+.tags span{font-family:var(--mono);font-size:34px;padding:14px 30px;border-radius:99px;border:2px solid rgba(0,212,255,.5);background:rgba(0,212,255,.1);color:#fff}
+/* agente */
+.agent{display:flex;align-items:center;gap:90px}
+.portrait{position:relative;flex:none;width:620px;height:620px;border-radius:44px;padding:5px;background:var(--grad);box-shadow:0 0 110px rgba(0,212,255,.3),0 0 180px rgba(168,85,247,.25)}
+.portrait img{width:100%;height:100%;object-fit:cover;border-radius:40px;display:block}
+.badge{position:absolute;left:28px;top:28px;font-family:var(--mono);font-size:26px;letter-spacing:.12em;text-transform:uppercase;background:rgba(10,10,15,.85);border:2px solid var(--cyan);color:var(--cyan);padding:8px 20px;border-radius:99px}
+.agent .col{gap:22px}
+h2.name{font-size:140px;line-height:1}
+.asks{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.ask{font-size:36px;line-height:1.25;color:#fff;background:var(--bg-2);border:2px solid var(--border-strong);border-left:6px solid var(--cyan);border-radius:16px;padding:18px 26px;font-weight:500}
+.obs{font-family:var(--mono);font-size:28px;color:var(--gold);line-height:1.35}
+/* ERP */
+.mods{flex:.85;display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.mod{font-size:44px;font-weight:900;background:var(--bg-2);border:2px solid var(--border-strong);border-radius:24px;padding:50px 30px;position:relative;overflow:hidden}
+.mod::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--grad)}
+.rule{border:2px solid var(--gold);background:rgba(255,195,74,.09);border-radius:24px;padding:28px 34px;display:flex;flex-direction:column;gap:10px}
+.rule b{font-size:52px;font-weight:900;color:var(--gold)}
+.rule span{font-size:34px;color:var(--text-1);line-height:1.3}
+/* vários negócios */
+.multi{position:relative;flex:none;width:720px;height:700px}
+.mcore{position:absolute;left:50%;top:50%;width:280px;height:280px;margin:-140px 0 0 -140px}
+.mcore img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:4px solid var(--cyan);box-shadow:0 0 110px rgba(0,212,255,.5)}
+.biz{position:absolute;font-size:44px;font-weight:900;background:var(--bg-2);border:2px solid var(--purple);border-radius:22px;padding:28px 40px;box-shadow:0 0 50px rgba(168,85,247,.25);white-space:nowrap}
+.biz:nth-child(1){left:50%;top:0;margin-left:-135px}
+.biz:nth-child(2){left:0;bottom:30px}
+.biz:nth-child(3){right:0;bottom:30px}
+/* órbita */
+.orbit{position:relative;flex:none}
+.orbit svg{position:absolute;inset:0;width:100%;height:100%}
+.ray{stroke:rgba(255,255,255,.12);stroke-width:2}
+.pulse{stroke:var(--cyan);stroke-width:5;stroke-linecap:round;stroke-dasharray:46 700;stroke-dashoffset:46;opacity:0}
+.slide.on .pulse{animation:pulse 3.9s linear infinite;animation-delay:calc(var(--pd) + 1.4s)}
+@keyframes pulse{0%{stroke-dashoffset:46;opacity:1}40%{stroke-dashoffset:-310;opacity:1}46%,100%{stroke-dashoffset:-310;opacity:0}}
+.core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;padding:5px;background:var(--grad);box-shadow:0 0 110px rgba(0,212,255,.55);animation:glow 3s ease-in-out infinite}
+.core img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+@keyframes glow{50%{box-shadow:0 0 160px rgba(168,85,247,.7)}}
+.node{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px;opacity:0}
+.slide.on .node{animation:pop .5s cubic-bezier(.2,.9,.3,1.3) both;animation-delay:calc(var(--i)*90ms + 500ms)}
+@keyframes pop{from{opacity:0;transform:translate(-50%,-50%) scale(.4)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.node img{border-radius:50%;object-fit:cover;border:3px solid rgba(0,212,255,.6);background:var(--bg-2);display:block}
+.node span{font-family:var(--mono);font-size:22px;color:#fff;background:rgba(10,10,15,.8);padding:1px 10px;border-radius:99px}
+/* demo */
+.s-demo{gap:28px}
+.demo-head{display:flex;align-items:center;gap:30px}
+.demo-head img{width:150px;height:150px;border-radius:50%;object-fit:cover;border:4px solid var(--cyan)}
+.demo-head>div{flex:1;display:flex;flex-direction:column;gap:10px}
+.live{color:var(--red);display:flex;align-items:center;gap:16px}
+.live i{width:22px;height:22px;border-radius:50%;background:var(--red);animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.25}}
+.fict{font-family:var(--mono);font-size:26px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border:2px solid var(--gold);padding:10px 24px;border-radius:99px}
+.prompt{background:#0d0d15;border:2px solid var(--cyan);border-radius:26px;padding:32px 44px;display:flex;flex-direction:column;gap:14px;box-shadow:0 0 70px rgba(0,212,255,.18)}
+.prompt p{font-family:var(--mono);font-size:44px;line-height:1.36;color:#fff;user-select:text;cursor:text}
+.watch{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.watch>.lbl{grid-column:1/-1}
+.w{background:var(--bg-2);border:2px solid var(--border-strong);border-radius:20px;padding:24px 26px;font-size:34px;font-weight:500;line-height:1.25;display:flex;gap:18px;align-items:center}
+.w em{font-style:normal;flex:none;font-family:var(--mono);width:56px;height:56px;border-radius:50%;background:var(--grad);color:#0A0A0F;display:grid;place-items:center;font-size:28px}
+/* cards */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.card{background:var(--bg-2);border:2px solid var(--border-strong);border-radius:28px;padding:44px;display:flex;flex-direction:column;gap:18px}
+.card.hl{background:linear-gradient(150deg,rgba(0,212,255,.2),rgba(168,85,247,.22));border-color:var(--cyan)}
+.card b{font-size:60px;font-weight:900;line-height:1.05}
+.card p{font-size:40px;color:var(--text-1);line-height:1.3}
+.card .num{font-size:120px;font-weight:900;line-height:1.1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.three .card b{font-size:46px;color:var(--text-1)}
+/* planos */
+.s-plans{gap:26px}
+.plans{display:grid;grid-template-columns:1fr 1fr 1fr 1.18fr;gap:22px;align-items:stretch}
+.plan{position:relative;background:var(--bg-2);border:2px solid var(--border-strong);border-radius:28px;padding:36px 30px;display:flex;flex-direction:column;gap:12px}
+.plan h4{font-size:50px}
+.price{font-size:70px;font-weight:900;letter-spacing:-.03em;line-height:1.05;margin-top:8px;white-space:nowrap}
+.mes{font-family:var(--mono);font-size:28px;color:var(--cyan);line-height:1.35;min-height:118px}
+.plan ul{list-style:none;display:flex;flex-direction:column;gap:12px;border-top:2px solid var(--border);padding-top:20px}
+.plan li{font-size:32px;line-height:1.22;color:var(--text-1);padding-left:34px;position:relative}
+.plan li::before{content:"";position:absolute;left:0;top:12px;width:16px;height:16px;border-radius:50%;background:var(--grad)}
+.plan.top{background:linear-gradient(160deg,rgba(0,212,255,.24),rgba(168,85,247,.28));border-color:var(--cyan);box-shadow:0 0 90px rgba(0,212,255,.3)}
+.plan.top u{position:absolute;right:26px;top:36px}
+.plan.top li{color:#fff;font-weight:500}
+.s-aud{gap:28px}
+.aud{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.aud .card{padding:36px 34px;gap:16px}
+.aud .card b{font-size:46px;line-height:1.1}
+.aud .card p{font-size:33px;line-height:1.3}
+.agenda{display:flex;justify-content:space-between;gap:14px;background:var(--bg-2);border:2px solid var(--border-strong);border-radius:22px;padding:22px 28px}
+.agenda span{display:flex;align-items:center;gap:10px;font-size:25px;font-weight:500;color:var(--text-1);white-space:nowrap}
+.agenda em{font-style:normal;flex:none;font-family:var(--mono);font-size:22px;width:40px;height:40px;border-radius:50%;background:var(--grad);color:#0A0A0F;display:grid;place-items:center}
+.rules4{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:8px}
+.r4{background:var(--bg-2);border:2px solid var(--border-strong);border-radius:26px;padding:38px 40px;display:flex;align-items:center;gap:32px}
+.r4 em{font-style:normal;flex:none;font-family:var(--mono);font-size:44px;width:96px;height:96px;border-radius:50%;background:var(--grad);color:#0A0A0F;display:grid;place-items:center}
+.r4 div{display:flex;flex-direction:column;gap:10px;min-width:0}
+.r4 b{font-size:50px;font-weight:900;line-height:1.08;letter-spacing:-.02em}
+.r4 p{font-size:36px;line-height:1.28;color:var(--text-1);text-wrap:balance}
+/* QR */
+.qrcol{flex:none;display:flex;flex-direction:column;align-items:center;gap:26px}
+.again{font-size:36px;line-height:1.32;color:var(--text-1);border-left:6px solid var(--gold);padding-left:26px;text-wrap:balance}
+.qrbox{flex:none;width:640px;height:640px;background:#fff;border-radius:36px;padding:14px;box-shadow:0 0 120px rgba(0,212,255,.4),0 0 200px rgba(168,85,247,.3)}
+.qr{width:100%;height:100%;display:block}
+.url{font-family:var(--mono);font-size:44px;white-space:nowrap;color:var(--cyan)}
+.sym{width:200px;height:200px}
+/* moldura */
+#logo{position:absolute;left:112px;bottom:14px;height:100px;z-index:5;opacity:.9}
+#num{position:absolute;right:130px;bottom:46px;z-index:5;font-family:var(--mono);font-size:26px;color:var(--text-2)}
+#bar{position:absolute;left:0;bottom:0;height:8px;width:0;background:var(--grad);z-index:6;transition:width .4s ease}
+#np{position:absolute;left:60px;right:60px;bottom:60px;z-index:20;background:rgba(8,8,14,.96);border:2px solid var(--gold);border-radius:24px;padding:30px 40px;display:none;box-shadow:0 20px 80px #000}
+#np.show{display:block}
+#np h5{font-family:var(--mono);font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-weight:500}
+#np p{font-size:36px;line-height:1.36;color:#fff}
+#fsb{position:fixed;right:18px;top:18px;z-index:50;font:500 18px 'Inter','Segoe UI Symbol',Arial,sans-serif;color:#E5E5E5;background:rgba(21,21,31,.85);border:1px solid rgba(255,255,255,.25);border-radius:99px;padding:9px 18px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s}
+#fsb.show{opacity:.9;pointer-events:auto}
+#fsb:hover{opacity:1;border-color:#00D4FF}
+/* ===== extras Clínica Cheia ===== */
+.who{display:flex;align-items:center;gap:90px}
+.who .photo{flex:none;width:560px;height:560px;border-radius:50%;padding:5px;background:var(--grad);box-shadow:0 0 110px rgba(0,212,255,.35),0 0 180px rgba(168,85,247,.25)}
+.who .photo img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.facts{display:flex;flex-wrap:wrap;gap:18px}
+.facts span{font-family:var(--mono);font-size:30px;padding:14px 28px;border-radius:99px;border:2px solid rgba(0,212,255,.5);background:rgba(0,212,255,.1);color:#fff}
+.cen{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.cen .chip-card{padding:42px 36px}
+.cen .chip-card b{font-size:48px;line-height:1.1}
+.cen .chip-card span{font-size:34px}
+.calc{display:flex;align-items:center;gap:22px;flex-wrap:nowrap}
+.calc .box{flex:1;background:var(--bg-2);border:2px solid var(--border-strong);border-radius:24px;padding:34px 26px;display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center}
+.calc .box b{font-size:44px;font-weight:900;line-height:1.1}
+.calc .box span{font-family:var(--mono);font-size:26px;color:var(--text-2)}
+.calc .box.res{border-color:var(--red);background:rgba(255,90,90,.08)}
+.calc .box.res b{color:#fff}
+.calc .op{flex:none;font-size:64px;font-weight:900;color:var(--cyan)}
+.ex{font-family:var(--mono);font-size:30px;color:var(--gold);line-height:1.4;border-left:6px solid var(--gold);padding-left:26px}
+.ex b{color:#fff;font-weight:500}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.vs .card ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+.vs .card li{font-size:34px;line-height:1.25;color:var(--text-1);padding-left:40px;position:relative}
+.vs .old{border-color:rgba(255,90,90,.45);background:rgba(255,90,90,.06)}
+.vs .old li::before{content:"✕";position:absolute;left:0;color:var(--red);font-weight:900}
+.vs .new li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:900}
+.six{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.six .card{padding:34px 34px;gap:10px}
+.six .card b{font-size:44px;line-height:1.1}
+.six .card p{font-size:32px;color:var(--text-2)}
+.team{display:grid;grid-template-columns:repeat(7,1fr);gap:18px}
+.tm{background:var(--bg-2);border:2px solid var(--border);border-radius:22px;padding:22px 14px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.tm img{width:150px;height:150px;border-radius:50%;object-fit:cover;border:3px solid rgba(0,212,255,.5)}
+.tm.mg img{border-color:rgba(255,195,74,.75)}
+.tm b{font-size:40px;font-weight:900}
+.tm i{font-style:normal;font-family:var(--mono);font-size:22px;letter-spacing:.06em;text-transform:uppercase;color:var(--cyan)}
+.tm.mg i{color:var(--gold)}
+.tm span{font-size:25px;color:var(--text-1);line-height:1.28;text-wrap:balance}
+.offer{display:flex;align-items:stretch;gap:30px}
+.offer .card{flex:1;justify-content:center}
+.offer .plus{flex:none;align-self:center;font-size:120px;font-weight:900;color:var(--cyan)}
+.offer .price{font-size:150px;font-weight:900;letter-spacing:-.03em;line-height:1}
+.offer .per{font-family:var(--mono);font-size:34px;color:var(--cyan)}
+.steps4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.steps4 .step{padding:40px 28px}
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.faq .card{padding:32px 36px;gap:12px}
+.faq .card b{font-size:40px;line-height:1.15}
+.faq .card p{font-size:31px;color:var(--text-1)}
+.pay{flex:none;width:640px;height:640px;border-radius:36px;border:4px dashed var(--gold);background:rgba(255,195,74,.07);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;text-align:center;padding:40px}
+.pay b{font-family:var(--mono);font-size:44px;color:var(--gold);font-weight:500}
+.pay span{font-size:30px;color:var(--text-2);line-height:1.3}
+.pain{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.pain .r4{padding:30px 32px;gap:24px}
+.pain .r4 em{width:80px;height:80px;font-size:38px}
+.pain .r4 b{font-size:42px}
+.dor{display:flex;flex-direction:column;gap:30px}
+.dor .tag{font-family:var(--mono);font-size:30px;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+h2.huge{font-size:128px;line-height:1.02}
+.wa{flex:none;width:720px;background:#0b141a;border:2px solid var(--border-strong);border-radius:36px;padding:34px;display:flex;flex-direction:column;gap:22px;box-shadow:0 30px 90px rgba(0,0,0,.6)}
+.wa .hd{display:flex;align-items:center;gap:18px;border-bottom:2px solid var(--border);padding-bottom:20px}
+.wa .hd b{font-size:34px}.wa .hd span{font-family:var(--mono);font-size:22px;color:var(--text-2)}
+.wa .av{width:64px;height:64px;border-radius:50%;background:var(--grad)}
+.bub{max-width:88%;font-size:32px;line-height:1.3;padding:20px 24px;border-radius:22px;position:relative}
+.bub small{display:block;font-family:var(--mono);font-size:20px;color:var(--text-2);margin-top:8px;text-align:right}
+.bub.in{background:#202c33;align-self:flex-start}
+.bub.out{background:#005c4b;align-self:flex-end}
+.gap{align-self:center;font-family:var(--mono);font-size:24px;color:var(--gold);border:2px solid var(--gold);border-radius:99px;padding:8px 22px}
+.calc3{display:flex;flex-direction:column;gap:18px}
+.cl{display:flex;align-items:center;gap:26px;background:var(--bg-2);border:2px solid var(--border-strong);border-radius:22px;padding:24px 34px}
+.cl em{font-style:normal;flex:none;font-family:var(--mono);font-size:34px;width:72px;height:72px;border-radius:50%;background:var(--grad);color:#0A0A0F;display:grid;place-items:center}
+.cl p{flex:1;font-size:38px;line-height:1.25;font-weight:500}
+.cl .blank{flex:none;font-family:var(--mono);font-size:36px;color:var(--text-2);min-width:280px;text-align:right}
+.cl.res{border-color:var(--red);background:rgba(255,90,90,.08)}
+.cl.bon{border-style:dashed}
+.ag2{display:flex;align-items:center;gap:80px}
+.ag2 .portrait{width:560px;height:560px}
+.inc{font-size:36px;line-height:1.3;color:var(--text-1);background:rgba(0,212,255,.08);border:2px solid rgba(0,212,255,.4);border-radius:18px;padding:20px 26px}
+.inc b{color:var(--cyan);font-family:var(--mono);font-size:26px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:6px;font-weight:500}
+.cta-side{display:flex;flex-direction:column;gap:18px}
+.mini{position:absolute;right:130px;top:70px;font-family:var(--mono);font-size:24px;color:var(--gold);border:2px dashed var(--gold);border-radius:16px;padding:12px 22px;z-index:4}
+</style>
+</head>
+<body>
+<div id="stage">
+<section class="slide ">
+<div class="split">
+<div class="col">
+<p class="eyebrow a" style="--i:0;font-size:27px;letter-spacing:.1em;white-space:nowrap">Aula ao vivo · 23/11 · 19h27</p>
+<h1 class="a mega" style="--i:1">Clínica<br><span class="grad">Cheia</span></h1>
+<p class="lead a" style="--i:2">Como a IA já opera a agenda<br>de uma clínica.</p>
+<p class="mono dim a" style="--i:3">Salatiel Batista · Agência no Bolso</p>
+</div>
+<div class="hero a" style="--i:2"><div class="ring r1"></div><div class="ring r2"></div><img src="img/maia.webp" alt="MAIA"></div>
+</div>
+<aside class="notes">BLOCO 1 · ABERTURA (10 min). Roteiro 1.1, recepção, 2 min. Boa noite! Peça no chat: nome, cidade e área (odonto, médica, fisio, estética, nutrição, veterinária). Leia 3 ou 4 cidades em voz alta. Se trouxe a secretária ou o sócio, melhor ainda.</aside>
+</section>
+
+<section class="slide ">
+<div class="who">
+<div class="photo a" style="--i:0"><img src="img/salatiel.jpg" alt="Salatiel Batista"></div>
+<div class="col">
+<p class="eyebrow a" style="--i:1">Quem está com você hoje</p>
+<h2 class="a" style="--i:2">Salatiel <span class="grad">Batista</span></h2>
+<p class="lead a" style="--i:3">A gente não vende curso de IA. A gente coloca a IA para trabalhar dentro da empresa, todo dia.</p>
+<div class="facts a" style="--i:4"><span>Empresário desde 2016</span><span>Ex-dono de agência de marketing</span><span>Agência no Bolso</span></div>
+</div></div>
+<aside class="notes">Roteiro 1.2, 3 min. Empresário desde 2016, teve agência de marketing. A primeira empresa onde a MAIA rodou foi a nossa: financeiro, fiscal, conteúdo, prospecção. Não é teoria, é o que roda na minha empresa, aplicado numa clínica. "+100 empresários atendidos" e nome de cliente da saúde: só se confirmado antes da aula.</aside>
+</section>
+
+<section class="slide ">
+<p class="eyebrow a" style="--i:0">A promessa de hoje</p>
+<h2 class="a" style="--i:1">Você sai daqui com <span class="grad">3 coisas</span></h2>
+<div class="three">
+<div class="card a" style="--i:2"><div class="num">01</div><b>A conta</b><p>Quanto a sua clínica perde por mês, com os SEUS números.</p></div>
+<div class="card hl a" style="--i:3"><div class="num">02</div><b>A IA ao vivo</b><p>A MAIA operando na sua frente. Não é slide, não é promessa de futuro.</p></div>
+<div class="card a" style="--i:4"><div class="num">03</div><b>O caminho</b><p>O próximo passo para colocar isso na sua clínica.</p></div>
+</div>
+<aside class="notes">Roteiro 1.3, 3 min. Primeira: a conta, com os números da sua clínica (pega papel e caneta). Segunda: a MAIA trabalhando ao vivo. Terceira: o próximo passo, sem virar especialista em tecnologia.</aside>
+</section>
+
+<section class="slide ">
+<p class="eyebrow a" style="--i:0">Combinados</p>
+<h2 class="a" style="--i:1">Antes de <span class="grad">começar</span></h2>
+<div class="rules4">
+<div class="r4 a" style="--i:2"><em>1</em><div><b>Fique até o fim</b><p>O mais importante está no final.</p></div></div>
+<div class="r4 a" style="--i:3"><em>2</em><div><b>Papel e caneta</b><p>A gente vai fazer uma conta juntos.</p></div></div>
+<div class="r4 a" style="--i:4"><em>3</em><div><b>Pergunte no chat</b><p>Eu paro para responder ao vivo.</p></div></div>
+<div class="r4 a" style="--i:5"><em>4</em><div><b>Celular no silencioso</b><p>Paciente em primeiro lugar, depois a aula.</p></div></div>
+</div>
+<aside class="notes">Roteiro 1.4, 2 min. Fica até o fim: quem sai no meio leva o diagnóstico e não leva o remédio. Peça: escreve "EU FICO" no chat. Movimento gera resultado, minha gente. Bora!</aside>
+</section>
+
+<section class="slide ">
+<p class="eyebrow a" style="--i:0">Responda no chat só com o número</p>
+<h2 class="a" style="--i:1">Qual destas <span class="loss">mais dói</span> na sua clínica?</h2>
+<div class="pain"><div class="r4 a" style="--i:2"><em>1</em><div><b>Falta e no-show</b></div></div><div class="r4 a" style="--i:3"><em>2</em><div><b>WhatsApp sem resposta</b></div></div><div class="r4 a" style="--i:4"><em>3</em><div><b>Lead que some</b></div></div><div class="r4 a" style="--i:5"><em>4</em><div><b>Eu preso na operação</b></div></div><div class="r4 a" style="--i:6"><em>5</em><div><b>Financeiro e fiscal bagunçados</b></div></div><div class="r4 a" style="--i:7"><em>6</em><div><b>Sem tempo para conteúdo</b></div></div></div>
+<aside class="notes">BLOCO 2 · AS DORES E A CONTA (22 min). Roteiro 2.1, 2 min. Antes de eu falar, quero ouvir você: responde só com o número. Leia as respostas. Vamos passar uma por uma.</aside>
+</section>
+
+<section class="slide ">
+<div class="dor">
+<p class="tag a" style="--i:0">Dor 1</p>
+<h2 class="a huge" style="--i:1">Marcou, confirmou...<br><span class="loss">e não apareceu.</span></h2>
+<p class="lead a" style="--i:2">Cadeira vazia com a luz acesa, o profissional parado e o aluguel correndo.</p>
+</div>
+<aside class="notes">Roteiro 2.2, 3 min. Ninguém avisou a tempo de colocar outro paciente no lugar. Você não perde paciente por falta de paciente: perde porque ninguém tampa o buraco antes de virar prejuízo.</aside>
+</section>
+
+<section class="slide ">
+<div class="split">
+<div class="col">
+<p class="eyebrow a" style="--i:0;color:var(--red)">Dor 2</p>
+<h2 class="a" style="--i:1">A clínica fecha às 18h.<br><span class="loss">O paciente não.</span></h2>
+<p class="lead a" style="--i:2">Quanto tempo a sua clínica leva para responder uma mensagem que chega às 21h?</p>
+</div>
+<div class="wa a" style="--i:2">
+<div class="hd"><i class="av"></i><div><b>Clínica (exemplo)</b><br><span>conversa fictícia</span></div></div>
+<p class="bub in">Oi, boa noite! Quanto custa uma avaliação?<small>21:14</small></p>
+<p class="gap">11 horas depois</p>
+<p class="bub out">Bom dia! A avaliação custa...<small>08:40</small></p>
+<p class="bub in">Obrigada, já marquei em outro lugar.<small>08:52</small></p>
+</div></div>
+<aside class="notes">Roteiro 2.3, 3 min. O paciente pensa em marcar à noite, deitado no sofá. Manda às nove, recebe resposta às oito e meia. Pergunte no chat: quanto tempo a sua clínica leva? Leia as respostas. Enquanto você dormia, quem respondeu primeiro foi a clínica do lado. A conversa é fictícia, diga isso.</aside>
+</section>
+
+<section class="slide ">
+<div class="dor">
+<p class="tag a" style="--i:0">Dor 3</p>
+<h2 class="a huge" style="--i:1">Você pagou pelo anúncio.<br><span class="loss">O lead esfriou.</span></h2>
+<p class="lead a" style="--i:2">Ninguém respondeu a tempo. E o paciente que veio uma vez e nunca mais voltou está parado no seu WhatsApp.</p>
+</div>
+<aside class="notes">Roteiro 2.4, 2 min. Dói no bolso duas vezes. O problema nunca foi volume de lead, é o que acontece depois que ele chega. E quantos pacientes antigos estão parados no WhatsApp sem ninguém chamar de volta?</aside>
+</section>
+
+<section class="slide ">
+<div class="dor">
+<p class="tag a" style="--i:0">Dor 4</p>
+<h2 class="a huge" style="--i:1">Você abriu uma clínica<br><span class="loss">ou comprou um emprego?</span></h2>
+<p class="lead a" style="--i:2">Secretária faltou, WhatsApp acumulou, fornecedor cobrou, planilha não bate. E quem segura é você.</p>
+</div>
+<aside class="notes">Roteiro 2.5, 3 min. Você estudou anos para cuidar de gente, ou de bicho, e passa metade do dia apagando incêndio. A recepção confirma um por um, atende telefone e recebe paciente ao mesmo tempo. Faça a pergunta do slide devagar.</aside>
+</section>
+
+<section class="slide ">
+<div class="dor">
+<p class="tag a" style="--i:0">Dor 5</p>
+<h2 class="a huge" style="--i:1">Quanto entrou? Quanto faltou?<br><span class="loss">Quanto sobrou?</span></h2>
+<p class="lead a" style="--i:2">Conta a pagar no caderno, nota fiscal no susto, imposto que você não sabe se paga a mais.</p>
+</div>
+<aside class="notes">Roteiro 2.6, 2 min. Você me responde em dez segundos quanto faturou, quanto saiu e quanto sobrou no mês passado? Contratar alguém, com o custo de CLT, vira medo. Sem número na mão, você decide no escuro.</aside>
+</section>
+
+<section class="slide ">
+<div class="dor">
+<p class="tag a" style="--i:0">Dor 6</p>
+<h2 class="a huge" style="--i:1">Último post:<br><span class="loss">há 3 semanas.</span></h2>
+<p class="lead a" style="--i:2">O paciente pesquisa a clínica antes de marcar. Quem vai gravar, escrever e postar? Você, entre um atendimento e outro?</p>
+</div>
+<aside class="notes">Roteiro 2.7, 2 min. O Instagram parado passa a sensação de clínica abandonada. Se precisar encurtar a aula, este slide pode ser pulado.</aside>
+</section>
+
+<section class="slide ">
+<p class="eyebrow a" style="--i:0">A virada</p>
+<h2 class="a big" style="--i:1">Não é falta de esforço.<br>É falta de quem <span class="grad">opere a clínica por você</span>.</h2>
+<div class="two">
+<div class="card a" style="--i:2"><span class="lbl" style="color:var(--red)">Não resolve 1</span><b>"Gaste mais em anúncio."</b><p>Anúncio sem atendimento é dinheiro jogado fora.</p></div>
+<div class="card a" style="--i:3"><span class="lbl" style="color:var(--red)">Não resolve 2</span><b>"Contrate mais secretária."</b><p>Mais folha, mais treinamento, mais rotatividade.</p></div>
+</div>
+<aside class="notes">Roteiro 2.8, 1 min. Se você se viu em pelo menos uma dessas dores, respira. Não é falta de competência clínica. Falta alguém operando a clínica por você, 24 horas, sem cansar.</aside>
+</section>
+
+<section class="slide ">
+<p class="eyebrow a" style="--i:0">Pegue o papel · com os SEUS números</p>
+<h2 class="a" style="--i:1">A conta do <span class="loss">prejuízo</span></h2>
+<div class="calc3">
+<div class="cl a" style="--i:2"><em>A</em><p>Faltas e remarcações em cima da hora por semana</p><span class="blank">______</span></div>
+<div class="cl a" style="--i:3"><em>B</em><p>Valor médio de uma consulta ou procedimento</p><span class="blank">R$ ______</span></div>
+<div class="cl res a" style="--i:4"><em>C</em><p>A × B × 4 semanas = o que escorre por mês</p><span class="blank">R$ ______</span></div>
+<div class="cl bon a" style="--i:5"><em>D</em><p>Bônus: mensagens fora do horário que não viram agendamento por semana × B × 4</p><span class="blank">R$ ______</span></div>
+</div>
+<aside class="notes">Roteiro 2.9, 4 min. Faça linha por linha, dando tempo para escrever. A vezes B vezes 4 semanas: dinheiro que sai todo mês só por cadeira vazia. Linha D para quem quiser ir além. Não precisa dizer o valor; se quiser, coloca no chat só o resultado da linha C. Leia 2 ou 3 sem julgar. NÃO dizer que a MAIA recupera esse valor: é estimativa do próprio participante.</aside>
+</section>
+
+<section class="slide ">
+<p class="eyebrow a" style="--i:0">Apresento a MAIA</p>
+<h2 class="a" style="--i:1">A MAIA não é um chatbot.<br>É uma <span class="grad">IA orquestradora</span>.</h2>
+<div class="flow">
+<div class="step a" style="--i:2"><em>1</em><b>Você pede</b><span>no WhatsApp ou no Telegram</span></div>
+<i class="arrow a" style="--i:3"></i>
+<div class="step hl a" style="--i:3"><img src="img/maia.webp" alt="MAIA"><b>A MAIA delega</b><span>ao especialista certo</span></div>
+<i class="arrow a" style="--i:4"></i>
+<div class="step a" style="--i:4"><em>3</em><b>O agente executa</b><span>cada um na sua área</span></div>
+<i class="arrow a" style="--i:5"></i>
+<div class="step a" style="--i:5"><em>4</em><b>Você aprova</b><span>a palavra final é sua</span></div>
+</div>
+<p class="foot-line a" style="--i:6">Roda em servidor próprio, da sua empresa.</p>
+<aside class="notes">BLOCO 3 · A MAIA MAGNATA E O TIME (25 min). Roteiro 3.1, 4 min. Não é robozinho do "digite 1 para agendar". Você fala com ela como fala com uma funcionária; ela passa para o especialista certo e devolve pronto. A IA prepara, a pessoa aprova. Servidor próprio: não dizer "100% seguro" nem "aprovado pela LGPD".</aside>
+</section>
+
+<section class="slide s-demo">
+<div class="demo-head a" style="--i:0"><img src="img/lis.webp" alt=""><div><p class="eyebrow live"><i></i>Demo ao vivo · o paciente das 21h</p><h3>Atendimento · Lis</h3></div><span class="fict">Clínica fictícia</span></div>
+<div class="prompt a" style="--i:1"><span class="lbl">Mensagem 1 · eu sou o paciente</span><p>Oi, boa noite, queria marcar uma avaliação, vocês têm horário essa semana?</p></div>
+<div class="prompt a" style="--i:2"><span class="lbl">Mensagem 2</span><p>Não vou conseguir ir amanhã, posso remarcar?</p></div>
+<div class="watch"><span class="lbl a" style="--i:3">O que observar</span><div class="w a" style="--i:4"><em>1</em>Responde em segundos</div><div class="w a" style="--i:5"><em>2</em>Tom da recepção, não de robô</div><div class="w a" style="--i:6"><em>3</em>Remarca e a vaga volta</div></div>
+<aside class="notes">Roteiro 3.2, 5 min. Lembra da mensagem das nove da noite? Envie a mensagem 1 e espere a resposta na tela; depois a mensagem 2. Quem responde é a Lis, a agente de atendimento. Ela pergunta o nome, oferece horários, confirma e remarca. Use só mensagens testadas antes e tenha a gravação de reserva. Mostre só o que a configuração da demo realmente faz.</aside>
+</section>
+
+<section class="slide ">
+<p class="eyebrow a" style="--i:0">Clínica não é só agenda. Clínica é empresa.</p>
+<h2 class="a big" style="--i:1">MAIA <span class="grad">Magnata</span></h2>
+<p class="lead a" style="--i:2">A IA que sai do marketing e das vendas e entra na empresa inteira.</p>
+<div class="tags a" style="--i:3"><span>Atendimento</span><span>Relacionamento</span><span>Marketing</span><span>Financeiro</span><span>Tributário</span><span>RH</span><span>Jurídico</span><span>Sistemas</span></div>
+<p class="foot-line a" style="--i:4">14 especialistas + ERP MAIA Gestão. Coordenados pela MAIA.</p>
+<aside class="notes">Roteiro 3.3, 2 min. Até aqui você viu a MAIA cuidando do paciente. Mas clínica tem financeiro, imposto, funcionário, contrato e conteúdo. Por isso a MAIA Magnata: time de especialistas e um sistema de gestão próprio, que já roda na nossa empresa. Vou te apresentar o time.</aside>
+</section>
+
+<section class="slide ">
+<p class="eyebrow a" style="--i:0">Time 1 de 2</p>
+<h2 class="a" style="--i:1">O time que <span class="grad">enche a agenda</span></h2>
+<div class="team"><div class="tm a" style="--i:2"><img src="img/lis.webp" alt="Lis"><b>Lis</b><i>Atendimento</i><span>Responde o WhatsApp 24h e leva para a agenda</span></div><div class="tm a" style="--i:3"><img src="img/eva.webp" alt="Eva"><b>Eva</b><i>Relacionamento</i><span>Confirma, faz o pós-consulta e chama quem sumiu</span></div><div class="tm a" style="--i:4"><img src="img/theo.webp" alt="Théo"><b>Théo</b><i>Copy</i><span>Textos de campanha e de página</span></div><div class="tm a" style="--i:5"><img src="img/ravi.webp" alt="Ravi"><b>Ravi</b><i>Tráfego pago</i><span>Anúncios para trazer paciente novo</span></div><div class="tm a" style="--i:6"><img src="img/leo.webp" alt="Léo"><b>Léo</b><i>Dev</i><span>Integrações e automações</span></div><div class="tm a" style="--i:7"><img src="img/nina.webp" alt="Nina"><b>Nina</b><i>Operações</i><span>Rotina e entregas da equipe</span></div><div class="tm a" style="--i:8"><img src="img/caio.webp" alt="Caio"><b>Caio</b><i>Projetos</i><span>Plano de 90 dias e prioridades</span></div></div>
+<aside class="notes">Roteiro 3.3b, 2 min. Um nome por respiração. A Lis você já viu: atende a qualquer hora e leva para a agenda. A Eva confirma, faz o pós-consulta e chama de volta quem sumiu. Théo escreve, Ravi roda os anúncios, Léo integra e automatiza, Nina organiza a rotina, Caio cuida do plano de 90 dias. Agora, os 7 novos da Magnata.</aside>
+</section>
+
+<section class="slide ">
+<div class="ag2">
+<div class="portrait a" style="--i:0"><img src="img/marcia.webp" alt="Márcia"><span class="badge">Magnata 1/7</span></div>
+<div class="col" style="gap:22px">
+<p class="eyebrow a" style="--i:1">Financeiro</p>
+<h2 class="a name" style="--i:2">Márcia</h2>
+<p class="lead a" style="--i:3;font-size:40px">Contas a pagar e receber, fluxo de caixa, DRE e conciliação</p>
+<p class="inc a" style="--i:4"><b>Na sua clínica</b>Responde quanto entrou, quanto saiu e quanto sobrou, direto no ERP.</p>
+<p class="ask a" style="--i:5">“Márcia, quanto entrou essa semana e o que vence até sexta?”</p>
+<p class="obs a" style="--i:6">Ela não paga conta sozinha. Prepara, você aprova.</p>
+</div></div>
+<aside class="notes">Roteiro 3.4, Márcia. Começo por ela porque é onde o dono mais sofre. Contas, fluxo de caixa, DRE e conciliação, tudo no ERP. Lembra do "quanto entrou, quanto saiu, quanto sobrou"? Ela prepara, você aprova. Se quiser, dispare o pedido ao vivo e volte quando a resposta chegar.</aside>
+</section>
+
+<section class="slide ">
+<div class="ag2">
+<div class="portrait a" style="--i:0"><img src="img/maria.webp" alt="Maria"><span class="badge">Magnata 2/7</span></div>
+<div class="col" style="gap:22px">
+<p class="eyebrow a" style="--i:1">Tributário</p>
+<h2 class="a name" style="--i:2">Maria</h2>
+<p class="lead a" style="--i:3;font-size:40px">Regimes, alíquota efetiva, Fator R, notas e prazos</p>
+<p class="inc a" style="--i:4"><b>Na sua clínica</b>Mostra se a clínica está no regime certo e quanto paga de imposto de verdade.</p>
+<p class="ask a" style="--i:5">“Maria, estou pagando imposto a mais? Compara meu regime.”</p>
+<p class="obs a" style="--i:6">A decisão final é sua, junto com o seu contador.</p>
+</div></div>
+<aside class="notes">Roteiro 3.4, Maria. Compara regimes, calcula alíquota efetiva e Fator R, acompanha nota e prazo. Ela te dá o mapa, você decide o caminho com o seu contador. Se quiser, dispare o pedido ao vivo e volte quando a resposta chegar.</aside>
+</section>
+
+<section class="slide ">
+<div class="ag2">
+<div class="portrait a" style="--i:0"><img src="img/geane.webp" alt="Geane"><span class="badge">Magnata 3/7</span></div>
+<div class="col" style="gap:22px">
+<p class="eyebrow a" style="--i:1">RH</p>
+<h2 class="a name" style="--i:2">Geane</h2>
+<p class="lead a" style="--i:3;font-size:40px">Vagas, admissão, custo CLT, folha e férias</p>
+<p class="inc a" style="--i:4"><b>Na sua clínica</b>Escreve a vaga da recepcionista e calcula o custo total com encargos.</p>
+<p class="ask a" style="--i:5">“Geane, quanto me custa de verdade contratar uma recepcionista?”</p>
+<p class="obs a" style="--i:6">Quem fecha a folha é uma pessoa.</p>
+</div></div>
+<aside class="notes">Roteiro 3.4, Geane. Escreve a vaga, calcula o custo total da CLT, monta o checklist de admissão e a escala de férias. Você nunca mais contrata no escuro. Se quiser, dispare o pedido ao vivo e volte quando a resposta chegar.</aside>
+</section>
+
+<section class="slide ">
+<div class="ag2">
+<div class="portrait a" style="--i:0"><img src="img/aline.webp" alt="Aline"><span class="badge">Magnata 4/7</span></div>
+<div class="col" style="gap:22px">
+<p class="eyebrow a" style="--i:1">Jurídico</p>
+<h2 class="a name" style="--i:2">Aline</h2>
+<p class="lead a" style="--i:3;font-size:40px">Contratos, LGPD e registro de marca</p>
+<p class="inc a" style="--i:4"><b>Na sua clínica</b>Revisa locação da sala, contrato com profissional parceiro e termos.</p>
+<p class="ask a" style="--i:5">“Aline, revisa esse contrato de locação da sala.”</p>
+<p class="obs a" style="--i:6">Apoio técnico: não substitui o seu advogado.</p>
+</div></div>
+<aside class="notes">Roteiro 3.4, Aline. Aponta a cláusula perigosa e sugere a correção. Orienta sobre LGPD, que em clínica é assunto sério por causa do dado de paciente, e sobre o registro da marca. Diga com todas as letras: não substitui o advogado. Se quiser, dispare o pedido ao vivo e volte quando a resposta chegar.</aside>
+</section>
+
+<section class="slide ">
+<div class="ag2">
+<div class="portrait a" style="--i:0"><img src="img/bia.webp" alt="Bia"><span class="badge">Magnata 5/7</span></div>
+<div class="col" style="gap:22px">
+<p class="eyebrow a" style="--i:1">Conteúdo</p>
+<h2 class="a name" style="--i:2">Bia</h2>
+<p class="lead a" style="--i:3;font-size:40px">Estratégia de conteúdo e roteiros</p>
+<p class="inc a" style="--i:4"><b>Na sua clínica</b>Linha editorial do mês, roteiros de Reels, live virando carrossel.</p>
+<p class="ask a" style="--i:5">“Bia, monta a linha editorial do mês da clínica.”</p>
+<p class="obs a" style="--i:6">Você grava, ela organiza o resto.</p>
+</div></div>
+<aside class="notes">Roteiro 3.4, Bia. Lembra do Instagram parado três semanas? A clínica volta a aparecer sem você perder o fim de semana. Se quiser, dispare o pedido ao vivo e volte quando a resposta chegar.</aside>
+</section>
+
+<section class="slide ">
+<div class="ag2">
+<div class="portrait a" style="--i:0"><img src="img/ruth.webp" alt="Ruth"><span class="badge">Magnata 6/7</span></div>
+<div class="col" style="gap:22px">
+<p class="eyebrow a" style="--i:1">Prospecção B2B</p>
+<h2 class="a name" style="--i:2">Ruth</h2>
+<p class="lead a" style="--i:3;font-size:40px">Leads pré-qualificados e primeiro contato</p>
+<p class="inc a" style="--i:4"><b>Na sua clínica</b>Empresas da cidade para parceria, convênio e plano corporativo.</p>
+<p class="ask a" style="--i:5">“Ruth, levanta as empresas da minha cidade com mais de 30 funcionários para eu oferecer convênio.”</p>
+<p class="obs a" style="--i:6">Nada é enviado sem a sua aprovação.</p>
+</div></div>
+<aside class="notes">Roteiro 3.4, Ruth. Para quem quer crescer de outro jeito: parceria com empresa, convênio, indicação de outros profissionais. Ela levanta a lista e escreve o rascunho do primeiro contato. O exemplo do convênio é ilustrativo. Se quiser, dispare o pedido ao vivo e volte quando a resposta chegar.</aside>
+</section>
+
+<section class="slide ">
+<div class="ag2">
+<div class="portrait a" style="--i:0"><img src="img/boris.webp" alt="Boris"><span class="badge">Magnata 7/7</span></div>
+<div class="col" style="gap:22px">
+<p class="eyebrow a" style="--i:1">Engenharia</p>
+<h2 class="a name" style="--i:2">Boris</h2>
+<p class="lead a" style="--i:3;font-size:40px">Sites, sistemas, automações e integrações</p>
+<p class="inc a" style="--i:4"><b>Na sua clínica</b>Sistema feito para o jeito da sua clínica, entregue testado.</p>
+<p class="ask a" style="--i:5">“Boris, faz um sistema de agendamento com a cara da minha clínica.”</p>
+<p class="obs a" style="--i:6">Entrega com testes.</p>
+</div></div>
+<aside class="notes">Roteiro 3.4, Boris. Sistema de agendamento, página, automação, relatório. Não prometa "integra com qualquer sistema": integração com o sistema atual da clínica o time avalia na call. Se quiser, dispare o pedido ao vivo e volte quando a resposta chegar.</aside>
+</section>
+
+<section class="slide ">
+<div class="split">
+<div class="col" style="flex:1.2">
+<p class="eyebrow a" style="--i:0">Exclusivo Magnata</p>
+<h2 class="a" style="--i:1">ERP <span class="grad">MAIA Gestão</span></h2>
+<p class="lead a" style="--i:2;font-size:44px;text-wrap:wrap">Um sistema de gestão próprio, integrado aos agentes.<br>Já roda na operação da Digital Master.</p>
+<div class="rule a" style="--i:9"><b>A IA prepara. Você aprova.</b><span>Não paga conta, não emite nota e não fecha folha sozinha.</span></div>
+</div>
+<div class="mods">
+<div class="mod a" style="--i:3">Financeiro</div><div class="mod a" style="--i:4">Contas</div>
+<div class="mod a" style="--i:5">DRE</div><div class="mod a" style="--i:6">Orçamento</div>
+<div class="mod a" style="--i:7">Fiscal</div><div class="mod a" style="--i:8">RH</div>
+</div></div>
+<aside class="notes">É nosso, não é integração com sistema de terceiro, e já roda na Digital Master. É aqui que a Márcia, a Maria e a Geane trabalham. Diga devagar: a IA prepara, a pessoa aprova.</aside>
+</section>
+
+<section class="slide ">
+<div class="split"><div class="col" style="flex:.8"><p class="eyebrow a" style="--i:0">O time completo</p><h2 class="a" style="--i:1;font-size:84px">Um time inteiro.<br><span class="grad">Coordenado pela MAIA.</span><br>Aprovado por você.</h2><p class="mono dim a" style="--i:3">1 orquestra. 14 executam.</p></div><div class="orbit" style="width:860px;height:860px"><svg viewBox="0 0 860 860"><line class="ray" x1="430" y1="430" x2="430.0" y2="85.0"/><line class="pulse" style="--pd:0.00s" x1="430" y1="430" x2="430.0" y2="85.0"/><line class="ray" x1="430" y1="430" x2="579.7" y2="119.2"/><line class="pulse" style="--pd:0.28s" x1="430" y1="430" x2="579.7" y2="119.2"/><line class="ray" x1="430" y1="430" x2="699.7" y2="214.9"/><line class="pulse" style="--pd:0.56s" x1="430" y1="430" x2="699.7" y2="214.9"/><line class="ray" x1="430" y1="430" x2="766.4" y2="353.2"/><line class="pulse" style="--pd:0.84s" x1="430" y1="430" x2="766.4" y2="353.2"/><line class="ray" x1="430" y1="430" x2="766.4" y2="506.8"/><line class="pulse" style="--pd:1.12s" x1="430" y1="430" x2="766.4" y2="506.8"/><line class="ray" x1="430" y1="430" x2="699.7" y2="645.1"/><line class="pulse" style="--pd:1.40s" x1="430" y1="430" x2="699.7" y2="645.1"/><line class="ray" x1="430" y1="430" x2="579.7" y2="740.8"/><line class="pulse" style="--pd:1.68s" x1="430" y1="430" x2="579.7" y2="740.8"/><line class="ray" x1="430" y1="430" x2="430.0" y2="775.0"/><line class="pulse" style="--pd:1.96s" x1="430" y1="430" x2="430.0" y2="775.0"/><line class="ray" x1="430" y1="430" x2="280.3" y2="740.8"/><line class="pulse" style="--pd:2.24s" x1="430" y1="430" x2="280.3" y2="740.8"/><line class="ray" x1="430" y1="430" x2="160.3" y2="645.1"/><line class="pulse" style="--pd:2.52s" x1="430" y1="430" x2="160.3" y2="645.1"/><line class="ray" x1="430" y1="430" x2="93.6" y2="506.8"/><line class="pulse" style="--pd:2.80s" x1="430" y1="430" x2="93.6" y2="506.8"/><line class="ray" x1="430" y1="430" x2="93.6" y2="353.2"/><line class="pulse" style="--pd:3.08s" x1="430" y1="430" x2="93.6" y2="353.2"/><line class="ray" x1="430" y1="430" x2="160.3" y2="214.9"/><line class="pulse" style="--pd:3.36s" x1="430" y1="430" x2="160.3" y2="214.9"/><line class="ray" x1="430" y1="430" x2="280.3" y2="119.2"/><line class="pulse" style="--pd:3.64s" x1="430" y1="430" x2="280.3" y2="119.2"/></svg><div class="core" style="width:220px;height:220px"><img src="img/maia.webp" alt="MAIA"></div><div class="node" style="left:430.0px;top:85.0px;--i:0"><img src="img/lis.webp" alt="Lis" style="width:100px;height:100px"><span>Lis</span></div><div class="node" style="left:579.7px;top:119.2px;--i:1"><img src="img/theo.webp" alt="Théo" style="width:100px;height:100px"><span>Théo</span></div><div class="node" style="left:699.7px;top:214.9px;--i:2"><img src="img/leo.webp" alt="Léo" style="width:100px;height:100px"><span>Léo</span></div><div class="node" style="left:766.4px;top:353.2px;--i:3"><img src="img/nina.webp" alt="Nina" style="width:100px;height:100px"><span>Nina</span></div><div class="node" style="left:766.4px;top:506.8px;--i:4"><img src="img/bia.webp" alt="Bia" style="width:100px;height:100px"><span>Bia</span></div><div class="node" style="left:699.7px;top:645.1px;--i:5"><img src="img/aline.webp" alt="Aline" style="width:100px;height:100px"><span>Aline</span></div><div class="node" style="left:579.7px;top:740.8px;--i:6"><img src="img/maria.webp" alt="Maria" style="width:100px;height:100px"><span>Maria</span></div><div class="node" style="left:430.0px;top:775.0px;--i:7"><img src="img/boris.webp" alt="Boris" style="width:100px;height:100px"><span>Boris</span></div><div class="node" style="left:280.3px;top:740.8px;--i:8"><img src="img/eva.webp" alt="Eva" style="width:100px;height:100px"><span>Eva</span></div><div class="node" style="left:160.3px;top:645.1px;--i:9"><img src="img/ravi.webp" alt="Ravi" style="width:100px;height:100px"><span>Ravi</span></div><div class="node" style="left:93.6px;top:506.8px;--i:10"><img src="img/caio.webp" alt="Caio" style="width:100px;height:100px"><span>Caio</span></div><div class="node" style="left:93.6px;top:353.2px;--i:11"><img src="img/geane.webp" alt="Geane" style="width:100px;height:100px"><span>Geane</span></div><div class="node" style="left:160.3px;top:214.9px;--i:12"><img src="img/marcia.webp" alt="Márcia" style="width:100px;height:100px"><span>Márcia</span></div><div class="node" style="left:280.3px;top:119.2px;--i:13"><img src="img/ruth.webp" alt="Ruth" style="width:100px;height:100px"><span>Ruth</span></div></div></div>
+<aside class="notes">Roteiro 3.5, 2 min. Uma IA que atende o paciente de noite, remarca quem não vai e coordena 14 especialistas. Em nenhum momento ela decide por você: você continua sendo o dono, agora com um time. Pergunte no chat: qual deles você colocaria para trabalhar amanhã na sua clínica?</aside>
+</section>
+
+<section class="slide ">
+<p class="eyebrow a" style="--i:0">Você tem dois caminhos</p>
+<h2 class="a" style="--i:1">Continuar no braço ou <span class="grad">colocar o time para operar</span></h2>
+<div class="vs">
+<div class="card old a" style="--i:2"><span class="lbl" style="color:var(--red)">Caminho antigo</span><ul><li>Secretária confirmando um por um</li><li>Lead respondido horas depois</li><li>Paciente sumido que ninguém chama</li><li>Mais anúncio e torcer</li><li>Dono apagando incêndio</li></ul></div>
+<div class="card new hl a" style="--i:3"><span class="lbl">Caminho novo</span><ul><li>Confirma e lembra sozinha</li><li>Responde em segundos, dia e noite</li><li>Remarca na hora</li><li>Vai atrás de quem sumiu</li><li>Número na mão, time trabalhando</li></ul></div>
+</div>
+<aside class="notes">BLOCO 4 · TRANSIÇÃO (5 min). Recapitule: você chegou com uma dor, fez a conta e viu um time trabalhando. O caminho antigo você já sabe quanto custa, acabou de fazer a conta. Pergunte: faz sentido ter isso na sua clínica? Escreve "FAZ SENTIDO". Leia o chat. Então presta atenção, que agora eu vou te mostrar como você tem a MAIA.</aside>
+</section>
+
+<section class="slide ">
+<p class="eyebrow a" style="--i:0">Como ter a MAIA na sua clínica</p>
+<div class="offer">
+<div class="card hl a" style="--i:1"><span class="lbl">1 · Licença MAIA</span><div class="price">R$ 597</div><div class="per">por mês</div><p>A MAIA viva, com o time de especialistas trabalhando.</p></div>
+<i class="plus a" style="--i:2">+</i>
+<div class="card a" style="--i:3"><span class="lbl">2 · Implantação personalizada</span><b>Desenhada para o fluxo da sua clínica</b><p>O valor é definido na call individual com o time, depois de entender todo o processo da sua clínica.</p></div>
+</div>
+<aside class="notes">BLOCO 5 · PITCH (23 min). Roteiro 5.1, 5 min. São duas partes. A licença da MAIA: R$ 597 por mês. E a implantação: não vou falar valor hoje, e explico por quê. Odonto com três cadeiras não é igual a veterinária com internação. O valor da implantação é definido na call individual, depois que o time entender o fluxo da sua clínica. REGRA: nenhum valor de implantação, nenhuma faixa, nenhum "a partir de", nem se insistirem.</aside>
+</section>
+
+<section class="slide ">
+<p class="eyebrow a" style="--i:0">O passo a passo</p>
+<h2 class="a" style="--i:1">Como <span class="grad">avançar hoje</span></h2>
+<div class="steps4" style="grid-template-columns:repeat(3,1fr)">
+<div class="step a" style="--i:2"><em>1</em><b>Pague a licença</b><span>R$ 597, pelo link da tela e do chat</span></div>
+<div class="step a" style="--i:3"><em>2</em><b>Agende a sua call</b><span>individual, com o time</span></div>
+<div class="step hl a" style="--i:4"><em>3</em><b>Implantação desenhada</b><span>no fluxo da sua clínica, com o valor apresentado na call</span></div>
+</div>
+<p class="foot-line a" style="--i:5">Link: <span class="mono" style="color:var(--gold);font-size:38px">[LINK DE PAGAMENTO]</span></p>
+<aside class="notes">Roteiro 5.2, 3 min. Passo um: paga a licença, os R$ 597, pelo link. Passo dois: o time agenda a sua call individual (confirmar antes da aula como o agendamento acontece). Passo três: na call a gente entende o seu fluxo, desenha a implantação e você conhece o valor e decide. Fixe o link no chat.</aside>
+</section>
+
+<section class="slide ">
+<p class="eyebrow a" style="--i:0">O que você coloca para trabalhar</p>
+<h2 class="a" style="--i:1">A MAIA e um <span class="grad">time inteiro</span></h2>
+<div class="tags a" style="--i:2"><span>Lis · atendimento</span><span>Eva · relacionamento</span><span>Márcia · financeiro</span><span>Maria · tributário</span><span>Geane · RH</span><span>Aline · jurídico</span><span>Bia · conteúdo</span><span>Ruth · prospecção</span><span>Boris · sistemas</span><span>+ Théo, Ravi, Léo, Nina, Caio</span><span>ERP MAIA Gestão</span></div>
+<div class="rule a" style="--i:3"><b>Licença R$ 597 por mês + implantação personalizada</b><span>O valor da implantação é definido na call individual.</span></div>
+<aside class="notes">Roteiro 5.3, 2 min. Leia o time em voz alta. Depois: volta no papel e olha o número da linha C. Compara com a licença. Eu não vou fazer essa conta por você, porque o número é seu.</aside>
+</section>
+
+<section class="slide ">
+<div class="split">
+<div class="col">
+<p class="eyebrow a" style="--i:0">Agora</p>
+<h2 class="a big" style="--i:1">Quero a MAIA<br><span class="grad">na minha clínica</span>.</h2>
+<p class="lead a" style="--i:2">Pague a licença de R$ 597 e escreva <b>PAGUEI</b> no chat.</p>
+<p class="again a" style="--i:3">A implantação é desenhada na sua call individual, para o fluxo da sua clínica.</p>
+</div>
+<div class="pay a" style="--i:2"><b>[LINK DE PAGAMENTO]</b><span>Espaço do QR code e do link de pagamento da licença de R$ 597.</span></div>
+</div>
+<aside class="notes">Roteiro 5.4, CTA 1, 1 min. Se você já decidiu, não espera eu terminar. Clica agora, paga a licença e escreve PAGUEI no chat. Comemore cada nome ao vivo.</aside>
+</section>
+
+<section class="slide ">
+<p class="eyebrow a" style="--i:0">Antes que você pergunte · 1 de 2</p>
+<h2 class="a" style="--i:1;font-size:80px">As dúvidas <span class="grad">mais comuns</span></h2>
+<div class="faq"><div class="card a" style="--i:2"><b>“Por que pagar os R$ 597 antes de saber o valor da implantação?”</b><p>A call é trabalho do time olhando a sua clínica de perto. A licença é a sua entrada.</p></div><div class="card a" style="--i:3"><b>“IA vai tratar mal o meu paciente?”</b><p>Fala no tom da sua clínica, definido por você. A IA prepara, a pessoa decide.</p></div><div class="card a" style="--i:4"><b>“Eu não entendo nada de tecnologia.”</b><p>Você não precisa. Fala com a MAIA pelo WhatsApp, em português. O time cuida do resto.</p></div><div class="card a" style="--i:5"><b>“E o dado do meu paciente? LGPD?”</b><p>Servidor próprio da sua empresa, orientação da Aline e, na call, o time mostra como fica na sua operação.</p></div></div>
+<aside class="notes">Roteiro 5.5, objeções 1 a 4. Responda com as falas do roteiro. Sobre os R$ 597 se a pessoa não seguir com a implantação: só diga o que o Chefe definiu antes da aula. Sobre LGPD: não prometer conformidade total.</aside>
+</section>
+
+<section class="slide ">
+<p class="eyebrow a" style="--i:0">Antes que você pergunte · 2 de 2</p>
+<h2 class="a" style="--i:1;font-size:80px">E ainda <span class="grad">tem mais</span></h2>
+<div class="faq" style="grid-template-columns:1fr 1fr 1fr"><div class="card a" style="--i:2"><b>“Já tenho secretária.”</b><p>E vai continuar tendo. A MAIA tira dela o repetitivo para ela cuidar de quem está na frente.</p></div><div class="card a" style="--i:3"><b>“Tem outros custos além disso?”</b><p>A implantação, definida na call, e as ferramentas de IA no nome da sua empresa. Tudo mostrado antes de você decidir.</p></div><div class="card a" style="--i:4"><b>“Vou pensar.”</b><p>Pense com o número da linha C na mão. Hoje você decide sentar com o time, não a implantação.</p></div></div>
+<aside class="notes">Roteiro 5.5, objeções 5 a 7. A MAIA não vem para demitir ninguém. Custos: citar as ferramentas de IA no nome da empresa só se o Chefe aprovar (pendência). Vou pensar: cada semana pensando é mais uma semana de cadeira vazia.</aside>
+</section>
+
+<section class="slide ">
+<div class="split">
+<div class="col">
+<p class="eyebrow a" style="--i:0">Perguntas ao vivo</p>
+<h2 class="a big" style="--i:1">Manda a sua<br><span class="grad">pergunta</span>.</h2>
+<p class="lead a" style="--i:2">O link da licença continua aqui e no chat.</p>
+</div>
+<div class="pay a" style="--i:2"><b>[LINK DE PAGAMENTO]</b><span>Espaço do QR code e do link de pagamento da licença de R$ 597.</span></div>
+</div>
+<aside class="notes">Roteiro 5.6, 3 min ou mais. Responda 3 a 5 perguntas do chat. Valor da implantação: "isso é definido na call individual, depois de entender o fluxo da sua clínica". Não estimar, não dar faixa, nem quando insistirem.</aside>
+</section>
+
+<section class="slide ">
+<div class="split">
+<div class="col">
+<p class="eyebrow a" style="--i:0">Último chamado</p>
+<h2 class="a" style="--i:1;font-size:92px">Licença R$ 597<br><span class="grad">+ implantação na call</span>.</h2>
+<p class="lead a" style="--i:2">Movimento gera resultado.</p>
+<p class="mono dim a" style="--i:3">[LINK DE PAGAMENTO]</p>
+</div>
+<div class="pay a" style="--i:2"><b>[LINK DE PAGAMENTO]</b><span>Espaço do QR code e do link de pagamento da licença de R$ 597.</span></div>
+</div>
+<aside class="notes">Roteiro 5.7, CTA final, 2 min. Você chegou aqui depois de um dia inteiro de trabalho e ficou até o final. Mas conhecimento sem atitude não muda a clínica: amanhã às oito o WhatsApp vai estar cheio de novo. Paga a licença, os R$ 597, e o time agenda a sua call individual. Movimento gera resultado.</aside>
+</section>
+
+<section class="slide ">
+<div class="center">
+<img class="sym a" style="--i:0" src="img/maia-symbol.svg" alt="">
+<h2 class="a mega2" style="--i:1">Movimento gera resultado.</h2>
+<h2 class="a mega2 grad" style="--i:3">Torne-se uma pessoa extraordinária.</h2>
+<p class="mono dim a" style="--i:5">Salatiel Batista · Digital Master · Agência no Bolso</p>
+</div>
+<aside class="notes">Encerramento, 1 min. Obrigado pela sua noite, obrigado pela confiança. E lembra: torne-se uma pessoa extraordinária. Boa noite, minha gente! Se ainda houver gente no chat, volte ao slide anterior com o link.</aside>
+</section>
+<img id="logo" src="img/logo-horizontal-ondark.png" alt="Agência no Bolso">
+<div id="num"></div>
+<div id="bar"></div>
+<div id="np"><h5>Notas do apresentador · tecla N para fechar</h5><p></p></div>
+</div>
+<button id="fsb" type="button" tabindex="-1">⛶ tela cheia</button>
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  var slides=[].slice.call(document.querySelectorAll('.slide')).filter(function(s){return !s.classList.contains('oculto')});
+  var num=document.getElementById('num'),bar=document.getElementById('bar'),np=document.getElementById('np'),cur=-1;
+  function fit(){stage.style.setProperty('--s',Math.min(innerWidth/1920,innerHeight/1080))}
+  function pad(n){return n<10?'0'+n:''+n}
+  function go(i,silent){
+    i=Math.max(0,Math.min(slides.length-1,i));
+    if(i===cur)return;
+    if(cur>=0)slides[cur].classList.remove('on');
+    cur=i;slides[i].classList.add('on');
+    num.textContent=pad(i+1)+' / '+pad(slides.length);
+    bar.style.width=((i+1)/slides.length*100)+'%';
+    np.querySelector('p').textContent=slides[i].querySelector('.notes').textContent;
+    if(!silent){try{history.replaceState(null,'','#/'+(i+1))}catch(e){location.hash='#/'+(i+1)}}
+  }
+  function fromHash(){var m=/#\/(\d+)/.exec(location.hash);go(m?parseInt(m[1],10)-1:0,true)}
+  function fs(){
+    var d=document,el=d.documentElement,p;
+    try{
+      if(d.fullscreenElement||d.webkitFullscreenElement)p=(d.exitFullscreen||d.webkitExitFullscreen).call(d);
+      else p=(el.requestFullscreen||el.webkitRequestFullscreen).call(el);
+      if(p&&p.catch)p.catch(function(){});
+    }catch(e){}
+  }
+  var fsb=document.getElementById('fsb'),fst;
+  function showFsb(){fsb.classList.add('show');clearTimeout(fst);fst=setTimeout(function(){fsb.classList.remove('show')},3000)}
+  fsb.addEventListener('click',function(e){e.stopPropagation();fs();fsb.blur()});
+  addEventListener('mousemove',showFsb);showFsb();
+  addEventListener('resize',fit);addEventListener('hashchange',fromHash);
+  addEventListener('keydown',function(e){
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
+    var k=e.key;
+    if(k==='ArrowRight'||k==='ArrowDown'||k===' '||k==='PageDown'||k==='Enter'){e.preventDefault();go(cur+1)}
+    else if(k==='ArrowLeft'||k==='ArrowUp'||k==='PageUp'||k==='Backspace'){e.preventDefault();go(cur-1)}
+    else if(k==='Home')go(0);else if(k==='End')go(slides.length-1);
+    else if(k==='f'||k==='F'||e.code==='KeyF')fs();
+    else if(k==='n'||k==='N'||e.code==='KeyN')np.classList.toggle('show');
+  });
+  addEventListener('click',function(e){
+    if(e.target.closest('#np,.prompt,#fsb'))return;
+    if(String(getSelection()))return;
+    go(e.clientX<innerWidth*0.12?cur-1:cur+1);
+  });
+  fit();fromHash();
+  /* auditoria de layout: abrir com ?audit (uso interno, não afeta a apresentação) */
+  if(/audit/.test(location.search)){
+    var st=document.createElement('style');st.textContent='.a,.node{opacity:1!important;animation:none!important}';document.head.appendChild(st);
+    document.fonts.ready.then(function(){
+      var out=[],s=Math.min(innerWidth/1920,innerHeight/1080),R=stage.getBoundingClientRect();
+      slides.forEach(function(sl,i){
+        go(i,true);
+        [].forEach.call(sl.querySelectorAll('*'),function(el){
+          if(el.closest('.notes')||el.closest('svg')||el.classList.contains('ring'))return;
+          var r=el.getBoundingClientRect();if(!r.width)return;
+          var x=[(r.left-R.left)/s,(r.top-R.top)/s,(r.right-R.left)/s,(r.bottom-R.top)/s].map(Math.round);
+          if(x[0]<60||x[1]<40||x[2]>1860||x[3]>975)out.push((i+1)+':'+el.tagName+'.'+el.className+'['+x+']');
+          if(el.scrollWidth>el.clientWidth+2&&getComputedStyle(el).display!=='inline')out.push((i+1)+':OVF '+el.tagName+'.'+el.className);
+        });
+      });
+      [].forEach.call(document.images,function(im){if(!(im.complete&&im.naturalWidth))out.push('IMG '+im.getAttribute('src'))});
+      var fl=[];document.fonts.forEach(function(f){fl.push(f.weight+':'+f.status)});
+      document.title='AUDIT n='+slides.length+' fonts='+fl.join(',')+' :: '+(out.join(' | ')||'OK');
+    });
+  }
+})();
+</script>
+</body>
+</html>
